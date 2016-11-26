@@ -14,7 +14,7 @@ import android.view.ViewGroup;
 public class TabFragment extends Fragment {
     public static TabLayout tabLayout;
     public static ViewPager viewPager;
-    public static int int_items = 3 ;
+    public static int int_items = 4 ;
 
     @Nullable
     @Override
@@ -67,6 +67,7 @@ public class TabFragment extends Fragment {
                 case 0 : return new demo();
                 case 1 : return new Map_Fragment();
                 case 2 : return new demo();
+                case 3 : return new TimTroFragment();
             }
             return null;
         }
@@ -92,6 +93,8 @@ public class TabFragment extends Fragment {
                     return "Bản đồ";
                 case 2 :
                     return "Trang cá nhân";
+                case 3:
+                    return "Tim tro";
             }
             return null;
         }
