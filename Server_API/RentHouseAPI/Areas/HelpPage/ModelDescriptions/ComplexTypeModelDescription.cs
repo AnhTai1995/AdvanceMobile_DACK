@@ -1,6 +1,6 @@
 using System.Collections.ObjectModel;
 
-namespace RentHouseAPI.Areas.HelpPage.ModelDescriptions
+namespace RenthouseAPI.Areas.HelpPage.ModelDescriptions
 {
     public class ComplexTypeModelDescription : ModelDescription
     {

@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace RentHouseAPI.Models
+namespace RenthouseAPI.Models
 {
     using System;
     using System.Collections.Generic;
@@ -17,7 +17,9 @@ namespace RentHouseAPI.Models
         public int MaDuLieu { get; set; }
         public Nullable<int> IDNhaTro { get; set; }
         public string MoTa { get; set; }
-        public Nullable<int> DienThoai { get; set; }
+        public string TinhTrang { get; set; }
+        public string Loai { get; set; }
+        public string DienThoai { get; set; }
         public string HinhAnh1 { get; set; }
         public string HinhAnh2 { get; set; }
         public string HinhAnh3 { get; set; }

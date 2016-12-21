@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Mvc;
 
-namespace RentHouseAPI
+namespace RenthouseAPI
 {
     public class FilterConfig
     {

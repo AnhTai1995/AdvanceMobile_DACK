@@ -1,6 +1,6 @@
 using System;
 
-namespace RentHouseAPI.Areas.HelpPage.ModelDescriptions
+namespace RenthouseAPI.Areas.HelpPage.ModelDescriptions
 {
     /// <summary>
     /// Describes a type model.

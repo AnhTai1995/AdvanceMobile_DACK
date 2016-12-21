@@ -7,16 +7,16 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace RentHouseAPI.Models
+namespace RenthouseAPI.Models
 {
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class NHATROEntities : DbContext
+    public partial class dbd393a18719f8424eb193a6ca016fa966Entities : DbContext
     {
-        public NHATROEntities()
-            : base("name=NHATROEntities")
+        public dbd393a18719f8424eb193a6ca016fa966Entities()
+            : base("name=dbd393a18719f8424eb193a6ca016fa966Entities")
         {
         }
     
@@ -25,13 +25,10 @@ namespace RentHouseAPI.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public DbSet<AuthFacebookUser> AuthFacebookUsers { get; set; }
         public DbSet<BinhLuan> BinhLuans { get; set; }
         public DbSet<ChiTietNhaTro> ChiTietNhaTroes { get; set; }
-        public DbSet<duong> duongs { get; set; }
         public DbSet<NguoiDung> NguoiDungs { get; set; }
         public DbSet<NhaTro> NhaTroes { get; set; }
-        public DbSet<phuong> phuongs { get; set; }
-        public DbSet<quanhuyen> quanhuyens { get; set; }
-        public DbSet<tinhthanh> tinhthanhs { get; set; }
     }
 }

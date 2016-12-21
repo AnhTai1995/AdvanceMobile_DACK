@@ -7,14 +7,20 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace RentHouseAPI.Models
+namespace RenthouseAPI.Models
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class duong
+    public partial class AuthFacebookUser
     {
-        public int MaDuong { get; set; }
-        public string TenDuong { get; set; }
+        public int IDFacebook { get; set; }
+        public string Ten { get; set; }
+        public string Token { get; set; }
+        public Nullable<System.DateTime> NamSinh { get; set; }
+        public string GioiTinh { get; set; }
+        public string Mail { get; set; }
+        public string Avatar { get; set; }
+        public Nullable<int> SoDienThoai { get; set; }
     }
 }

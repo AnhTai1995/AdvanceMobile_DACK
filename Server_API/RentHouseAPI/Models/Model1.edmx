@@ -4,7 +4,20 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="NHATROModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="dbd393a18719f8424eb193a6ca016fa966Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AuthFacebookUser">
+          <Key>
+            <PropertyRef Name="IDFacebook" />
+          </Key>
+          <Property Name="IDFacebook" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ten" Type="nvarchar" MaxLength="50" />
+          <Property Name="Token" Type="nvarchar" MaxLength="100" />
+          <Property Name="NamSinh" Type="date" />
+          <Property Name="GioiTinh" Type="nvarchar" MaxLength="10" />
+          <Property Name="Mail" Type="varchar" MaxLength="500" />
+          <Property Name="Avatar" Type="nvarchar" MaxLength="500" />
+          <Property Name="SoDienThoai" Type="int" />
+        </EntityType>
         <EntityType Name="BinhLuan">
           <Key>
             <PropertyRef Name="IDBinhLuan" />
@@ -22,20 +35,15 @@
           <Property Name="MaDuLieu" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IDNhaTro" Type="int" />
           <Property Name="MoTa" Type="nvarchar" MaxLength="500" />
-          <Property Name="DienThoai" Type="int" />
+          <Property Name="TinhTrang" Type="nvarchar" MaxLength="500" />
+          <Property Name="Loai" Type="nvarchar" MaxLength="500" />
+          <Property Name="DienThoai" Type="nvarchar" MaxLength="20" />
           <Property Name="HinhAnh1" Type="nvarchar" MaxLength="500" />
           <Property Name="HinhAnh2" Type="nvarchar" MaxLength="500" />
           <Property Name="HinhAnh3" Type="nvarchar" MaxLength="500" />
           <Property Name="KinhDo" Type="real" />
           <Property Name="ViDo" Type="real" />
           <Property Name="ChuThich" Type="nvarchar" MaxLength="500" />
-        </EntityType>
-        <EntityType Name="duong">
-          <Key>
-            <PropertyRef Name="MaDuong" />
-          </Key>
-          <Property Name="MaDuong" Type="int" Nullable="false" />
-          <Property Name="TenDuong" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="NguoiDung">
           <Key>
@@ -57,52 +65,36 @@
           </Key>
           <Property Name="IDNhaTro" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="DienTich" Type="real" />
-          <Property Name="SoNha" Type="nvarchar" MaxLength="8" />
-          <Property Name="GiaPhong" Type="int" />
-          <Property Name="MaDuong" Type="int" />
-          <Property Name="MaPhuong" Type="int" />
-          <Property Name="MaQuanHuyen" Type="int" />
-          <Property Name="MaTinhThanh" Type="int" />
-          <Property Name="TinhTrang" Type="nvarchar" MaxLength="500" />
+          <Property Name="DiaChi" Type="nvarchar" MaxLength="500" />
           <Property Name="IDNguoiDang" Type="int" />
           <Property Name="HinhAnh" Type="nvarchar" MaxLength="500" />
+          <Property Name="GiaPhong" Type="int" />
         </EntityType>
-        <EntityType Name="phuong">
-          <Key>
-            <PropertyRef Name="MaPhuong" />
-          </Key>
-          <Property Name="MaPhuong" Type="int" Nullable="false" />
-          <Property Name="TenPhuong" Type="nvarchar" MaxLength="64" />
-        </EntityType>
-        <EntityType Name="quanhuyen">
-          <Key>
-            <PropertyRef Name="MaQuanHuyen" />
-          </Key>
-          <Property Name="MaQuanHuyen" Type="int" Nullable="false" />
-          <Property Name="TenQuanHuyen" Type="nvarchar" MaxLength="100" />
-        </EntityType>
-        <EntityType Name="tinhthanh">
-          <Key>
-            <PropertyRef Name="MaTinhThanh" />
-          </Key>
-          <Property Name="MaTinhThanh" Type="int" Nullable="false" />
-          <Property Name="TenTinhThanh" Type="nvarchar" MaxLength="100" />
-        </EntityType>
-        <EntityContainer Name="NHATROModelStoreContainer">
+        <EntityContainer Name="dbd393a18719f8424eb193a6ca016fa966ModelStoreContainer">
+          <EntitySet Name="AuthFacebookUser" EntityType="Self.AuthFacebookUser" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BinhLuan" EntityType="Self.BinhLuan" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ChiTietNhaTro" EntityType="Self.ChiTietNhaTro" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="duong" EntityType="Self.duong" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NguoiDung" EntityType="Self.NguoiDung" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NhaTro" EntityType="Self.NhaTro" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="phuong" EntityType="Self.phuong" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="quanhuyen" EntityType="Self.quanhuyen" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="tinhthanh" EntityType="Self.tinhthanh" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema>
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="NHATROModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="dbd393a18719f8424eb193a6ca016fa966Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AuthFacebookUser">
+          <Key>
+            <PropertyRef Name="IDFacebook" />
+          </Key>
+          <Property Name="IDFacebook" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ten" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Token" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="NamSinh" Type="DateTime" Precision="0" />
+          <Property Name="GioiTinh" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Mail" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Avatar" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="SoDienThoai" Type="Int32" />
+        </EntityType>
         <EntityType Name="BinhLuan">
           <Key>
             <PropertyRef Name="IDBinhLuan" />
@@ -120,20 +112,15 @@
           <Property Name="MaDuLieu" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="IDNhaTro" Type="Int32" />
           <Property Name="MoTa" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="DienThoai" Type="Int32" />
+          <Property Name="TinhTrang" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Loai" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="DienThoai" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="HinhAnh1" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="HinhAnh2" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="HinhAnh3" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="KinhDo" Type="Single" />
           <Property Name="ViDo" Type="Single" />
           <Property Name="ChuThich" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="duong">
-          <Key>
-            <PropertyRef Name="MaDuong" />
-          </Key>
-          <Property Name="MaDuong" Type="Int32" Nullable="false" />
-          <Property Name="TenDuong" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="NguoiDung">
           <Key>
@@ -155,55 +142,40 @@
           </Key>
           <Property Name="IDNhaTro" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="DienTich" Type="Single" />
-          <Property Name="SoNha" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
-          <Property Name="GiaPhong" Type="Int32" />
-          <Property Name="MaDuong" Type="Int32" />
-          <Property Name="MaPhuong" Type="Int32" />
-          <Property Name="MaQuanHuyen" Type="Int32" />
-          <Property Name="MaTinhThanh" Type="Int32" />
-          <Property Name="TinhTrang" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="DiaChi" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="IDNguoiDang" Type="Int32" />
           <Property Name="HinhAnh" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="GiaPhong" Type="Int32" />
         </EntityType>
-        <EntityType Name="phuong">
-          <Key>
-            <PropertyRef Name="MaPhuong" />
-          </Key>
-          <Property Name="MaPhuong" Type="Int32" Nullable="false" />
-          <Property Name="TenPhuong" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="quanhuyen">
-          <Key>
-            <PropertyRef Name="MaQuanHuyen" />
-          </Key>
-          <Property Name="MaQuanHuyen" Type="Int32" Nullable="false" />
-          <Property Name="TenQuanHuyen" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="tinhthanh">
-          <Key>
-            <PropertyRef Name="MaTinhThanh" />
-          </Key>
-          <Property Name="MaTinhThanh" Type="Int32" Nullable="false" />
-          <Property Name="TenTinhThanh" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityContainer Name="NHATROEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="dbd393a18719f8424eb193a6ca016fa966Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AuthFacebookUsers" EntityType="Self.AuthFacebookUser" />
           <EntitySet Name="BinhLuans" EntityType="Self.BinhLuan" />
           <EntitySet Name="ChiTietNhaTroes" EntityType="Self.ChiTietNhaTro" />
-          <EntitySet Name="duongs" EntityType="Self.duong" />
           <EntitySet Name="NguoiDungs" EntityType="Self.NguoiDung" />
           <EntitySet Name="NhaTroes" EntityType="Self.NhaTro" />
-          <EntitySet Name="phuongs" EntityType="Self.phuong" />
-          <EntitySet Name="quanhuyens" EntityType="Self.quanhuyen" />
-          <EntitySet Name="tinhthanhs" EntityType="Self.tinhthanh" />
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="NHATROModelStoreContainer" CdmEntityContainer="NHATROEntities">
+        <EntityContainerMapping StorageEntityContainer="dbd393a18719f8424eb193a6ca016fa966ModelStoreContainer" CdmEntityContainer="dbd393a18719f8424eb193a6ca016fa966Entities">
+          <EntitySetMapping Name="AuthFacebookUsers">
+            <EntityTypeMapping TypeName="dbd393a18719f8424eb193a6ca016fa966Model.AuthFacebookUser">
+              <MappingFragment StoreEntitySet="AuthFacebookUser">
+                <ScalarProperty Name="IDFacebook" ColumnName="IDFacebook" />
+                <ScalarProperty Name="Ten" ColumnName="Ten" />
+                <ScalarProperty Name="Token" ColumnName="Token" />
+                <ScalarProperty Name="NamSinh" ColumnName="NamSinh" />
+                <ScalarProperty Name="GioiTinh" ColumnName="GioiTinh" />
+                <ScalarProperty Name="Mail" ColumnName="Mail" />
+                <ScalarProperty Name="Avatar" ColumnName="Avatar" />
+                <ScalarProperty Name="SoDienThoai" ColumnName="SoDienThoai" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="BinhLuans">
-            <EntityTypeMapping TypeName="NHATROModel.BinhLuan">
+            <EntityTypeMapping TypeName="dbd393a18719f8424eb193a6ca016fa966Model.BinhLuan">
               <MappingFragment StoreEntitySet="BinhLuan">
                 <ScalarProperty Name="IDBinhLuan" ColumnName="IDBinhLuan" />
                 <ScalarProperty Name="IDNhaTro" ColumnName="IDNhaTro" />
@@ -214,11 +186,13 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ChiTietNhaTroes">
-            <EntityTypeMapping TypeName="NHATROModel.ChiTietNhaTro">
+            <EntityTypeMapping TypeName="dbd393a18719f8424eb193a6ca016fa966Model.ChiTietNhaTro">
               <MappingFragment StoreEntitySet="ChiTietNhaTro">
                 <ScalarProperty Name="MaDuLieu" ColumnName="MaDuLieu" />
                 <ScalarProperty Name="IDNhaTro" ColumnName="IDNhaTro" />
                 <ScalarProperty Name="MoTa" ColumnName="MoTa" />
+                <ScalarProperty Name="TinhTrang" ColumnName="TinhTrang" />
+                <ScalarProperty Name="Loai" ColumnName="Loai" />
                 <ScalarProperty Name="DienThoai" ColumnName="DienThoai" />
                 <ScalarProperty Name="HinhAnh1" ColumnName="HinhAnh1" />
                 <ScalarProperty Name="HinhAnh2" ColumnName="HinhAnh2" />
@@ -229,16 +203,8 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="duongs">
-            <EntityTypeMapping TypeName="NHATROModel.duong">
-              <MappingFragment StoreEntitySet="duong">
-                <ScalarProperty Name="MaDuong" ColumnName="MaDuong" />
-                <ScalarProperty Name="TenDuong" ColumnName="TenDuong" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="NguoiDungs">
-            <EntityTypeMapping TypeName="NHATROModel.NguoiDung">
+            <EntityTypeMapping TypeName="dbd393a18719f8424eb193a6ca016fa966Model.NguoiDung">
               <MappingFragment StoreEntitySet="NguoiDung">
                 <ScalarProperty Name="IDNguoiDung" ColumnName="IDNguoiDung" />
                 <ScalarProperty Name="Username" ColumnName="Username" />
@@ -252,43 +218,14 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="NhaTroes">
-            <EntityTypeMapping TypeName="NHATROModel.NhaTro">
+            <EntityTypeMapping TypeName="dbd393a18719f8424eb193a6ca016fa966Model.NhaTro">
               <MappingFragment StoreEntitySet="NhaTro">
                 <ScalarProperty Name="IDNhaTro" ColumnName="IDNhaTro" />
                 <ScalarProperty Name="DienTich" ColumnName="DienTich" />
-                <ScalarProperty Name="SoNha" ColumnName="SoNha" />
-                <ScalarProperty Name="GiaPhong" ColumnName="GiaPhong" />
-                <ScalarProperty Name="MaDuong" ColumnName="MaDuong" />
-                <ScalarProperty Name="MaPhuong" ColumnName="MaPhuong" />
-                <ScalarProperty Name="MaQuanHuyen" ColumnName="MaQuanHuyen" />
-                <ScalarProperty Name="MaTinhThanh" ColumnName="MaTinhThanh" />
-                <ScalarProperty Name="TinhTrang" ColumnName="TinhTrang" />
+                <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
                 <ScalarProperty Name="IDNguoiDang" ColumnName="IDNguoiDang" />
                 <ScalarProperty Name="HinhAnh" ColumnName="HinhAnh" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="phuongs">
-            <EntityTypeMapping TypeName="NHATROModel.phuong">
-              <MappingFragment StoreEntitySet="phuong">
-                <ScalarProperty Name="MaPhuong" ColumnName="MaPhuong" />
-                <ScalarProperty Name="TenPhuong" ColumnName="TenPhuong" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="quanhuyens">
-            <EntityTypeMapping TypeName="NHATROModel.quanhuyen">
-              <MappingFragment StoreEntitySet="quanhuyen">
-                <ScalarProperty Name="MaQuanHuyen" ColumnName="MaQuanHuyen" />
-                <ScalarProperty Name="TenQuanHuyen" ColumnName="TenQuanHuyen" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tinhthanhs">
-            <EntityTypeMapping TypeName="NHATROModel.tinhthanh">
-              <MappingFragment StoreEntitySet="tinhthanh">
-                <ScalarProperty Name="MaTinhThanh" ColumnName="MaTinhThanh" />
-                <ScalarProperty Name="TenTinhThanh" ColumnName="TenTinhThanh" />
+                <ScalarProperty Name="GiaPhong" ColumnName="GiaPhong" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

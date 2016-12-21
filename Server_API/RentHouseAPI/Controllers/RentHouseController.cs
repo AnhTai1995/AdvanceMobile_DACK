@@ -1,8 +1,7 @@
-﻿using RentHouseAPI.Models;
+﻿using RenthouseAPI.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Http;
 using System.Web.Http.Description;
 
@@ -11,7 +10,7 @@ namespace RentHouseAPI.Controllers
     [RoutePrefix("api/v1")]
     public class RentHouseController : ApiController
     {
-        private NHATROEntities db = new NHATROEntities();
+        private dbd393a18719f8424eb193a6ca016fa966Entities db = new dbd393a18719f8424eb193a6ca016fa966Entities();
 
         /// <summary>
         /// GET danh sach nha tro
@@ -22,20 +21,15 @@ namespace RentHouseAPI.Controllers
         public IEnumerable<NhaTro> getNhaTro()
         {
             List<NhaTro> temp = new List<NhaTro>();
-            for (int i=0; i<db.NhaTroes.Count(); i++)
+            for (int i = 0; i < db.NhaTroes.Count(); i++)
             {
                 NhaTro t = new NhaTro();
                 temp.Add(t);
                 temp[i].IDNhaTro = db.NhaTroes.ToList()[i].IDNhaTro;
                 temp[i].IDNguoiDang = db.NhaTroes.ToList()[i].IDNguoiDang;
                 temp[i].DienTich = db.NhaTroes.ToList()[i].DienTich;
-                temp[i].SoNha = db.NhaTroes.ToList()[i].SoNha;
+                temp[i].DiaChi = db.NhaTroes.ToList()[i].DiaChi;
                 temp[i].GiaPhong = db.NhaTroes.ToList()[i].GiaPhong;
-                temp[i].MaDuong = db.NhaTroes.ToList()[i].MaDuong;
-                temp[i].MaPhuong = db.NhaTroes.ToList()[i].MaPhuong;
-                temp[i].MaQuanHuyen = db.NhaTroes.ToList()[i].MaQuanHuyen;
-                temp[i].MaTinhThanh = db.NhaTroes.ToList()[i].MaTinhThanh;
-                temp[i].TinhTrang = db.NhaTroes.ToList()[i].TinhTrang;
                 temp[i].HinhAnh = db.NhaTroes.ToList()[i].HinhAnh;
 
             }
@@ -49,18 +43,49 @@ namespace RentHouseAPI.Controllers
         /// </summary>
         /// <param>NhaTro</param>
         /// <return></return>
-        [ResponseType(typeof(NhaTro))]
+        [ResponseType(typeof(ttNhaTro))]
         [Route("nha-tro")]
         [HttpPost]
-        public bool postNhaTro(NhaTro nhatro)
+        public bool postNhaTro(ttNhaTro nhatro)
         {
             try
             {
-                db.NhaTroes.Add(nhatro);
+                NhaTro nt = new NhaTro();
+                nt.IDNguoiDang = nhatro.IDNguoiDang;
+                nt.HinhAnh = nhatro.HinhAnh;
+                nt.DiaChi = nhatro.DiaChi;
+                nt.DienTich = nhatro.DienTich;
+                nt.GiaPhong = nhatro.GiaPhong; 
+
+                db.NhaTroes.Add(nt);
                 db.SaveChanges();
+
+                var q = (from e in db.NhaTroes
+                         where e.IDNguoiDang == nhatro.IDNguoiDang && e.DiaChi == nhatro.DiaChi && e.GiaPhong == nhatro.GiaPhong && e.DienTich == nhatro.DienTich
+                         select e
+                    ).ToList().First<NhaTro>();
+
+                ChiTietNhaTro ctnhatro = new ChiTietNhaTro();
+                ctnhatro.IDNhaTro = q.IDNhaTro;
+                ctnhatro.MoTa = nhatro.MoTa;
+                ctnhatro.TinhTrang = nhatro.TinhTrang;
+                ctnhatro.Loai = nhatro.Loai;
+                ctnhatro.DienThoai = nhatro.DienThoai;
+                ctnhatro.HinhAnh1 = nhatro.HinhAnh1;
+                ctnhatro.HinhAnh2 = nhatro.HinhAnh2;
+                ctnhatro.HinhAnh3 = nhatro.HinhAnh3;
+                ctnhatro.KinhDo = nhatro.KinhDo;
+                ctnhatro.ViDo = nhatro.ViDo;
+                ctnhatro.ChuThich = nhatro.ChuThich;
+
+                db.ChiTietNhaTroes.Add(ctnhatro);
+                db.SaveChanges();
+                
+
+
                 return true;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return false;
             }
@@ -91,28 +116,7 @@ namespace RentHouseAPI.Controllers
             return temp;
         }
 
-        /// <summary>
-        /// POST nguoi dung
-        /// </summary>
-        /// <param>NhaTro</param>
-        /// <return></return>
-        [ResponseType(typeof(NguoiDung))]
-        [Route("nha-tro")]
-        [HttpPost]
-        public bool postNguoiDung(NguoiDung nguoidung)
-        {
-            try
-            {
-                db.NguoiDungs.Add(nguoidung);
-                db.SaveChanges();
-                return true;
-            }
-            catch (Exception e)
-            {
-                return false;
-            }
-        }
-
+        
         /// <summary>
         /// GET danh sach binh luan theo id nha tro
         /// </summary>
@@ -160,7 +164,9 @@ namespace RentHouseAPI.Controllers
                 temp[i].MaDuLieu = q[i].MaDuLieu;
                 temp[i].IDNhaTro = q[i].IDNhaTro.Value;
                 temp[i].MoTa = q[i].MoTa;
-                temp[i].DienThoai = q[i].DienThoai.Value;
+                temp[i].DienThoai = q[i].DienThoai;
+                temp[i].TinhTrang = q[i].TinhTrang;
+                temp[i].Loai = q[i].Loai;
                 temp[i].HinhAnh1 = q[i].HinhAnh1;
                 temp[i].HinhAnh2 = q[i].HinhAnh2;
                 temp[i].HinhAnh3 = q[i].HinhAnh3;

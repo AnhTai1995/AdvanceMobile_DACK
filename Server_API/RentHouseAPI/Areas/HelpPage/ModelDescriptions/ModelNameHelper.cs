@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Linq;
 using System.Reflection;
 
-namespace RentHouseAPI.Areas.HelpPage.ModelDescriptions
+namespace RenthouseAPI.Areas.HelpPage.ModelDescriptions
 {
     internal static class ModelNameHelper
     {

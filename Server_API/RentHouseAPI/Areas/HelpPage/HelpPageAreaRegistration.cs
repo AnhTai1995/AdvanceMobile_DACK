@@ -1,7 +1,7 @@
 using System.Web.Http;
 using System.Web.Mvc;
 
-namespace RentHouseAPI.Areas.HelpPage
+namespace RenthouseAPI.Areas.HelpPage
 {
     public class HelpPageAreaRegistration : AreaRegistration
     {

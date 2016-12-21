@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace RentHouseAPI.Models
+namespace RenthouseAPI.Models
 {
     using System;
     using System.Collections.Generic;

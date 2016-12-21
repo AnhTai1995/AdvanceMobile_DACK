@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace RentHouseAPI.Controllers
+namespace RenthouseAPI.Controllers
 {
     public class HomeController : Controller
     {
