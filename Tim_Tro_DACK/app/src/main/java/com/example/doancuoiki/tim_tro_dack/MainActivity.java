@@ -80,11 +80,11 @@ public class MainActivity extends AppCompatActivity {
 //
 //                }
 //
-//                if (menuItem.getItemId() == R.id.nav_item_profile) {
-//                    Intent newscr = new Intent(Home.this,Profile.class);
-//                    startActivity(newscr);
-//
-//                }
+               if (menuItem.getItemId() == R.id.nav_item_about) {
+                   Intent newscr = new Intent(MainActivity.this,Chi_tiet_nha_tro.class);
+                   startActivity(newscr);
+
+               }
 //
 //                if (menuItem.getItemId() == R.id.nav_item_set) {
 //                    Intent newscr = new Intent(Home.this, Setting.class);

@@ -14,7 +14,7 @@ import android.view.ViewGroup;
 public class TabFragment extends Fragment {
     public static TabLayout tabLayout;
     public static ViewPager viewPager;
-    public static int int_items = 4 ;
+    public static int int_items = 3 ;
 
     @Nullable
     @Override
@@ -45,7 +45,7 @@ public class TabFragment extends Fragment {
         });
 
 
-        viewPager.setCurrentItem(1);
+        viewPager.setCurrentItem(0);
         return x;
 
     }
@@ -64,10 +64,10 @@ public class TabFragment extends Fragment {
         public Fragment getItem(int position)
         {
             switch (position){
-                case 0 : return new demo();
+                case 0 : return new TimTroFragment();
                 case 1 : return new Map_Fragment();
-                case 2 : return new demo();
-                case 3 : return new TimTroFragment();
+                case 2 : return new TbaoFragment();
+
             }
             return null;
         }
@@ -92,9 +92,8 @@ public class TabFragment extends Fragment {
                 case 1 :
                     return "Bản đồ";
                 case 2 :
-                    return "Trang cá nhân";
-                case 3:
-                    return "Tim tro";
+                    return "Thông báo";
+
             }
             return null;
         }

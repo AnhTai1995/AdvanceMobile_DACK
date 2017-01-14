@@ -59,9 +59,9 @@ public class AdapterTro  extends RecyclerView.Adapter<AdapterTro.MyViewHolder>{
         holder.name.setText(tro.get_user().getName());
         holder.timePost.setText(tro.get_user().getTimePost());
 
-        holder.diaChi.setText(tro.getDiaChi());
-        holder.gia.setText(tro.getGia());
-        holder.dienTich.setText(tro.getDienTich());
+        holder.diaChi.setText("Địa chỉ: " + tro.getDiaChi());
+        holder.gia.setText("Giá: "+tro.getGia());
+        holder.dienTich.setText("Diện tích: "+tro.getDienTich());
 
         //holder.hinhNhaTro
 

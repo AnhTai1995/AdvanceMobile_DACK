@@ -16,11 +16,13 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:text="Ứng dụng tìm nhà trọ phổ biến nhất hiện nay"
+        android:textColor="#585858"
         android:layout_gravity="center" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Timtro.Hcmus.edu.vn"
+        android:text="Timtro.hcmus.edu.vn"
+        android:textColor="#585858"
         android:layout_gravity="center" />
     <ProgressBar
         android:layout_width="wrap_content"

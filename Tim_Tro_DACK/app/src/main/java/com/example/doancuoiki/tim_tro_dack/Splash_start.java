@@ -18,7 +18,7 @@ public class Splash_start extends AppCompatActivity {
         // Show the splash screen
         setContentView(R.layout.activity_splash_start);
         mProgress = (ProgressBar) findViewById(R.id.splashprogressBar);
-        mProgress.getIndeterminateDrawable().setColorFilter(Color.parseColor("#A9F5F2"), PorterDuff.Mode.MULTIPLY);
+        mProgress.getIndeterminateDrawable().setColorFilter(Color.parseColor("#2E9AFE"), PorterDuff.Mode.MULTIPLY);
 
         // Start lengthy operation in a background thread
         new Thread(new Runnable() {
