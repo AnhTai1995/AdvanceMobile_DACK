@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <TextView
+        android:text="Đăng nhập tài khoản"
+        android:textSize="24dp"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginTop="15dp"
+        android:textColor="@color/black"
+        android:layout_gravity="center"/>
+
+    <EditText
+        android:background="@drawable/edittext"
+        android:layout_marginTop="10dp"
+        android:hint="Tên tài khoản"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:textColor="@color/black"
+        android:id="@+id/edttendn" />
+
+    <EditText
+        android:background="@drawable/edittext"
+        android:layout_marginTop="15dp"
+        android:hint="Mật khẩu"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:textColor="@color/black"
+        android:id="@+id/edtmatkhau" />
+
+    <Button
+        android:background="#00AA00"
+        android:layout_marginTop="15dp"
+        android:text="Đăng nhập"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:textColor="@color/white"
+        android:id="@+id/btdangnhap" />
+
+    <View
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="5dp"
+        android:id="@+id/SplitLine_hor2"
+        android:layout_width="270dp"
+        android:layout_gravity="center"
+        android:layout_height="0.03dp"
+        android:background="#848484" />
+
+    <ImageButton
+        android:src="@drawable/ic_fb"
+        android:layout_marginTop="30dp"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:textColor="@color/black"
+        android:id="@+id/btfb" />
+    <ImageButton
+        android:src="@drawable/ic_gg"
+        android:layout_marginTop="15dp"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:textColor="@color/black"
+        android:id="@+id/btgg" />
+
+    <TextView
+        android:text="Quên mật khẩu"
+        android:layout_width="150dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="220dp"
+        android:textSize="16dp"
+        android:textColor="#0033FF" />
+
+    <TextView
+        android:text="Đăng kí mới"
+        android:layout_width="150dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="220dp"
+        android:textSize="16dp"
+        android:textColor="#0033FF"
+        android:id="@+id/txtdangki"/>
+
+
+</LinearLayout>

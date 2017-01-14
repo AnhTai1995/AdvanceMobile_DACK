@@ -210,14 +210,20 @@
                 android:orientation="horizontal">
 
                 <EditText
-                    android:layout_width="310dp"
-                    android:layout_height="50dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:background="@drawable/edittext"
+                    android:layout_width="280dp"
+                    android:layout_height="35dp"
                     android:hint="Nhận xét của bạn về nhà trọ này..."
-                    android:textSize="13dp"
+                    android:textSize="15dp"
                     android:id="@+id/edtbinhluan"/>
 
                 <Button
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="15dp"
                     android:layout_width="50dp"
                     android:layout_height="30dp"
                     android:text="Gửi"
