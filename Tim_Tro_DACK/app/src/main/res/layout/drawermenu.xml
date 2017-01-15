@@ -6,15 +6,22 @@
 
     <group android:checkableBehavior="single"
         android:id="@+id/group1">
-        <item android:title="Thông báo"
-            android:id="@+id/nav_item_export"
+        <item android:title="Đăng nhập"
+            android:id="@+id/nav_item_sign"
             android:icon="@drawable/bell"
             android:layout_width="wrap_content"/></group>
 
     <group android:checkableBehavior="single"
         android:id="@+id/group2">
-        <item android:title="Thông tin"
-            android:id="@+id/nav_item_feedback"
+        <item android:title="Thông tin cá nhân"
+            android:id="@+id/nav_item_profile"
+            android:icon="@drawable/bell"
+            android:layout_width="wrap_content" /></group>
+
+    <group android:checkableBehavior="single"
+        android:id="@+id/group3">
+        <item android:title="Giới thiệu"
+            android:id="@+id/nav_item_about"
             android:icon="@drawable/bell"
             android:layout_width="wrap_content" /></group>
 

@@ -42,10 +42,10 @@ public class TimTroFragment extends Fragment {
         recyclerViewTro.setLayoutManager(layoutManager);
         recyclerViewTro.setItemAnimator(new DefaultItemAnimator());
 
-        user u1 = new user("avatar", "Hoang Trung1", "5h");
-        user u2 = new user("avatar", "Hoang Trung2", "5h");
-        user u3 = new user("avatar", "Hoang Trung3", "5h");
-        user u4 = new user("avatar", "Hoang Trung4", "5h");
+        user u1 = new user("avatar", "Hoàng Trung", "5h trước");
+        user u2 = new user("avatar", "Hoang Yến", "5h trước");
+        user u3 = new user("avatar", "Phụng Hoàng", "5h trước");
+        user u4 = new user("avatar", "Vính Phát", "5h trước");
 
         Tro tro1 = new Tro(u1, "30/10 tan lap, dong hoa, di an, binh duong", "1542000000d", "200 met vuong", "hinh");
         Tro tro2 = new Tro(u2, "30/10 tan lap", "1542000000d", "200 met vuong", "hinh");

@@ -10,8 +10,7 @@
         android:label="@string/newname"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
-        </activity>
+        <activity android:name=".MainActivity" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -24,6 +23,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".Chi_tiet_nha_tro" />
+        <activity android:name=".Dang_nhap" />
+        <activity android:name=".Dang_ki" />
+        <activity android:name=".QuenMK" />
+        <activity android:name=".DangTin"></activity>
     </application>
 
 </manifest>
