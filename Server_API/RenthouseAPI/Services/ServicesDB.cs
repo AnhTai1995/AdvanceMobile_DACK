@@ -89,6 +89,7 @@ namespace RenthouseAPI.Services
             nt.DiaChi = nhatro.DiaChi;
             nt.DienTich = nhatro.DienTich;
             nt.GiaPhong = nhatro.GiaPhong;
+            nt.NgayDang = DateTime.Now.Date.ToString("dd'/'MM'/'yyyy");
 
             db.NhaTroes.Add(nt);
             db.SaveChanges();
@@ -115,6 +116,63 @@ namespace RenthouseAPI.Services
             return true;
         }
 
+        //Chinh sua tong tin nha tro
+        public async Task<bool> updateNhaTro(ttNhaTro nhatro)
+        {
+            NhaTro nt = db.NhaTroes.Find(nhatro.IDNhaTro);
+
+            nt.DienTich = nhatro.DienTich;
+            nt.DiaChi = nhatro.DiaChi;
+            nt.HinhAnh = nhatro.HinhAnh;
+            nt.GiaPhong = nhatro.GiaPhong;
+            nt.NgayDang = nhatro.NgayDang;
+            db.SaveChanges();
+
+            var q = (from e in db.ChiTietNhaTroes
+                     join k in db.NhaTroes on e.IDNhaTro equals k.IDNhaTro
+                     where k.IDNhaTro == nhatro.IDNhaTro
+                     select new
+                     {
+                         IDCTNT = e.IDCTNT
+                     }).FirstOrDefault();
+
+            ChiTietNhaTro ctnhatro = db.ChiTietNhaTroes.Find(q.IDCTNT);
+
+            ctnhatro.MoTa = nhatro.MoTa;
+            ctnhatro.TinhTrang = nhatro.TinhTrang;
+            ctnhatro.Loai = nhatro.Loai;
+            ctnhatro.DienThoai = nhatro.DienThoai;
+            ctnhatro.HinhAnh1 = nhatro.HinhAnh1;
+            ctnhatro.HinhAnh2 = nhatro.HinhAnh2;
+            ctnhatro.HinhAnh3 = nhatro.HinhAnh3;
+            ctnhatro.KinhDo = nhatro.KinhDo;
+            ctnhatro.ViDo = nhatro.ViDo;
+            ctnhatro.ChuThich = nhatro.ChuThich;
+            db.SaveChanges();
+
+            return true;
+        }
+
+        // Them nguoi dung
+        public async Task<bool> addNguoiDung(ttNguoiDung nguoidung)
+        {
+            NguoiDung nd = new NguoiDung();
+            nd.Username = nguoidung.Username;
+            nd.Pass = nguoidung.Pass;
+            nd.Ten = nguoidung.Ten;
+            nd.NamSinh = DateTime.ParseExact(nguoidung.NamSinh, "yyyy-MM-dd",
+                                       System.Globalization.CultureInfo.InvariantCulture);
+            nd.GioiTinh = nguoidung.Username;
+            nd.Mail = nguoidung.Mail;
+            nd.Avatar = nguoidung.Avatar;
+            nd.SoDienThoai = int.Parse(nguoidung.SDT);
+
+            db.NguoiDungs.Add(nd);
+            db.SaveChanges();
+
+            return true;
+        }
+
         // Lay danh sach binh luan theo id nha tro
         public async Task<IEnumerable<BinhLuan>> listBinhLuan(string id)
         {
@@ -135,6 +193,22 @@ namespace RenthouseAPI.Services
             }
 
             return temp;
+        }
+
+        // Them binh luan
+        public async Task<bool> addBinhLuan(ttBinhLuan binhluan)
+        {
+            BinhLuan bl = new BinhLuan();
+            bl.IDNhaTro = binhluan.IDNhaTro;
+            bl.IDNguoiDung = binhluan.IDNguoiDung;
+            bl.NoiDung = binhluan.NoiDung;
+            bl.ThoiGianBL = DateTime.ParseExact(binhluan.ThoiGian, "yyyy-MM-dd HH:mm:ss,fff",
+                                       System.Globalization.CultureInfo.InvariantCulture);
+
+            db.BinhLuans.Add(bl);
+            db.SaveChanges();
+
+            return true;
         }
 
         // Lay danh sach nguoi dung
@@ -298,7 +372,7 @@ namespace RenthouseAPI.Services
 
                     if (add)
                     {
-                        string today = DateTime.Today.Date.ToString("dd'/'MM'/'yyyy");
+                        string today = DateTime.Now.Date.ToString("dd'/'MM'/'yyyy");
 
                         NhaTro nt = new NhaTro();
                         nt.IDNguoiDang = "ND00001";

@@ -103,7 +103,25 @@ namespace RentHouseAPI.Controllers
 
         #region PUT
 
-
+        /// <summary>
+        /// PUT nha tro
+        /// </summary>
+        /// <param>NhaTro</param>
+        /// <return></return>
+        [ResponseType(typeof(ttNhaTro))]
+        [Route("nha-tro")]
+        [HttpPut]
+        public async Task<bool> putNhaTro(ttNhaTro nhatro)
+        {
+            try
+            {
+                return await Service.updateNhaTro(nhatro);
+            }
+            catch (Exception e)
+            {
+                throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.BadRequest, false));
+            }
+        }
 
         #endregion
 
@@ -134,6 +152,26 @@ namespace RentHouseAPI.Controllers
             }
         }
 
+        /// <summary>
+        /// POST nguoi dung
+        /// </summary>
+        /// <param>nguoidung</param>
+        /// <return></return>
+        [ResponseType(typeof(ttNguoiDung))]
+        [Route("nguoi-dung")]
+        [HttpPost]
+        public async Task<bool> postNguoiDung(ttNguoiDung nguoidung)
+        {
+            try
+            {
+                return await Service.addNguoiDung(nguoidung);
+            }
+            catch (Exception e)
+            {
+                throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.BadRequest, false));
+            }
+        }
+
         #endregion
 
         //---------------------------------------------//
@@ -157,6 +195,26 @@ namespace RentHouseAPI.Controllers
             try
             {
                 return await Service.listBinhLuan(id);
+            }
+            catch (Exception e)
+            {
+                throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.BadRequest, false));
+            }
+        }
+
+        /// <summary>
+        /// POST binh luan
+        /// </summary>
+        /// <param>binhluan</param>
+        /// <return></return>
+        [ResponseType(typeof(ttBinhLuan))]
+        [Route("binh-luan")]
+        [HttpPost]
+        public async Task<bool> postBinhLuan(ttBinhLuan binhluan)
+        {
+            try
+            {
+                return await Service.addBinhLuan(binhluan);
             }
             catch (Exception e)
             {
