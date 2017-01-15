@@ -78,7 +78,8 @@
         android:layout_marginTop="30dp"
         android:layout_marginLeft="220dp"
         android:textSize="16dp"
-        android:textColor="#0033FF" />
+        android:textColor="#0033FF"
+        android:id="@+id/txtquenmk"/>
 
     <TextView
         android:text="Đăng kí mới"

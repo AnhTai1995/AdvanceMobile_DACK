@@ -1,12 +1,14 @@
 package com.example.doancuoiki.tim_tro_dack;
 
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -90,6 +92,13 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(newscr);
 
                 }
+
+                if(menuItem.getItemId()==R.id.nav_item_logout) {
+                    Intent newscr = new Intent(MainActivity.this,DangTin.class);
+                    startActivity(newscr);
+                }
+
+
 
 
                 return false;

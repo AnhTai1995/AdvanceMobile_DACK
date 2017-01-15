@@ -46,7 +46,7 @@
                 android:layout_height="40dp"
                 android:text="Đăng Tin Ngay"
                 android:textColor="@color/white"
-                android:background="#00BB00"
+                android:background="#00AA00"
                 android:layout_gravity="center"/>
 
         </LinearLayout>

@@ -25,7 +25,9 @@
         </activity>
         <activity android:name=".Chi_tiet_nha_tro" />
         <activity android:name=".Dang_nhap" />
-        <activity android:name=".Dang_ki"></activity>
+        <activity android:name=".Dang_ki" />
+        <activity android:name=".QuenMK" />
+        <activity android:name=".DangTin"></activity>
     </application>
 
 </manifest>
