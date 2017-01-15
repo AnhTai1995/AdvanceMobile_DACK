@@ -16,6 +16,7 @@
         android:layout_gravity="center"/>
 
     <EditText
+        android:paddingLeft="10dp"
         android:background="@drawable/edittext"
         android:layout_marginTop="10dp"
         android:hint="Tên tài khoản"
@@ -26,6 +27,7 @@
         android:id="@+id/edttendn" />
 
     <EditText
+        android:paddingLeft="10dp"
         android:background="@drawable/edittext"
         android:layout_marginTop="15dp"
         android:hint="Mật khẩu"
