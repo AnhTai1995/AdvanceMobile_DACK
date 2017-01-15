@@ -13,10 +13,10 @@ namespace RenthouseAPI.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class dbd393a18719f8424eb193a6ca016fa966Entities : DbContext
+    public partial class NHATROEntities : DbContext
     {
-        public dbd393a18719f8424eb193a6ca016fa966Entities()
-            : base("name=dbd393a18719f8424eb193a6ca016fa966Entities")
+        public NHATROEntities()
+            : base("name=NHATROEntities")
         {
         }
     
@@ -25,7 +25,7 @@ namespace RenthouseAPI.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public DbSet<AuthFacebookUser> AuthFacebookUsers { get; set; }
+        public DbSet<AccountType> AccountTypes { get; set; }
         public DbSet<BinhLuan> BinhLuans { get; set; }
         public DbSet<ChiTietNhaTro> ChiTietNhaTroes { get; set; }
         public DbSet<NguoiDung> NguoiDungs { get; set; }

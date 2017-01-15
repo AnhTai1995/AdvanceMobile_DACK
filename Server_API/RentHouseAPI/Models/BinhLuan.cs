@@ -14,10 +14,13 @@ namespace RenthouseAPI.Models
     
     public partial class BinhLuan
     {
-        public int IDBinhLuan { get; set; }
-        public Nullable<int> IDNhaTro { get; set; }
-        public Nullable<int> IDNguoiDung { get; set; }
+        public int ID { get; set; }
+        public string IDBinhLuan { get; set; }
+        public string IDNhaTro { get; set; }
+        public string IDNguoiDung { get; set; }
         public string NoiDung { get; set; }
         public Nullable<System.DateTime> ThoiGianBL { get; set; }
+    
+        public virtual NguoiDung NguoiDung { get; set; }
     }
 }

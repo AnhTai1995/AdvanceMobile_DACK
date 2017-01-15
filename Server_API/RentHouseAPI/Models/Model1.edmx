@@ -4,179 +4,316 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="dbd393a18719f8424eb193a6ca016fa966Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="AuthFacebookUser">
+      <Schema Namespace="NHATROModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AccountType">
           <Key>
-            <PropertyRef Name="IDFacebook" />
+            <PropertyRef Name="ID" />
           </Key>
-          <Property Name="IDFacebook" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Ten" Type="nvarchar" MaxLength="50" />
-          <Property Name="Token" Type="nvarchar" MaxLength="100" />
-          <Property Name="NamSinh" Type="date" />
-          <Property Name="GioiTinh" Type="nvarchar" MaxLength="10" />
-          <Property Name="Mail" Type="varchar" MaxLength="500" />
-          <Property Name="Avatar" Type="nvarchar" MaxLength="500" />
-          <Property Name="SoDienThoai" Type="int" />
+          <Property Name="ID" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="TenLoai" Type="nvarchar" MaxLength="20" Nullable="false" />
         </EntityType>
         <EntityType Name="BinhLuan">
           <Key>
             <PropertyRef Name="IDBinhLuan" />
           </Key>
-          <Property Name="IDBinhLuan" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="IDNhaTro" Type="int" />
-          <Property Name="IDNguoiDung" Type="int" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDBinhLuan" Type="varchar" MaxLength="8" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDNhaTro" Type="varchar" MaxLength="7" />
+          <Property Name="IDNguoiDung" Type="varchar" MaxLength="7" />
           <Property Name="NoiDung" Type="nvarchar" MaxLength="500" />
           <Property Name="ThoiGianBL" Type="datetime" />
         </EntityType>
         <EntityType Name="ChiTietNhaTro">
           <Key>
-            <PropertyRef Name="MaDuLieu" />
+            <PropertyRef Name="IDCTNT" />
           </Key>
-          <Property Name="MaDuLieu" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="IDNhaTro" Type="int" />
-          <Property Name="MoTa" Type="nvarchar" MaxLength="500" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDCTNT" Type="varchar" MaxLength="9" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDNhaTro" Type="varchar" MaxLength="7" />
+          <Property Name="MoTa" Type="nvarchar" MaxLength="3000" />
           <Property Name="TinhTrang" Type="nvarchar" MaxLength="500" />
           <Property Name="Loai" Type="nvarchar" MaxLength="500" />
-          <Property Name="DienThoai" Type="nvarchar" MaxLength="20" />
+          <Property Name="DienThoai" Type="nvarchar" MaxLength="100" />
           <Property Name="HinhAnh1" Type="nvarchar" MaxLength="500" />
           <Property Name="HinhAnh2" Type="nvarchar" MaxLength="500" />
           <Property Name="HinhAnh3" Type="nvarchar" MaxLength="500" />
           <Property Name="KinhDo" Type="real" />
           <Property Name="ViDo" Type="real" />
           <Property Name="ChuThich" Type="nvarchar" MaxLength="500" />
+          <Property Name="AutoExtract" Type="bit" />
         </EntityType>
         <EntityType Name="NguoiDung">
           <Key>
             <PropertyRef Name="IDNguoiDung" />
-            <PropertyRef Name="Username" />
           </Key>
-          <Property Name="IDNguoiDung" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Username" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDNguoiDung" Type="varchar" MaxLength="7" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AccountType" Type="varchar" MaxLength="5" />
+          <Property Name="Username" Type="varchar" MaxLength="30" />
           <Property Name="Ten" Type="nvarchar" MaxLength="50" />
           <Property Name="Pass" Type="varchar" MaxLength="20" />
           <Property Name="NamSinh" Type="date" />
+          <Property Name="GioiTinh" Type="nvarchar" MaxLength="10" />
           <Property Name="Mail" Type="varchar" MaxLength="500" />
           <Property Name="Avatar" Type="nvarchar" MaxLength="500" />
           <Property Name="SoDienThoai" Type="int" />
+          <Property Name="IsFacebookUser" Type="bit" />
         </EntityType>
         <EntityType Name="NhaTro">
           <Key>
             <PropertyRef Name="IDNhaTro" />
           </Key>
-          <Property Name="IDNhaTro" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="DienTich" Type="real" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDNhaTro" Type="varchar" MaxLength="7" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DienTich" Type="nvarchar" MaxLength="100" />
           <Property Name="DiaChi" Type="nvarchar" MaxLength="500" />
-          <Property Name="IDNguoiDang" Type="int" />
+          <Property Name="IDNguoiDang" Type="varchar" MaxLength="7" />
           <Property Name="HinhAnh" Type="nvarchar" MaxLength="500" />
-          <Property Name="GiaPhong" Type="int" />
+          <Property Name="GiaPhong" Type="nvarchar" MaxLength="30" />
+          <Property Name="NgayDang" Type="nvarchar" MaxLength="100" />
+          <Property Name="AutoExtract" Type="bit" />
         </EntityType>
-        <EntityContainer Name="dbd393a18719f8424eb193a6ca016fa966ModelStoreContainer">
-          <EntitySet Name="AuthFacebookUser" EntityType="Self.AuthFacebookUser" Schema="dbo" store:Type="Tables" />
+        <Association Name="FK__BinhLuan__IDNguo__25869641">
+          <End Role="NguoiDung" Type="Self.NguoiDung" Multiplicity="0..1" />
+          <End Role="BinhLuan" Type="Self.BinhLuan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NguoiDung">
+              <PropertyRef Name="IDNguoiDung" />
+            </Principal>
+            <Dependent Role="BinhLuan">
+              <PropertyRef Name="IDNguoiDung" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ChiTietNh__IDNha__20C1E124">
+          <End Role="NhaTro" Type="Self.NhaTro" Multiplicity="0..1" />
+          <End Role="ChiTietNhaTro" Type="Self.ChiTietNhaTro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NhaTro">
+              <PropertyRef Name="IDNhaTro" />
+            </Principal>
+            <Dependent Role="ChiTietNhaTro">
+              <PropertyRef Name="IDNhaTro" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__NguoiDung__Accou__1A14E395">
+          <End Role="AccountType" Type="Self.AccountType" Multiplicity="0..1" />
+          <End Role="NguoiDung" Type="Self.NguoiDung" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AccountType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="NguoiDung">
+              <PropertyRef Name="AccountType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__NhaTro__IDNguoiD__1DE57479">
+          <End Role="NguoiDung" Type="Self.NguoiDung" Multiplicity="0..1" />
+          <End Role="NhaTro" Type="Self.NhaTro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NguoiDung">
+              <PropertyRef Name="IDNguoiDung" />
+            </Principal>
+            <Dependent Role="NhaTro">
+              <PropertyRef Name="IDNguoiDang" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="NHATROModelStoreContainer">
+          <EntitySet Name="AccountType" EntityType="Self.AccountType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BinhLuan" EntityType="Self.BinhLuan" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ChiTietNhaTro" EntityType="Self.ChiTietNhaTro" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NguoiDung" EntityType="Self.NguoiDung" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NhaTro" EntityType="Self.NhaTro" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__BinhLuan__IDNguo__25869641" Association="Self.FK__BinhLuan__IDNguo__25869641">
+            <End Role="NguoiDung" EntitySet="NguoiDung" />
+            <End Role="BinhLuan" EntitySet="BinhLuan" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ChiTietNh__IDNha__20C1E124" Association="Self.FK__ChiTietNh__IDNha__20C1E124">
+            <End Role="NhaTro" EntitySet="NhaTro" />
+            <End Role="ChiTietNhaTro" EntitySet="ChiTietNhaTro" />
+          </AssociationSet>
+          <AssociationSet Name="FK__NguoiDung__Accou__1A14E395" Association="Self.FK__NguoiDung__Accou__1A14E395">
+            <End Role="AccountType" EntitySet="AccountType" />
+            <End Role="NguoiDung" EntitySet="NguoiDung" />
+          </AssociationSet>
+          <AssociationSet Name="FK__NhaTro__IDNguoiD__1DE57479" Association="Self.FK__NhaTro__IDNguoiD__1DE57479">
+            <End Role="NguoiDung" EntitySet="NguoiDung" />
+            <End Role="NhaTro" EntitySet="NhaTro" />
+          </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="dbd393a18719f8424eb193a6ca016fa966Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="AuthFacebookUser">
+      <Schema Namespace="NHATROModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AccountType">
           <Key>
-            <PropertyRef Name="IDFacebook" />
+            <PropertyRef Name="ID" />
           </Key>
-          <Property Name="IDFacebook" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Ten" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Token" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="NamSinh" Type="DateTime" Precision="0" />
-          <Property Name="GioiTinh" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="Mail" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Avatar" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="SoDienThoai" Type="Int32" />
+          <Property Name="ID" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TenLoai" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="NguoiDungs" Relationship="Self.FK__NguoiDung__Accou__1A14E395" FromRole="AccountType" ToRole="NguoiDung" />
         </EntityType>
         <EntityType Name="BinhLuan">
           <Key>
             <PropertyRef Name="IDBinhLuan" />
           </Key>
-          <Property Name="IDBinhLuan" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IDNhaTro" Type="Int32" />
-          <Property Name="IDNguoiDung" Type="Int32" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDBinhLuan" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDNhaTro" Type="String" MaxLength="7" FixedLength="false" Unicode="false" />
+          <Property Name="IDNguoiDung" Type="String" MaxLength="7" FixedLength="false" Unicode="false" />
           <Property Name="NoiDung" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="ThoiGianBL" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="NguoiDung" Relationship="Self.FK__BinhLuan__IDNguo__25869641" FromRole="BinhLuan" ToRole="NguoiDung" />
         </EntityType>
         <EntityType Name="ChiTietNhaTro">
           <Key>
-            <PropertyRef Name="MaDuLieu" />
+            <PropertyRef Name="IDCTNT" />
           </Key>
-          <Property Name="MaDuLieu" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IDNhaTro" Type="Int32" />
-          <Property Name="MoTa" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDCTNT" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDNhaTro" Type="String" MaxLength="7" FixedLength="false" Unicode="false" />
+          <Property Name="MoTa" Type="String" MaxLength="3000" FixedLength="false" Unicode="true" />
           <Property Name="TinhTrang" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="Loai" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="DienThoai" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="DienThoai" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="HinhAnh1" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="HinhAnh2" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="HinhAnh3" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="KinhDo" Type="Single" />
           <Property Name="ViDo" Type="Single" />
           <Property Name="ChuThich" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="AutoExtract" Type="Boolean" />
+          <NavigationProperty Name="NhaTro" Relationship="Self.FK__ChiTietNh__IDNha__20C1E124" FromRole="ChiTietNhaTro" ToRole="NhaTro" />
         </EntityType>
         <EntityType Name="NguoiDung">
           <Key>
             <PropertyRef Name="IDNguoiDung" />
-            <PropertyRef Name="Username" />
           </Key>
-          <Property Name="IDNguoiDung" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Username" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDNguoiDung" Type="String" MaxLength="7" FixedLength="false" Unicode="false" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AccountType" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="Username" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="Ten" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Pass" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="NamSinh" Type="DateTime" Precision="0" />
+          <Property Name="GioiTinh" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="Mail" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="Avatar" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="SoDienThoai" Type="Int32" />
+          <Property Name="IsFacebookUser" Type="Boolean" />
+          <NavigationProperty Name="AccountType1" Relationship="Self.FK__NguoiDung__Accou__1A14E395" FromRole="NguoiDung" ToRole="AccountType" />
+          <NavigationProperty Name="BinhLuans" Relationship="Self.FK__BinhLuan__IDNguo__25869641" FromRole="NguoiDung" ToRole="BinhLuan" />
+          <NavigationProperty Name="NhaTroes" Relationship="Self.FK__NhaTro__IDNguoiD__1DE57479" FromRole="NguoiDung" ToRole="NhaTro" />
         </EntityType>
         <EntityType Name="NhaTro">
           <Key>
             <PropertyRef Name="IDNhaTro" />
           </Key>
-          <Property Name="IDNhaTro" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="DienTich" Type="Single" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDNhaTro" Type="String" MaxLength="7" FixedLength="false" Unicode="false" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DienTich" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="DiaChi" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="IDNguoiDang" Type="Int32" />
+          <Property Name="IDNguoiDang" Type="String" MaxLength="7" FixedLength="false" Unicode="false" />
           <Property Name="HinhAnh" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="GiaPhong" Type="Int32" />
+          <Property Name="GiaPhong" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="NgayDang" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="AutoExtract" Type="Boolean" />
+          <NavigationProperty Name="ChiTietNhaTroes" Relationship="Self.FK__ChiTietNh__IDNha__20C1E124" FromRole="NhaTro" ToRole="ChiTietNhaTro" />
+          <NavigationProperty Name="NguoiDung" Relationship="Self.FK__NhaTro__IDNguoiD__1DE57479" FromRole="NhaTro" ToRole="NguoiDung" />
         </EntityType>
-        <EntityContainer Name="dbd393a18719f8424eb193a6ca016fa966Entities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="AuthFacebookUsers" EntityType="Self.AuthFacebookUser" />
+        <Association Name="FK__NguoiDung__Accou__1A14E395">
+          <End Role="AccountType" Type="Self.AccountType" Multiplicity="0..1" />
+          <End Role="NguoiDung" Type="Self.NguoiDung" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AccountType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="NguoiDung">
+              <PropertyRef Name="AccountType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__BinhLuan__IDNguo__25869641">
+          <End Role="NguoiDung" Type="Self.NguoiDung" Multiplicity="0..1" />
+          <End Role="BinhLuan" Type="Self.BinhLuan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NguoiDung">
+              <PropertyRef Name="IDNguoiDung" />
+            </Principal>
+            <Dependent Role="BinhLuan">
+              <PropertyRef Name="IDNguoiDung" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ChiTietNh__IDNha__20C1E124">
+          <End Role="NhaTro" Type="Self.NhaTro" Multiplicity="0..1" />
+          <End Role="ChiTietNhaTro" Type="Self.ChiTietNhaTro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NhaTro">
+              <PropertyRef Name="IDNhaTro" />
+            </Principal>
+            <Dependent Role="ChiTietNhaTro">
+              <PropertyRef Name="IDNhaTro" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__NhaTro__IDNguoiD__1DE57479">
+          <End Role="NguoiDung" Type="Self.NguoiDung" Multiplicity="0..1" />
+          <End Role="NhaTro" Type="Self.NhaTro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NguoiDung">
+              <PropertyRef Name="IDNguoiDung" />
+            </Principal>
+            <Dependent Role="NhaTro">
+              <PropertyRef Name="IDNguoiDang" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="NHATROEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AccountTypes" EntityType="Self.AccountType" />
           <EntitySet Name="BinhLuans" EntityType="Self.BinhLuan" />
           <EntitySet Name="ChiTietNhaTroes" EntityType="Self.ChiTietNhaTro" />
           <EntitySet Name="NguoiDungs" EntityType="Self.NguoiDung" />
           <EntitySet Name="NhaTroes" EntityType="Self.NhaTro" />
+          <AssociationSet Name="FK__NguoiDung__Accou__1A14E395" Association="Self.FK__NguoiDung__Accou__1A14E395">
+            <End Role="AccountType" EntitySet="AccountTypes" />
+            <End Role="NguoiDung" EntitySet="NguoiDungs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__BinhLuan__IDNguo__25869641" Association="Self.FK__BinhLuan__IDNguo__25869641">
+            <End Role="NguoiDung" EntitySet="NguoiDungs" />
+            <End Role="BinhLuan" EntitySet="BinhLuans" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ChiTietNh__IDNha__20C1E124" Association="Self.FK__ChiTietNh__IDNha__20C1E124">
+            <End Role="NhaTro" EntitySet="NhaTroes" />
+            <End Role="ChiTietNhaTro" EntitySet="ChiTietNhaTroes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__NhaTro__IDNguoiD__1DE57479" Association="Self.FK__NhaTro__IDNguoiD__1DE57479">
+            <End Role="NguoiDung" EntitySet="NguoiDungs" />
+            <End Role="NhaTro" EntitySet="NhaTroes" />
+          </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="dbd393a18719f8424eb193a6ca016fa966ModelStoreContainer" CdmEntityContainer="dbd393a18719f8424eb193a6ca016fa966Entities">
-          <EntitySetMapping Name="AuthFacebookUsers">
-            <EntityTypeMapping TypeName="dbd393a18719f8424eb193a6ca016fa966Model.AuthFacebookUser">
-              <MappingFragment StoreEntitySet="AuthFacebookUser">
-                <ScalarProperty Name="IDFacebook" ColumnName="IDFacebook" />
-                <ScalarProperty Name="Ten" ColumnName="Ten" />
-                <ScalarProperty Name="Token" ColumnName="Token" />
-                <ScalarProperty Name="NamSinh" ColumnName="NamSinh" />
-                <ScalarProperty Name="GioiTinh" ColumnName="GioiTinh" />
-                <ScalarProperty Name="Mail" ColumnName="Mail" />
-                <ScalarProperty Name="Avatar" ColumnName="Avatar" />
-                <ScalarProperty Name="SoDienThoai" ColumnName="SoDienThoai" />
+        <EntityContainerMapping StorageEntityContainer="NHATROModelStoreContainer" CdmEntityContainer="NHATROEntities">
+          <EntitySetMapping Name="AccountTypes">
+            <EntityTypeMapping TypeName="NHATROModel.AccountType">
+              <MappingFragment StoreEntitySet="AccountType">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="TenLoai" ColumnName="TenLoai" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="BinhLuans">
-            <EntityTypeMapping TypeName="dbd393a18719f8424eb193a6ca016fa966Model.BinhLuan">
+            <EntityTypeMapping TypeName="NHATROModel.BinhLuan">
               <MappingFragment StoreEntitySet="BinhLuan">
+                <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="IDBinhLuan" ColumnName="IDBinhLuan" />
                 <ScalarProperty Name="IDNhaTro" ColumnName="IDNhaTro" />
                 <ScalarProperty Name="IDNguoiDung" ColumnName="IDNguoiDung" />
@@ -186,9 +323,10 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ChiTietNhaTroes">
-            <EntityTypeMapping TypeName="dbd393a18719f8424eb193a6ca016fa966Model.ChiTietNhaTro">
+            <EntityTypeMapping TypeName="NHATROModel.ChiTietNhaTro">
               <MappingFragment StoreEntitySet="ChiTietNhaTro">
-                <ScalarProperty Name="MaDuLieu" ColumnName="MaDuLieu" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="IDCTNT" ColumnName="IDCTNT" />
                 <ScalarProperty Name="IDNhaTro" ColumnName="IDNhaTro" />
                 <ScalarProperty Name="MoTa" ColumnName="MoTa" />
                 <ScalarProperty Name="TinhTrang" ColumnName="TinhTrang" />
@@ -200,32 +338,40 @@
                 <ScalarProperty Name="KinhDo" ColumnName="KinhDo" />
                 <ScalarProperty Name="ViDo" ColumnName="ViDo" />
                 <ScalarProperty Name="ChuThich" ColumnName="ChuThich" />
+                <ScalarProperty Name="AutoExtract" ColumnName="AutoExtract" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="NguoiDungs">
-            <EntityTypeMapping TypeName="dbd393a18719f8424eb193a6ca016fa966Model.NguoiDung">
+            <EntityTypeMapping TypeName="NHATROModel.NguoiDung">
               <MappingFragment StoreEntitySet="NguoiDung">
+                <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="IDNguoiDung" ColumnName="IDNguoiDung" />
+                <ScalarProperty Name="AccountType" ColumnName="AccountType" />
                 <ScalarProperty Name="Username" ColumnName="Username" />
                 <ScalarProperty Name="Ten" ColumnName="Ten" />
                 <ScalarProperty Name="Pass" ColumnName="Pass" />
                 <ScalarProperty Name="NamSinh" ColumnName="NamSinh" />
+                <ScalarProperty Name="GioiTinh" ColumnName="GioiTinh" />
                 <ScalarProperty Name="Mail" ColumnName="Mail" />
                 <ScalarProperty Name="Avatar" ColumnName="Avatar" />
                 <ScalarProperty Name="SoDienThoai" ColumnName="SoDienThoai" />
+                <ScalarProperty Name="IsFacebookUser" ColumnName="IsFacebookUser" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="NhaTroes">
-            <EntityTypeMapping TypeName="dbd393a18719f8424eb193a6ca016fa966Model.NhaTro">
+            <EntityTypeMapping TypeName="NHATROModel.NhaTro">
               <MappingFragment StoreEntitySet="NhaTro">
+                <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="IDNhaTro" ColumnName="IDNhaTro" />
                 <ScalarProperty Name="DienTich" ColumnName="DienTich" />
                 <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
                 <ScalarProperty Name="IDNguoiDang" ColumnName="IDNguoiDang" />
                 <ScalarProperty Name="HinhAnh" ColumnName="HinhAnh" />
                 <ScalarProperty Name="GiaPhong" ColumnName="GiaPhong" />
+                <ScalarProperty Name="NgayDang" ColumnName="NgayDang" />
+                <ScalarProperty Name="AutoExtract" ColumnName="AutoExtract" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

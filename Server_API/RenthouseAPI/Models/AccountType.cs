@@ -12,15 +12,16 @@ namespace RenthouseAPI.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class AuthFacebookUser
+    public partial class AccountType
     {
-        public int IDFacebook { get; set; }
-        public string Ten { get; set; }
-        public string Token { get; set; }
-        public Nullable<System.DateTime> NamSinh { get; set; }
-        public string GioiTinh { get; set; }
-        public string Mail { get; set; }
-        public string Avatar { get; set; }
-        public Nullable<int> SoDienThoai { get; set; }
+        public AccountType()
+        {
+            this.NguoiDungs = new HashSet<NguoiDung>();
+        }
+    
+        public string ID { get; set; }
+        public string TenLoai { get; set; }
+    
+        public virtual ICollection<NguoiDung> NguoiDungs { get; set; }
     }
 }

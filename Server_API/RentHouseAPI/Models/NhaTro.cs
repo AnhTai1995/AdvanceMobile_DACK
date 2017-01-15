@@ -14,11 +14,22 @@ namespace RenthouseAPI.Models
     
     public partial class NhaTro
     {
-        public int IDNhaTro { get; set; }
-        public Nullable<float> DienTich { get; set; }
+        public NhaTro()
+        {
+            this.ChiTietNhaTroes = new HashSet<ChiTietNhaTro>();
+        }
+    
+        public int ID { get; set; }
+        public string IDNhaTro { get; set; }
+        public string DienTich { get; set; }
         public string DiaChi { get; set; }
-        public Nullable<int> IDNguoiDang { get; set; }
+        public string IDNguoiDang { get; set; }
         public string HinhAnh { get; set; }
-        public Nullable<int> GiaPhong { get; set; }
+        public string GiaPhong { get; set; }
+        public string NgayDang { get; set; }
+        public Nullable<bool> AutoExtract { get; set; }
+    
+        public virtual ICollection<ChiTietNhaTro> ChiTietNhaTroes { get; set; }
+        public virtual NguoiDung NguoiDung { get; set; }
     }
 }

@@ -14,13 +14,27 @@ namespace RenthouseAPI.Models
     
     public partial class NguoiDung
     {
-        public int IDNguoiDung { get; set; }
+        public NguoiDung()
+        {
+            this.BinhLuans = new HashSet<BinhLuan>();
+            this.NhaTroes = new HashSet<NhaTro>();
+        }
+    
+        public int ID { get; set; }
+        public string IDNguoiDung { get; set; }
+        public string AccountType { get; set; }
         public string Username { get; set; }
         public string Ten { get; set; }
         public string Pass { get; set; }
         public Nullable<System.DateTime> NamSinh { get; set; }
+        public string GioiTinh { get; set; }
         public string Mail { get; set; }
         public string Avatar { get; set; }
         public Nullable<int> SoDienThoai { get; set; }
+        public Nullable<bool> IsFacebookUser { get; set; }
+    
+        public virtual AccountType AccountType1 { get; set; }
+        public virtual ICollection<BinhLuan> BinhLuans { get; set; }
+        public virtual ICollection<NhaTro> NhaTroes { get; set; }
     }
 }

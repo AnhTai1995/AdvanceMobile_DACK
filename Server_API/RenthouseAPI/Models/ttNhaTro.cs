@@ -7,13 +7,13 @@ namespace RenthouseAPI.Models
 {
     public class ttNhaTro
     {
-        public int IDNhaTro { get; set; }
-        public Nullable<float> DienTich { get; set; }
+        public string IDNhaTro { get; set; }
+        public string DienTich { get; set; }
         public string DiaChi { get; set; }
-        public Nullable<int> IDNguoiDang { get; set; }
+        public string IDNguoiDang { get; set; }
         public string HinhAnh { get; set; }
-        public Nullable<int> GiaPhong { get; set; }
-        public int MaDuLieu { get; set; }
+        public string GiaPhong { get; set; }
+        public string IDCTNT { get; set; }
         public string MoTa { get; set; }
         public string TinhTrang { get; set; }
         public string Loai { get; set; }
@@ -24,5 +24,6 @@ namespace RenthouseAPI.Models
         public Nullable<float> KinhDo { get; set; }
         public Nullable<float> ViDo { get; set; }
         public string ChuThich { get; set; }
+        public string NgayDang { get; set; }
     }
 }

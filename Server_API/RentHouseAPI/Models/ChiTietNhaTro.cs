@@ -14,8 +14,9 @@ namespace RenthouseAPI.Models
     
     public partial class ChiTietNhaTro
     {
-        public int MaDuLieu { get; set; }
-        public Nullable<int> IDNhaTro { get; set; }
+        public int ID { get; set; }
+        public string IDCTNT { get; set; }
+        public string IDNhaTro { get; set; }
         public string MoTa { get; set; }
         public string TinhTrang { get; set; }
         public string Loai { get; set; }
@@ -26,5 +27,8 @@ namespace RenthouseAPI.Models
         public Nullable<float> KinhDo { get; set; }
         public Nullable<float> ViDo { get; set; }
         public string ChuThich { get; set; }
+        public Nullable<bool> AutoExtract { get; set; }
+    
+        public virtual NhaTro NhaTro { get; set; }
     }
 }
