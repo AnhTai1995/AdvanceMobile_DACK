@@ -41,6 +41,11 @@ public class TabFragment extends Fragment {
             @Override
             public void run() {
                 tabLayout.setupWithViewPager(viewPager);
+
+                    tabLayout.getTabAt(0).setIcon(R.drawable.news);
+                    tabLayout.getTabAt(1).setIcon(R.drawable.map);
+                    tabLayout.getTabAt(2).setIcon(R.drawable.search);
+
             }
         });
 
@@ -83,19 +88,19 @@ public class TabFragment extends Fragment {
          * This method returns the title of the tab according to the position.
          */
 
-        @Override
-        public CharSequence getPageTitle(int position) {
-
-            switch (position){
-                case 0 :
-                    return "Bảng tin";
-                case 1 :
-                    return "Bản đồ";
-                case 2 :
-                    return "Thông báo";
-
-            }
-            return null;
-        }
+//        @Override
+//        public CharSequence getPageTitle(int position) {
+//
+//            switch (position){
+//                case 0 :
+//                   return "Bảng tin";
+//                case 1 :
+//                    return "Bản đồ";
+//                case 2 :
+//                    return "Tìm kiếm";
+//
+//            }
+//            return null;
+//        }
     }
 }

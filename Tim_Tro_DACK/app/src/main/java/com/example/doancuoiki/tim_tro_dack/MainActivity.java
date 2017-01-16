@@ -88,17 +88,30 @@ public class MainActivity extends AppCompatActivity {
 
                }
                 if (menuItem.getItemId() == R.id.nav_item_about) {
-                    Intent newscr = new Intent(MainActivity.this,Chi_tiet_nha_tro.class);
+                    Intent newscr = new Intent(MainActivity.this,GioiThieu.class);
                     startActivity(newscr);
 
                 }
+
+//                if(menuItem.getItemId()==R.id.nav_item_logout) {
+//                    Intent newscr = new Intent(MainActivity.this,DangTin.class);
+//                    startActivity(newscr);
+//                }
+
+                if(menuItem.getItemId()==R.id.nav_item_profile) {
+                    Intent newscr = new Intent(MainActivity.this,NguoiDung.class);
+                    startActivity(newscr);
+                }
+
+                if(menuItem.getItemId()==R.id.nav_item_notification) {
+                    Intent newscr = new Intent(MainActivity.this,ThongBao.class);
+                    startActivity(newscr);
+                }
+
 
                 if(menuItem.getItemId()==R.id.nav_item_logout) {
-                    Intent newscr = new Intent(MainActivity.this,DangTin.class);
-                    startActivity(newscr);
+                    onBackPressed();
                 }
-
-
 
 
                 return false;
@@ -117,5 +130,25 @@ public class MainActivity extends AppCompatActivity {
         mDrawerLayout.setDrawerListener(mDrawerToggle);
 
         mDrawerToggle.syncState();
+    }
+
+    @Override
+    public void onBackPressed() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Bạn có chắc chắn muốn thoát khỏi ứng dụng?")
+                .setCancelable(false)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        MainActivity.this.finish();
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+        AlertDialog alert = builder.create();
+        alert.show();
+
     }
 }

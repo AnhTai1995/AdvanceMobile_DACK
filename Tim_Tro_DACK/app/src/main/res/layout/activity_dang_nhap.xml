@@ -47,6 +47,26 @@
         android:textColor="@color/white"
         android:id="@+id/btdangnhap" />
 
+    <TextView
+        android:text="Quên mật khẩu"
+        android:layout_width="150dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="220dp"
+        android:textSize="16dp"
+        android:textColor="#0033FF"
+        android:id="@+id/txtquenmk"/>
+
+    <TextView
+        android:text="Đăng kí mới"
+        android:layout_width="150dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="220dp"
+        android:textSize="16dp"
+        android:textColor="#0033FF"
+        android:id="@+id/txtdangki"/>
+
     <View
         android:layout_marginTop="30dp"
         android:layout_marginBottom="5dp"
@@ -73,25 +93,6 @@
         android:textColor="@color/black"
         android:id="@+id/btgg" />
 
-    <TextView
-        android:text="Quên mật khẩu"
-        android:layout_width="150dp"
-        android:layout_height="20dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginLeft="220dp"
-        android:textSize="16dp"
-        android:textColor="#0033FF"
-        android:id="@+id/txtquenmk"/>
-
-    <TextView
-        android:text="Đăng kí mới"
-        android:layout_width="150dp"
-        android:layout_height="20dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="220dp"
-        android:textSize="16dp"
-        android:textColor="#0033FF"
-        android:id="@+id/txtdangki"/>
 
 
 </LinearLayout>

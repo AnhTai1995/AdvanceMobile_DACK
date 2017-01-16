@@ -1,9 +1,11 @@
 package com.example.doancuoiki.tim_tro_dack;
 
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -24,8 +26,9 @@ public class AdapterTro  extends RecyclerView.Adapter<AdapterTro.MyViewHolder>{
         private ImageView avatar;
         private TextView name;
         private TextView timePost;
+        private Button btdangtin;
 
-        public MyViewHolder(View itemView) {
+        public MyViewHolder(final View itemView) {
             super(itemView);
 
             diaChi = (TextView) itemView.findViewById(R.id.dichi);
@@ -36,6 +39,8 @@ public class AdapterTro  extends RecyclerView.Adapter<AdapterTro.MyViewHolder>{
             avatar = (ImageView) itemView.findViewById(R.id.avatar);
             name = (TextView) itemView.findViewById(R.id.username);
             timePost = (TextView) itemView.findViewById(R.id.timePost);
+
+
         }
     }
 

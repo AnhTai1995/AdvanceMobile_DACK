@@ -16,8 +16,7 @@
         android:layout_marginTop="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        >
+        android:orientation="vertical">
 
         <TextView
             android:text="Hình ảnh"
@@ -37,10 +36,10 @@
         <ImageView
             android:layout_gravity="center"
             android:id="@+id/imgView"
-            android:layout_width="350dp"
+            android:layout_width="match_parent"
             android:layout_height="200dp"
             android:scaleType="fitXY"
-            android:src="@drawable/icon_camera" />
+            android:src="@drawable/camera" />
 
         <Button
             android:layout_gravity="center"
@@ -66,8 +65,7 @@
             android:layout_marginTop="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
+            android:orientation="vertical">
             <TextView
                 android:text="Thông tin cơ bản"
                 android:textSize="18dp"
@@ -184,11 +182,7 @@
                     android:id="@+id/btdangtin"
                     android:background="#00AA00"
                     android:textColor="@color/white"/>
-
-                />
-
         </LinearLayout>
-
 
     </LinearLayout>
 

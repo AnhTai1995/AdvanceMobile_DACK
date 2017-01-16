@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
         android:allowBackup="true"
@@ -29,7 +30,10 @@
         <activity android:name=".Dang_nhap" />
         <activity android:name=".Dang_ki" />
         <activity android:name=".QuenMK" />
-        <activity android:name=".DangTin"></activity>
+        <activity android:name=".DangTin" />
+        <activity android:name=".ThongBao" />
+        <activity android:name=".NguoiDung" />
+        <activity android:name=".GioiThieu"></activity>
     </application>
 
 </manifest>
