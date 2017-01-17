@@ -63,16 +63,6 @@ public class Dang_ki extends AppCompatActivity {
                                 startActivity(newscr);
 //
                             }
-
-
-//                            if(response.body() == true){
-//                                //Intent newscr = new Intent(Dang_ki.this,Dang_nhap.class);
-//                                //startActivity(newscr);
-//                                Toast.makeText(getApplicationContext(), "Đã đăng ký thành công", Toast.LENGTH_SHORT).show();
-//                            }
-//                            else {
-//                                Toast.makeText(Dang_ki.this, "Đăng ký không thành công, tên tài khoản bị trùng!", Toast.LENGTH_LONG).show();
-//                            }
                         }
                         @Override
                         public void onFailure(Call<Boolean> call, Throwable t) {

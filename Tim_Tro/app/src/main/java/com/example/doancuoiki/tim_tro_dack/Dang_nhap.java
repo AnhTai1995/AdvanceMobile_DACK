@@ -11,6 +11,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.doancuoiki.tim_tro_dack.Model.NguoiDung;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -217,6 +218,7 @@ public class Dang_nhap extends AppCompatActivity implements GoogleApiClient.OnCo
         if (requestCode == RC_SIGN_IN) {
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
             handleSignInResult(result);
+
         }
     }
     // [END onActivityResult]
@@ -227,11 +229,44 @@ public class Dang_nhap extends AppCompatActivity implements GoogleApiClient.OnCo
         if (result.isSuccess()) {
             // Signed in successfully, show authenticated UI.
             GoogleSignInAccount acct = result.getSignInAccount();
+            String personName = acct.getDisplayName();
+//            String personGivenName = acct.getGivenName();
+//            String personFamilyName = acct.getFamilyName();
+            String personEmail = acct.getEmail();
+            String personId = acct.getId();
 
-            updateUI(true);
+            Retrofit retrofit = new Retrofit.Builder()
+                    .baseUrl("http://renthouseapi.apphb.com/")
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+            Service service = retrofit.create(Service.class);
+            NguoiDung nguoidung = new NguoiDung(personId, personName, personId, "1995-01-01", "Nam", personEmail, "", "", true);
+            Call<Boolean> call = service.Register(nguoidung);
+            call.enqueue(new Callback<Boolean>() {
+                @Override
+                public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                    //Boolean bool = response.body();
+                    Log.d(TAG, response.toString());
+                    if (!response.isSuccessful()){
+                        Toast.makeText(getApplicationContext(), "Đăng kí thất bại", Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        Toast.makeText(getApplicationContext(), "Đăng kí thành công", Toast.LENGTH_SHORT).show();
+                        Intent newscr = new Intent(Dang_nhap.this,Dang_ki.class);
+                        startActivity(newscr);
+//
+                    }
+                }
+                @Override
+                public void onFailure(Call<Boolean> call, Throwable t) {
+
+                }
+            });
+
+
         } else {
             // Signed out, show unauthenticated UI.
-            updateUI(false);
+
         }
     }
     // [END handleSignInResult]
@@ -251,7 +286,6 @@ public class Dang_nhap extends AppCompatActivity implements GoogleApiClient.OnCo
                     @Override
                     public void onResult(Status status) {
                         // [START_EXCLUDE]
-                        updateUI(false);
                         // [END_EXCLUDE]
                     }
                 });
@@ -265,7 +299,7 @@ public class Dang_nhap extends AppCompatActivity implements GoogleApiClient.OnCo
                     @Override
                     public void onResult(Status status) {
                         // [START_EXCLUDE]
-                        updateUI(false);
+
                         // [END_EXCLUDE]
                     }
                 });
@@ -279,17 +313,6 @@ public class Dang_nhap extends AppCompatActivity implements GoogleApiClient.OnCo
         Log.d(TAG, "onConnectionFailed:" + connectionResult);
     }
 
-
-    private void updateUI(boolean signedIn) {
-        if (signedIn) {
-            findViewById(R.id.sign_in_button).setVisibility(View.GONE);
-            findViewById(R.id.sign_out_button).setVisibility(View.VISIBLE);
-        } else {
-
-            findViewById(R.id.sign_in_button).setVisibility(View.VISIBLE);
-            findViewById(R.id.sign_out_button).setVisibility(View.GONE);
-        }
-    }
 
     @Override
     public void onClick(View v) {
