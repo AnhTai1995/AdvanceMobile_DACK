@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <TextView
+        android:text="Đăng kí tài khoản"
+        android:textSize="24dp"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/black"
+        android:id="@+id/txtbando"
+        android:layout_gravity="center"/>
+
+    <EditText
+        android:background="@drawable/edittext"
+        android:layout_marginTop="15dp"
+        android:hint="Tên tài khoản"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:textColor="@color/black"
+        android:id="@+id/edtten" />
+
+    <EditText
+        android:background="@drawable/edittext"
+        android:layout_marginTop="15dp"
+        android:hint="Mật khẩu"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:textColor="@color/black"
+        android:id="@+id/edtmatkhau" />
+    <EditText
+        android:background="@drawable/edittext"
+        android:layout_marginTop="15dp"
+        android:hint="Nhập lại mật khẩu"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:textColor="@color/black"
+        android:id="@+id/edtmatkhaulaplai" />
+    <EditText
+        android:background="@drawable/edittext"
+        android:layout_marginTop="15dp"
+        android:hint="Email"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:textColor="@color/black"
+        android:id="@+id/edtmail" />
+    <EditText
+        android:background="@drawable/edittext"
+        android:layout_marginTop="15dp"
+        android:hint="Số điện thoại"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:textColor="@color/black"
+        android:id="@+id/edtsdt" />
+
+    <Button
+        android:background="#00AA00"
+        android:layout_marginTop="25dp"
+        android:text="Đăng kí"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:textColor="@color/white"
+        android:id="@+id/btdangki" />
+
+
+</LinearLayout>
