@@ -47,7 +47,7 @@ public class Dang_ki extends AppCompatActivity {
                             .addConverterFactory(GsonConverterFactory.create())
                             .build();
                     Service service = retrofit.create(Service.class);
-                    NguoiDung nguoidung = new NguoiDung("aaaaa", "User", "12345", "1995-01-01", "Nam", "aa@bb.com", "", "123456789", false);
+                    NguoiDung nguoidung = new NguoiDung("aaaaa", tendn, pass, "1995-01-01", "Nam", mail, "", SDT, false);
                     Call<Boolean> call = service.Register(nguoidung);
                     call.enqueue(new Callback<Boolean>() {
                         @Override
@@ -59,6 +59,9 @@ public class Dang_ki extends AppCompatActivity {
                             }
                             else {
                                 Toast.makeText(getApplicationContext(), "Đăng kí thành công", Toast.LENGTH_SHORT).show();
+                                Intent newscr = new Intent(Dang_ki.this,Dang_nhap.class);
+                                startActivity(newscr);
+//
                             }
 
 

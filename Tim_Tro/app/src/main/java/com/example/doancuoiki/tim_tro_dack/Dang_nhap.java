@@ -90,8 +90,7 @@ public class Dang_nhap extends AppCompatActivity implements GoogleApiClient.OnCo
                     public okhttp3.Response intercept(Chain chain) throws IOException {
                         Request original = chain.request();
                         Request request = original.newBuilder()
-                                .header("User-Agent", "Your-App-Name")
-                                .header("Accept", "application/vnd.yourapi.v1.full+json")
+                                .header("Authorization", "Bearer " +authorization.getAccessToken())
                                 .method(original.method(), original.body())
                                 .build();
                         return chain.proceed(request);
@@ -106,7 +105,7 @@ public class Dang_nhap extends AppCompatActivity implements GoogleApiClient.OnCo
                         .addConverterFactory(GsonConverterFactory.create())
                         .build();
                 Service service = retrofit.create(Service.class);
-                Call<List<NhaTro>> call = service.getNhaTro("NT00002");
+                Call<List<NhaTro>> call = service.getNhaTro(authorization.getAccessToken(),"NT00002");
                 call.enqueue(new Callback<List<NhaTro>>() {
                     @Override
                     public void onResponse(Call<List<NhaTro>> call, Response<List<NhaTro>> response) {
@@ -181,7 +180,6 @@ public class Dang_nhap extends AppCompatActivity implements GoogleApiClient.OnCo
                 Log.e(TAG, t.getMessage());
             }
         });
-        Toast.makeText(Dang_nhap.this, authorization.getClientId() , Toast.LENGTH_SHORT).show();
         if(authorization.getClientId() != null && authorization.getClientId() != "" )
         {
             Call<Authorization> call1 = service.getAccessToken("password", authorization.getClientId(), edtusername.getText().toString(),
@@ -190,8 +188,12 @@ public class Dang_nhap extends AppCompatActivity implements GoogleApiClient.OnCo
                 @Override
                 public void onResponse(Call<Authorization> call, Response<Authorization> response) {
                     Authorization auth = response.body();
-                    authorization.setToken(auth.getAccessToken());
-                    Toast.makeText(Dang_nhap.this, auth.getAccessToken(), Toast.LENGTH_SHORT).show();
+                    if(auth.getAccessToken() == null || auth.getAccessToken() == ""){
+                        Toast.makeText(Dang_nhap.this, "Đăng nhập không thành công!", Toast.LENGTH_SHORT);
+                    }else {
+                        Toast.makeText(Dang_nhap.this, "Đăng nhập thành công!", Toast.LENGTH_SHORT);
+                        authorization.setToken(auth.getAccessToken());
+                    }
                 }
 
                 @Override

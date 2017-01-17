@@ -10,6 +10,7 @@ import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
 
@@ -36,7 +37,7 @@ public interface Service {
             @Body NguoiDung body);
 
     @GET("nha-tro-2")
-    Call<List<NhaTro>> getNhaTro(@Query("id") String ID);
+    Call<List<NhaTro>> getNhaTro(@Header("access_token") String token, @Query("id") String ID);
 
 
 
