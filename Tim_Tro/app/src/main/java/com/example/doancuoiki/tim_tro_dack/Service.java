@@ -1,9 +1,12 @@
 package com.example.doancuoiki.tim_tro_dack;
 
+import com.example.doancuoiki.tim_tro_dack.Model.NguoiDung;
+
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
+import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -28,15 +31,9 @@ public interface Service {
             @Field("username") String username,
             @Field("password") String password);
 
-    @FormUrlEncoded
     @POST("api/v1/nguoi-dung")
     Call<Boolean> Register(
-            @Field("Username") String username,
-            @Field("Pass") String password,
-            @Field("Mail") String email,
-            @Field("SDT") String SDT,
-            @Field("GioiTinh") String GioiTinh,
-            @Field("isFacebook") Boolean is);
+            @Body NguoiDung body);
 
     @GET("nha-tro-2")
     Call<List<NhaTro>> getNhaTro(@Query("id") String ID);

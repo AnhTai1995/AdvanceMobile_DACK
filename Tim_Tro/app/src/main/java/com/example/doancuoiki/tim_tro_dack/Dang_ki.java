@@ -3,10 +3,13 @@ package com.example.doancuoiki.tim_tro_dack;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.example.doancuoiki.tim_tro_dack.Model.NguoiDung;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -15,6 +18,8 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Dang_ki extends AppCompatActivity {
+
+    private final String TAG = this.getClass().getName();
 
     private EditText username, password, repassword, email, sodienthoai;
     private Button DangKy;
@@ -42,19 +47,29 @@ public class Dang_ki extends AppCompatActivity {
                             .addConverterFactory(GsonConverterFactory.create())
                             .build();
                     Service service = retrofit.create(Service.class);
-                    Call<Boolean> call = service.Register(tendn, pass, mail, SDT, "Nam", false);
+                    NguoiDung nguoidung = new NguoiDung("aaaaa", "User", "12345", "1995-01-01", "Nam", "aa@bb.com", "", "123456789", false);
+                    Call<Boolean> call = service.Register(nguoidung);
                     call.enqueue(new Callback<Boolean>() {
                         @Override
                         public void onResponse(Call<Boolean> call, Response<Boolean> response) {
-                            Boolean bool = response.body();
-
-                            if(bool == null){
-                                Intent newscr = new Intent(Dang_ki.this,Dang_nhap.class);
-                                startActivity(newscr);
+                            //Boolean bool = response.body();
+                            Log.d(TAG, response.toString());
+                            if (!response.isSuccessful()){
+                                Toast.makeText(getApplicationContext(), "Đăng kí thất bại", Toast.LENGTH_SHORT).show();
                             }
                             else {
-                                Toast.makeText(Dang_ki.this, "Đăng ký không thành công, tên tài khoản bị trùng!", Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplicationContext(), "Đăng kí thành công", Toast.LENGTH_SHORT).show();
                             }
+
+
+//                            if(response.body() == true){
+//                                //Intent newscr = new Intent(Dang_ki.this,Dang_nhap.class);
+//                                //startActivity(newscr);
+//                                Toast.makeText(getApplicationContext(), "Đã đăng ký thành công", Toast.LENGTH_SHORT).show();
+//                            }
+//                            else {
+//                                Toast.makeText(Dang_ki.this, "Đăng ký không thành công, tên tài khoản bị trùng!", Toast.LENGTH_LONG).show();
+//                            }
                         }
                         @Override
                         public void onFailure(Call<Boolean> call, Throwable t) {
