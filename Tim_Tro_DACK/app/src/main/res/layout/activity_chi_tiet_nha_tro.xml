@@ -131,6 +131,7 @@
             </LinearLayout><!--head: avatar, name-->
 
             <TextView
+                android:id="@+id/diaChi"
                 android:text="Địa chỉ"
                 android:paddingLeft="10dp"
                 android:layout_width="match_parent"
@@ -138,6 +139,7 @@
                 android:layout_marginTop="10dp"
                 android:textColor="@color/black" />
             <TextView
+                android:id="@+id/dienTich"
                 android:text="Diện tích"
                 android:paddingLeft="10dp"
                 android:layout_width="match_parent"
@@ -145,6 +147,7 @@
                 android:layout_marginTop="10dp"
                 android:textColor="@color/black" />
             <TextView
+                android:id="@+id/giaPhong"
                 android:text="Giá phòng"
                 android:paddingLeft="10dp"
                 android:layout_width="match_parent"
@@ -152,6 +155,7 @@
                 android:layout_marginTop="10dp"
                 android:textColor="@color/black" />
             <TextView
+                android:id="@+id/dienThoai"
                 android:text="Địện thoại"
                 android:paddingLeft="10dp"
                 android:layout_width="match_parent"
@@ -159,6 +163,7 @@
                 android:layout_marginTop="10dp"
                 android:textColor="@color/black" />
             <TextView
+                android:id="@+id/moTa"
                 android:text="Mô tả"
                 android:paddingLeft="10dp"
                 android:layout_width="match_parent"
