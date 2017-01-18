@@ -54,8 +54,10 @@
         <activity
             android:name=".view.activity.DanhSachBaiDang"
             android:label="Danh sách bài đăng" />
-        <activity android:name=".view.activity.ChinhSuaBaiDang"
-            android:label="Chỉnh sửa bài đăng"></activity>
+        <activity
+            android:name=".view.activity.ChinhSuaBaiDang"
+            android:label="Chỉnh sửa bài đăng" />
+        <activity android:name=".view.activity.DanhSachDaLuu"></activity>
     </application>
 
 </manifest>

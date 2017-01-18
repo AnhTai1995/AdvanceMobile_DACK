@@ -8,10 +8,11 @@ import android.widget.Button;
 
 import com.example.doancuoiki.tim_tro_dack.view.activity.DangTin;
 import com.example.doancuoiki.tim_tro_dack.view.activity.DanhSachBaiDang;
+import com.example.doancuoiki.tim_tro_dack.view.activity.DanhSachDaLuu;
 import com.example.doancuoiki.tim_tro_dack.view.activity.MainActivity;
 
 public class NguoiDung extends AppCompatActivity {
-Button quanly;
+Button quanly, quanlyluu;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,6 +23,15 @@ Button quanly;
             @Override
             public void onClick(View view) {
                 Intent newscr = new Intent(NguoiDung.this,DanhSachBaiDang.class);
+                startActivity(newscr);
+            }
+        });
+
+        quanlyluu = (Button)findViewById(R.id.btquanlyluu);
+        quanlyluu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent newscr = new Intent(NguoiDung.this,DanhSachDaLuu.class);
                 startActivity(newscr);
             }
         });
