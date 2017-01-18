@@ -3,6 +3,10 @@
     package="com.example.doancuoiki.tim_tro_dack">
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -10,24 +14,48 @@
         android:label="@string/newname"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity" />
+        <activity android:name=".view.activity.MainActivity" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity android:name=".Splash_start">
+        <activity android:name=".view.activity.Splash_start">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Chi_tiet_nha_tro" />
-        <activity android:name=".Dang_nhap" />
-        <activity android:name=".Dang_ki" />
-        <activity android:name=".QuenMK" />
-        <activity android:name=".DangTin"></activity>
+        <activity
+            android:name=".view.activity.Chi_tiet_nha_tro"
+            android:label="Chi tiết nhà trọ" />
+        <activity
+            android:name=".view.activity.Dang_nhap"
+            android:label="Tài khoản" />
+        <activity
+            android:name=".view.activity.Dang_ki"
+            android:label="Đăng kí" />
+        <activity
+            android:name=".view.activity.QuenMK"
+            android:label="Quên mật khẩu" />
+        <activity
+            android:name=".view.activity.DangTin"
+            android:label="Đăng tin" />
+        <activity
+            android:name=".ThongBao"
+            android:label="Thông báo" />
+        <activity
+            android:name=".NguoiDung"
+            android:label="Thông tin cá nhân" />
+        <activity
+            android:name=".GioiThieu"
+            android:label="Giới thiệu" />
+        <activity
+            android:name=".view.activity.DanhSachBaiDang"
+            android:label="Danh sách bài đăng" />
+        <activity android:name=".view.activity.ChinhSuaBaiDang"
+            android:label="Chỉnh sửa bài đăng"></activity>
     </application>
 
 </manifest>

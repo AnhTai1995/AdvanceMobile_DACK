@@ -1,14 +1,128 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.doancuoiki.tim_tro_dack.TbaoFragment">
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.doancuoiki.tim_tro_dack.view.fragment.TbaoFragment"
 
-    <!-- TODO: Update blank fragment layout -->
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Tự thiết kế màn hình thông báo"
-        android:gravity="center"/>
+        android:text="Tiêu chí tìm kiếm"
+        android:textSize="24dp"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/black"
+        android:layout_gravity="center"/>
 
-</FrameLayout>
+    <LinearLayout
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_gravity="left"
+            android:paddingLeft="-1.5dp"
+            android:text="Quận"
+            android:textSize="20dp"
+            android:layout_width="87dp"
+            android:layout_height="40dp"
+            android:paddingTop="7dp"
+            android:textColor="@color/black"
+            />
+
+        <Spinner
+            android:layout_gravity="left"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/edittext"
+            android:id="@+id/spinner1"
+            android:layout_width="230dp"
+            android:layout_height="40dp"
+            android:textColor="@color/black" />
+
+        </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_gravity="left"
+            android:text="Diện tích"
+            android:textSize="20dp"
+            android:layout_width="80dp"
+            android:layout_height="40dp"
+            android:paddingTop="7dp"
+            android:textColor="@color/black"
+            />
+
+        <Spinner
+            android:layout_gravity="left"
+            android:layout_marginLeft="20dp"
+            android:background="@drawable/edittext"
+            android:id="@+id/spinner2"
+            android:layout_width="230dp"
+            android:layout_height="40dp"
+            android:textColor="@color/black" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true"
+        android:orientation="horizontal">
+
+        <TextView
+            android:paddingTop="10dp"
+            android:layout_gravity="left"
+            android:text="Giá"
+            android:textSize="20dp"
+            android:layout_width="80dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="7dp"
+            android:textColor="@color/black"
+            />
+
+        <Spinner
+            android:layout_gravity="left"
+            android:layout_marginLeft="20dp"
+            android:background="@drawable/edittext"
+            android:id="@+id/spinner3"
+            android:layout_width="230dp"
+            android:layout_height="40dp"
+            android:textColor="@color/black" />
+
+
+    </LinearLayout>
+
+
+
+    <Button
+
+        android:layout_marginLeft="127dp"
+        android:background="#00AA00"
+        android:layout_marginTop="35dp"
+        android:text="Đồng ý"
+        android:layout_width="230dp"
+        android:layout_height="40dp"
+        android:textColor="@color/white"
+        android:id="@+id/btdangki" />
+
+
+
+
+
+
+
+</LinearLayout>

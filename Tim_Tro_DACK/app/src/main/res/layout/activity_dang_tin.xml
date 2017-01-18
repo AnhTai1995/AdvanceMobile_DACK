@@ -16,8 +16,7 @@
         android:layout_marginTop="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        >
+        android:orientation="vertical">
 
         <TextView
             android:text="Hình ảnh"
@@ -36,11 +35,23 @@
 
         <ImageView
             android:layout_gravity="center"
-            android:id="@+id/imgTro"
-            android:layout_width="250dp"
+            android:id="@+id/imgView"
+            android:layout_width="match_parent"
             android:layout_height="200dp"
             android:scaleType="fitXY"
-            android:src="@drawable/icon_camera" />
+            android:src="@drawable/camera" />
+
+        <Button
+            android:layout_gravity="center"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:text="Tải ảnh lên"
+            android:id="@+id/btdanganh"
+            android:background="#3366FF"
+            android:textColor="@color/white"
+            android:onClick="loadImagefromGallery"/>
         </LinearLayout>
 
         <View
@@ -54,8 +65,7 @@
             android:layout_marginTop="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
+            android:orientation="vertical">
             <TextView
                 android:text="Thông tin cơ bản"
                 android:textSize="18dp"
@@ -80,9 +90,11 @@
                 android:layout_height="35dp"
                 android:hint="Địa chỉ"
                 android:textSize="15dp"
+                android:paddingLeft="10dp"
                 android:id="@+id/edtdiachi"/>
 
             <EditText
+                android:paddingLeft="10dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
@@ -94,6 +106,7 @@
                 android:id="@+id/edtdientich"/>
 
             <EditText
+                android:paddingLeft="10dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
@@ -105,6 +118,7 @@
                 android:id="@+id/edtgia"/>
 
             <EditText
+                android:paddingLeft="10dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
@@ -147,13 +161,14 @@
                 android:background="#848484" />
 
                 <EditText
+                    android:paddingLeft="10dp"
                     android:layout_gravity="center"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
                     android:background="@drawable/edittext"
                     android:layout_width="300dp"
                     android:layout_height="60dp"
-                    android:hint="Mô tả"
+                    android:hint="Mô tả chi tiết về phòng trọ..."
                     android:textSize="15dp"
                     android:id="@+id/edtbinhluan"/>
 
@@ -167,11 +182,7 @@
                     android:id="@+id/btdangtin"
                     android:background="#00AA00"
                     android:textColor="@color/white"/>
-
-                />
-
         </LinearLayout>
-
 
     </LinearLayout>
 

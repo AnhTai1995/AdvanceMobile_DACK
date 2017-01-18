@@ -17,6 +17,7 @@
         android:layout_gravity="center"/>
 
     <EditText
+        android:paddingLeft="10dp"
         android:background="@drawable/edittext"
         android:layout_marginTop="15dp"
         android:hint="Tên tài khoản"
@@ -27,6 +28,7 @@
         android:id="@+id/edtten" />
 
     <EditText
+        android:paddingLeft="10dp"
         android:background="@drawable/edittext"
         android:layout_marginTop="15dp"
         android:hint="Mật khẩu"
@@ -36,6 +38,7 @@
         android:textColor="@color/black"
         android:id="@+id/edtmatkhau" />
     <EditText
+        android:paddingLeft="10dp"
         android:background="@drawable/edittext"
         android:layout_marginTop="15dp"
         android:hint="Nhập lại mật khẩu"
@@ -45,6 +48,7 @@
         android:textColor="@color/black"
         android:id="@+id/edtmatkhaulaplai" />
     <EditText
+        android:paddingLeft="10dp"
         android:background="@drawable/edittext"
         android:layout_marginTop="15dp"
         android:hint="Email"
@@ -54,6 +58,7 @@
         android:textColor="@color/black"
         android:id="@+id/edtmail" />
     <EditText
+        android:paddingLeft="10dp"
         android:background="@drawable/edittext"
         android:layout_marginTop="15dp"
         android:hint="Số điện thoại"

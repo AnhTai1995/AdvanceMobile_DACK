@@ -5,4 +5,43 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_maps">Map</string>
+
+    <string-array name="arr_gia">
+        <item>Tất cả</item>
+        <item>Dưới 1 triệu</item>
+        <item>Dưới 2 triệu</item>
+        <item>Dưới 3tr</item>
+        <item>Dưới 4 triệu</item>
+        <item>Dưới 5tr</item>
+    </string-array>
+
+    <string-array name="arr_quan">
+        <item>Tất cả</item>
+        <item>Quận 1</item>
+        <item>Quận 2</item>
+        <item>Quận 3</item>
+        <item>Quận 4</item>
+        <item>Quận 5</item>
+        <item>Quận 6</item>
+        <item>Quận 7 triệu</item>
+        <item>Quận 8</item>
+        <item>Quận 9</item>
+        <item>Quận 10</item>
+        <item>Quận 11</item>
+        <item>Quận 12</item>
+        <item>Quận Gò Vấp</item>
+        <item>Quận Thủ Đức</item>
+        <item>Quận Bình Chánh</item>
+        <item>Quận Phú Nhuận</item>
+    </string-array>
+
+    <string-array name="arr_dientich">
+        <item>Tất cả</item>
+        <item>Dưới 15 mét vuông</item>
+        <item>Dưới 20 mét vuông</item>
+        <item>Dưới 30 mét vuông</item>
+        <item>Dưới 40 mét vuông</item>
+        <item>Dưới 50 mét vuông</item>
+    </string-array>
+
 </resources>
