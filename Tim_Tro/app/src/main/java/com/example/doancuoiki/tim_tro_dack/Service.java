@@ -31,7 +31,7 @@ public interface Service {
             @Field("username") String username,
             @Field("password") String password);
 
-    @POST("api/v1/nguoi-dung")
+    @POST("nguoi-dung")
     Call<Boolean> Register(
             @Body NguoiDung body);
 

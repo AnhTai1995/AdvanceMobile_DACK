@@ -166,22 +166,22 @@ public class Dang_nhap extends AppCompatActivity implements GoogleApiClient.OnCo
     }
 
 
-    public void getToken(final String tendangnhap, final String pass){
+    public void getToken(String tendangnhap, String pass){
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://renthouseapi.apphb.com/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-
+        final String tendn = tendangnhap, matkhau = pass;
         final Service service = retrofit.create(Service.class);
-        Call<Authorization> call = service.Client_ID(edtusername.getText().toString());
+        Call<Authorization> call = service.Client_ID(tendn);
         call.enqueue(new Callback<Authorization>() {
             @Override
             public void onResponse(Call<Authorization> call, Response<Authorization> response) {
                 Authorization auth = response.body();
                 authorization.setClientId(auth.getClientId().toString());
-                Call<Authorization> call1 = service.getAccessToken("password", authorization.getClientId(), tendangnhap,
-                        pass);
+                Call<Authorization> call1 = service.getAccessToken("password", authorization.getClientId(), tendn,
+                        matkhau);
                 call1.enqueue(new Callback<Authorization>() {
                     @Override
                     public void onResponse(Call<Authorization> call, Response<Authorization> response) {
@@ -193,7 +193,7 @@ public class Dang_nhap extends AppCompatActivity implements GoogleApiClient.OnCo
                             Toast.makeText(Dang_nhap.this, "Đăng nhập thành công!", Toast.LENGTH_SHORT).show();
                             authorization.setToken(auth.getAccessToken());
                             Toast.makeText(Dang_nhap.this, authorization.getAccessToken(), Toast.LENGTH_SHORT).show();
-                            saveDetailuser(tendangnhap);
+                            saveDetailuser(tendn);
                             Intent newscr = new Intent(Dang_nhap.this,Dang_ki.class);
                             startActivity(newscr);
                         }
@@ -220,7 +220,7 @@ public class Dang_nhap extends AppCompatActivity implements GoogleApiClient.OnCo
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
             Service service = retrofit.create(Service.class);
-            Call<NguoiDung> call = service.getNguoiDung(edtusername.getText().toString());
+            Call<NguoiDung> call = service.getNguoiDung(tendangnhap);
             call.enqueue(new Callback<NguoiDung>() {
                 @Override
                 public void onResponse(Call<NguoiDung> call, Response<NguoiDung> response) {
@@ -268,28 +268,28 @@ public class Dang_nhap extends AppCompatActivity implements GoogleApiClient.OnCo
                     .build();
             final Service service = retrofit.create(Service.class);
             Call<NguoiDung> call = service.getNguoiDung(personId);
+            //Toast.makeText(Dang_nhap.this, personId  + personEmail + personName , Toast.LENGTH_SHORT).show();
             call.enqueue(new Callback<NguoiDung>() {
                 @Override
                 public void onResponse(Call<NguoiDung> call, Response<NguoiDung> response) {
-                   if (!response.isSuccessful()){
-                       NguoiDung nguoidung = new NguoiDung(personId, personName, personId, "1995-01-01", "Nam", personEmail, "", "", true);
+                   if (response.body() == null){
+                       NguoiDung nguoidung = new NguoiDung(personId, personName, personId, "1995-01-01", "Nam", personEmail, "", "2213351", true);
                        Call<Boolean> call1 = service.Register(nguoidung);
                        call1.enqueue(new Callback<Boolean>() {
                            @Override
                            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
                                //Boolean bool = response.body();
-                               Log.d(TAG, response.toString());
-                               if (!response.isSuccessful()){
-                                   Toast.makeText(getApplicationContext(), "Đăng nhập thất bại", Toast.LENGTH_SHORT).show();
+                               if ( !response.isSuccessful() ){
+                                   Toast.makeText(Dang_nhap.this, "Đăng kí thất bại", Toast.LENGTH_SHORT).show();
                                }
                                else {
-                                   Toast.makeText(getApplicationContext(), "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
+                                   Toast.makeText(Dang_nhap.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
                                    getToken(personId, personId);
                                }
                            }
                            @Override
                            public void onFailure(Call<Boolean> call, Throwable t) {
-
+                               Toast.makeText(Dang_nhap.this, "hú hú", Toast.LENGTH_SHORT).show();
                            }
                        });
                    }else {

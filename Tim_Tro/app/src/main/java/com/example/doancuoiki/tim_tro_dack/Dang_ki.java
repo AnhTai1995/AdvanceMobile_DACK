@@ -42,20 +42,23 @@ public class Dang_ki extends AppCompatActivity {
                 String SDT = sodienthoai.getText().toString();
                 if ( pass.compareTo(repassword.getText().toString()) == 0 )
                 {
+
                     Retrofit retrofit = new Retrofit.Builder()
-                            .baseUrl("http://renthouseapi.apphb.com/")
+                            .baseUrl("http://renthouseapi.apphb.com/api/v1/")
                             .addConverterFactory(GsonConverterFactory.create())
                             .build();
                     Service service = retrofit.create(Service.class);
-                    NguoiDung nguoidung = new NguoiDung(tendn, tendn, pass, "1995-01-01", "Nam", mail, "", SDT, false);
+                    NguoiDung nguoidung = new NguoiDung(tendn, "Quoc", pass, "1995-01-01", "Nam", mail, "", SDT, false);
                     Call<Boolean> call = service.Register(nguoidung);
+
                     call.enqueue(new Callback<Boolean>() {
+
                         @Override
                         public void onResponse(Call<Boolean> call, Response<Boolean> response) {
                             //Boolean bool = response.body();
                             Log.d(TAG, response.toString());
                             if (!response.isSuccessful()){
-                                Toast.makeText(getApplicationContext(), "Đăng kí thất bại", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(Dang_ki.this, "Đăng kí thất bại", Toast.LENGTH_SHORT).show();
                             }
                             else {
                                 Toast.makeText(getApplicationContext(), "Đăng kí thành công", Toast.LENGTH_SHORT).show();
@@ -66,7 +69,7 @@ public class Dang_ki extends AppCompatActivity {
                         }
                         @Override
                         public void onFailure(Call<Boolean> call, Throwable t) {
-
+                            Toast.makeText(Dang_ki.this, "hú hú", Toast.LENGTH_SHORT).show();
                         }
                     });
                 }
