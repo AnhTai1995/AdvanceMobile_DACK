@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:fitsSystemWindows="true"
     android:orientation="vertical">
 
@@ -84,14 +84,23 @@
         android:layout_gravity="center"
         android:textColor="@color/black"
         android:id="@+id/btfb" />
-    <ImageButton
-        android:src="@drawable/ic_gg"
-        android:layout_marginTop="15dp"
+    <com.google.android.gms.common.SignInButton
+        android:id="@+id/sign_in_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_centerInParent="true"
+        android:visibility="visible"
+        tools:visibility="gone" />
+
+    <Button
+        android:id="@+id/sign_out_button"
+        android:textColor="@color/black"
         android:layout_width="250dp"
         android:layout_height="40dp"
-        android:layout_gravity="center"
-        android:textColor="@color/black"
-        android:id="@+id/btgg" />
+        android:text="sign_out"
+        android:layout_gravity="center"/>
+
 
 
 
