@@ -225,7 +225,14 @@ public class Dang_nhap extends AppCompatActivity implements GoogleApiClient.OnCo
                 @Override
                 public void onResponse(Call<NguoiDung> call, Response<NguoiDung> response) {
                     NguoiDung nd = response.body();
-                    //Lưu xuống Realm
+
+                    //Save data in Realm
+                    NguoiDung.config(Dang_nhap.this);
+                    NguoiDung.addDataRealm(nd);
+
+                    Authorization.config(Dang_nhap.this);
+                    Authorization.addDataRealm(authorization);
+
                     Toast.makeText(Dang_nhap.this, nd.Username, Toast.LENGTH_SHORT).show();
                 }
                 @Override
@@ -267,13 +274,13 @@ public class Dang_nhap extends AppCompatActivity implements GoogleApiClient.OnCo
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
             final Service service = retrofit.create(Service.class);
-            Call<NguoiDung> call = service.getNguoiDung(personId);
+            Call<NguoiDung> call = service.getNguoiDung(personEmail);
             //Toast.makeText(Dang_nhap.this, personId  + personEmail + personName , Toast.LENGTH_SHORT).show();
             call.enqueue(new Callback<NguoiDung>() {
                 @Override
                 public void onResponse(Call<NguoiDung> call, Response<NguoiDung> response) {
                    if (response.body() == null){
-                       NguoiDung nguoidung = new NguoiDung(personId, personName, personId, "1995-01-01", "Nam", personEmail, "", "2213351", true);
+                       NguoiDung nguoidung = new NguoiDung(personEmail, personName, personEmail, "1995-01-01", "Nam", personEmail, "", "2213351", true);
                        Call<Boolean> call1 = service.Register(nguoidung);
                        call1.enqueue(new Callback<Boolean>() {
                            @Override
@@ -284,7 +291,7 @@ public class Dang_nhap extends AppCompatActivity implements GoogleApiClient.OnCo
                                }
                                else {
                                    Toast.makeText(Dang_nhap.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
-                                   getToken(personId, personId);
+                                   getToken(personEmail, personEmail);
                                }
                            }
                            @Override
@@ -293,7 +300,7 @@ public class Dang_nhap extends AppCompatActivity implements GoogleApiClient.OnCo
                            }
                        });
                    }else {
-                       getToken(personId, personId);
+                       getToken(personEmail, personEmail);
                    }
                 }
                 @Override
