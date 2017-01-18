@@ -1,21 +1,22 @@
-package com.example.doancuoiki.tim_tro_dack;
+package com.example.doancuoiki.tim_tro_dack.view.activity;
 
+import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.os.Build;
-import android.provider.Settings;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-
 import android.database.Cursor;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Build;
+import android.os.Bundle;
 import android.provider.MediaStore;
+import android.provider.Settings;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
-import android.Manifest;
+
+import com.example.doancuoiki.tim_tro_dack.R;
 
 public class DangTin extends AppCompatActivity {
     private static int RESULT_LOAD_IMG = 1;

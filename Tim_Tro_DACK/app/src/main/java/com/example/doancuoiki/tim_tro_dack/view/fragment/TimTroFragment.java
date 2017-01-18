@@ -1,5 +1,6 @@
-package com.example.doancuoiki.tim_tro_dack;
+package com.example.doancuoiki.tim_tro_dack.view.fragment;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -10,8 +11,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.example.doancuoiki.tim_tro_dack.R;
+import com.example.doancuoiki.tim_tro_dack.presenter.TroPresenter;
 
 /**
  * Created by xuan trung on 11/19/2016.
@@ -19,8 +20,9 @@ import java.util.List;
 
 public class TimTroFragment extends Fragment {
 
-    private List<Tro> troList = new ArrayList<>();
     private RecyclerView recyclerViewTro;
+    private TroPresenter troPresenter;
+    private Context context;
 
     public TimTroFragment(){
 
@@ -42,24 +44,10 @@ public class TimTroFragment extends Fragment {
         recyclerViewTro.setLayoutManager(layoutManager);
         recyclerViewTro.setItemAnimator(new DefaultItemAnimator());
 
-        user u1 = new user("avatar", "Hoàng Trung", "5h trước");
-        user u2 = new user("avatar", "Hoang Yến", "5h trước");
-        user u3 = new user("avatar", "Phụng Hoàng", "5h trước");
-        user u4 = new user("avatar", "Vính Phát", "5h trước");
+        troPresenter = new TroPresenter(context, recyclerViewTro);
 
-        Tro tro1 = new Tro(u1, "30/10 tan lap, dong hoa, di an, binh duong", "1542000000d", "200 met vuong", "hinh");
-        Tro tro2 = new Tro(u2, "30/10 tan lap", "1542000000d", "200 met vuong", "hinh");
-        Tro tro3 = new Tro(u3, "30/10 tan lap, dong hoa, di an, binh duong", "1542000000d", "200 met vuong", "hinh");
-        Tro tro4 = new Tro(u4, "30/10 tan lap, dong hoa, di an, binh duong", "1542000000d", "200 met vuong", "hinh");
+        troPresenter.fetchData();
 
-        troList.add(tro1);
-        troList.add(tro2);
-        troList.add(tro3);
-        troList.add(tro4);
-
-        AdapterTro adapterTro = new AdapterTro(troList);
-
-        recyclerViewTro.setAdapter(adapterTro);
         return view;
     }
 

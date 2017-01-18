@@ -1,4 +1,4 @@
-package com.example.doancuoiki.tim_tro_dack;
+package com.example.doancuoiki.tim_tro_dack.model;
 
 /**
  * Created by xuan trung on 11/19/2016.

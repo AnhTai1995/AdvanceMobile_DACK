@@ -1,8 +1,8 @@
-package com.example.doancuoiki.tim_tro_dack;
+package com.example.doancuoiki.tim_tro_dack.view.activity;
 
-import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -10,11 +10,13 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.Toast;
+
+import com.example.doancuoiki.tim_tro_dack.GioiThieu;
+import com.example.doancuoiki.tim_tro_dack.NguoiDung;
+import com.example.doancuoiki.tim_tro_dack.R;
+import com.example.doancuoiki.tim_tro_dack.ThongBao;
+import com.example.doancuoiki.tim_tro_dack.view.fragment.TabFragment;
 
 public class MainActivity extends AppCompatActivity {
     DrawerLayout mDrawerLayout;

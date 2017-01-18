@@ -1,5 +1,10 @@
-package com.example.doancuoiki.tim_tro_dack;
+package com.example.doancuoiki.tim_tro_dack.adapter;
 
+import android.support.v7.widget.RecyclerView;
+
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -8,6 +13,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.doancuoiki.tim_tro_dack.R;
+import com.example.doancuoiki.tim_tro_dack.model.Tro;
+import com.example.doancuoiki.tim_tro_dack.view.activity.Chi_tiet_nha_tro;
 
 import java.util.List;
 
@@ -18,6 +27,9 @@ import java.util.List;
 public class AdapterTro  extends RecyclerView.Adapter<AdapterTro.MyViewHolder>{
 
     private List<Tro> _tro;
+    private Context context;
+
+
 
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
@@ -30,7 +42,7 @@ public class AdapterTro  extends RecyclerView.Adapter<AdapterTro.MyViewHolder>{
 
         public MyViewHolder(final View itemView) {
             super(itemView);
-
+            context = itemView.getContext();// use call activity
             diaChi = (TextView) itemView.findViewById(R.id.dichi);
             gia = (TextView) itemView.findViewById(R.id.gia);
             dienTich = (TextView) itemView.findViewById(R.id.dientich);
@@ -44,8 +56,9 @@ public class AdapterTro  extends RecyclerView.Adapter<AdapterTro.MyViewHolder>{
         }
     }
 
-    public AdapterTro(List<Tro> tro){
+    public AdapterTro(List<Tro> tro, Context context){
         this._tro = tro;
+        this.context  = context;
     }
 
     @Override
@@ -59,16 +72,31 @@ public class AdapterTro  extends RecyclerView.Adapter<AdapterTro.MyViewHolder>{
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
 
-        Tro tro = _tro.get(position);
+        final Tro tro = _tro.get(position);
         //holder.avatar.setImageResource(tro.get_user().getAvatar());
-        holder.name.setText(tro.get_user().getName());
-        holder.timePost.setText(tro.get_user().getTimePost());
+        holder.name.setText(tro.getTenND());
+        holder.timePost.setText("13 gio");
 
         holder.diaChi.setText("Địa chỉ: " + tro.getDiaChi());
-        holder.gia.setText("Giá: "+tro.getGia());
+        holder.gia.setText("Giá: "+tro.getGiaPhong());
         holder.dienTich.setText("Diện tích: "+tro.getDienTich());
 
-        //holder.hinhNhaTro
+        holder.hinhNhaTro.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(context, Chi_tiet_nha_tro.class);
+                //Khai báo Bundle
+                Bundle bundle=new Bundle();
+                //đưa dữ liệu riêng lẻ vào Bundle
+                bundle.putString("IDNhaTro", tro.getIDNhaTro());
+                //Đưa Bundle vào Intent
+                intent.putExtra("MyPackage", bundle);
+                //Mở Activity ResultActivity
+                context.startActivity(intent);
+                //context.finish();
+            }
+        });
 
     }
 

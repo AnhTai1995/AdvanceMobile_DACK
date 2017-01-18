@@ -1,10 +1,12 @@
-package com.example.doancuoiki.tim_tro_dack;
+package com.example.doancuoiki.tim_tro_dack.view.activity;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+
+import com.example.doancuoiki.tim_tro_dack.R;
 
 public class Dang_nhap extends AppCompatActivity {
     TextView dangki, quenmk;
