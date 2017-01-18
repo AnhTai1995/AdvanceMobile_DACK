@@ -6,7 +6,7 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -27,14 +27,35 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.activity.Chi_tiet_nha_tro" />
-        <activity android:name=".view.activity.Dang_nhap" />
-        <activity android:name=".view.activity.Dang_ki" />
-        <activity android:name=".view.activity.QuenMK" />
-        <activity android:name=".view.activity.DangTin" />
-        <activity android:name=".ThongBao" />
-        <activity android:name=".NguoiDung" />
-        <activity android:name=".GioiThieu"></activity>
+        <activity
+            android:name=".view.activity.Chi_tiet_nha_tro"
+            android:label="Chi tiết nhà trọ" />
+        <activity
+            android:name=".view.activity.Dang_nhap"
+            android:label="Tài khoản" />
+        <activity
+            android:name=".view.activity.Dang_ki"
+            android:label="Đăng kí" />
+        <activity
+            android:name=".view.activity.QuenMK"
+            android:label="Quên mật khẩu" />
+        <activity
+            android:name=".view.activity.DangTin"
+            android:label="Đăng tin" />
+        <activity
+            android:name=".ThongBao"
+            android:label="Thông báo" />
+        <activity
+            android:name=".NguoiDung"
+            android:label="Thông tin cá nhân" />
+        <activity
+            android:name=".GioiThieu"
+            android:label="Giới thiệu" />
+        <activity
+            android:name=".view.activity.DanhSachBaiDang"
+            android:label="Danh sách bài đăng" />
+        <activity android:name=".view.activity.ChinhSuaBaiDang"
+            android:label="Chỉnh sửa bài đăng"></activity>
     </application>
 
 </manifest>

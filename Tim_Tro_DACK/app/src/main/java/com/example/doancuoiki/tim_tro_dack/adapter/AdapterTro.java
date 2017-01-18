@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.example.doancuoiki.tim_tro_dack.R;
 import com.example.doancuoiki.tim_tro_dack.model.Tro;
 import com.example.doancuoiki.tim_tro_dack.view.activity.Chi_tiet_nha_tro;
+import com.example.doancuoiki.tim_tro_dack.view.activity.DangTin;
 
 import java.util.List;
 
@@ -52,6 +53,7 @@ public class AdapterTro  extends RecyclerView.Adapter<AdapterTro.MyViewHolder>{
             name = (TextView) itemView.findViewById(R.id.username);
             timePost = (TextView) itemView.findViewById(R.id.timePost);
 
+;
 
         }
     }
@@ -97,6 +99,8 @@ public class AdapterTro  extends RecyclerView.Adapter<AdapterTro.MyViewHolder>{
                 //context.finish();
             }
         });
+
+
 
     }
 

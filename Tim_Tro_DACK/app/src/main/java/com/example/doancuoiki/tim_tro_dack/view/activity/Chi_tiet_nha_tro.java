@@ -1,7 +1,10 @@
 package com.example.doancuoiki.tim_tro_dack.view.activity;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -9,9 +12,14 @@ import android.widget.Toast;
 import com.example.doancuoiki.tim_tro_dack.R;
 import com.example.doancuoiki.tim_tro_dack.apihelper.APIService;
 import com.example.doancuoiki.tim_tro_dack.model.TroDetaile;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.List;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -19,14 +27,21 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 
-public class Chi_tiet_nha_tro extends AppCompatActivity {
+public class Chi_tiet_nha_tro extends AppCompatActivity implements OnMapReadyCallback {
 
     TextView diChi, dienTich, giaPhong, dienThoai, moTa;
+    GoogleMap mMap;
+    SupportMapFragment mapFragment;
+    LatLng latlng;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chi_tiet_nha_tro);
+
+        mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
 
         diChi = (TextView) findViewById(R.id.diaChi);
         dienTich = (TextView) findViewById(R.id.dienTich);
@@ -65,6 +80,18 @@ public class Chi_tiet_nha_tro extends AppCompatActivity {
                     //giaPhong.setText(nhaTro.get(0).g);
                     //dienThoai.set //điện thoại sai
                     moTa.setText("Mô tả: " + nhaTro.get(0).getMoTa());
+
+                    //Add marker cho bản đồ
+                    Double kd = Double.parseDouble(nhaTro.get(0).getKinhDo());
+                    Double vd = Double.parseDouble(nhaTro.get(0).getViDo());
+                    latlng = new LatLng(vd,kd);
+
+                    LatLng HCM = new LatLng(vd,kd);
+                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(HCM, 13));
+                    // Add a marker in Sydney and move the camera
+                    mMap.addMarker(new MarkerOptions().position(HCM).title(nhaTro.get(0).getTinhTrang()));
+                    mMap.moveCamera(CameraUpdateFactory.newLatLng(HCM));
+
                 }
                 else
                     Toast.makeText(Chi_tiet_nha_tro.this, "Chưa cập nhật thông tin" , Toast.LENGTH_SHORT).show();
@@ -74,5 +101,16 @@ public class Chi_tiet_nha_tro extends AppCompatActivity {
                 //Log.e(TAG, t.getMessage());
             }
         });
+    }
+
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        mMap = googleMap;
+        if (ContextCompat.checkSelfPermission(Chi_tiet_nha_tro.this, Manifest.permission.ACCESS_FINE_LOCATION)
+        == PackageManager.PERMISSION_GRANTED) {
+            mMap.setMyLocationEnabled(true);
+            mMap.getUiSettings().setZoomControlsEnabled(true);
+        }
     }
 }

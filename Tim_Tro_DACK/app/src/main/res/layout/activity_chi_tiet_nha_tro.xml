@@ -186,29 +186,20 @@
                 android:weightSum="1.0">
 
                 <TextView
-                    android:paddingLeft="12dp"
+                    android:paddingLeft="70dp"
                     android:id="@+id/thich"
-                    android:layout_width="0dip"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Thích"
-                    android:drawableLeft="@drawable/heart"
-                    android:layout_weight="0.33" />
-                <TextView
-                    android:paddingLeft="12dp"
-                    android:id="@+id/chiase"
-                    android:layout_width="0dip"
-                    android:layout_height="wrap_content"
-                    android:text="Chia sẻ"
-                    android:drawableLeft="@drawable/share"
-                    android:layout_weight="0.34" />
-                <TextView
+                    android:text="Thêm vào danh sách yêu thích"
+                    android:drawableLeft="@drawable/addheart" />
+              <!--  <TextView
                     android:paddingLeft="15dp"
                     android:id="@+id/luu"
                     android:layout_width="0dip"
                     android:layout_height="wrap_content"
                     android:text="Lưu"
                     android:drawableLeft="@drawable/save_all"
-                    android:layout_weight="0.33" />
+                    android:layout_weight="0.33" /> -->
             </LinearLayout>
 
         </LinearLayout>
