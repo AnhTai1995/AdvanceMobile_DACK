@@ -1,7 +1,5 @@
 package com.example.doancuoiki.tim_tro_dack.Model;
 
-import java.lang.ref.SoftReference;
-
 /**
  * Created by Lucifer on 17/01/2017.
  */
@@ -16,6 +14,7 @@ public class NguoiDung {
     public String Avatar;
     public String SDT;
     public Boolean isFacebook;
+    public String IDNguoiDung;
 
     public NguoiDung(String username, String name, String pass, String namsinh, String gioitinh, String mail, String avatar, String sdt, Boolean isfacebook) {
         this.Username = username;

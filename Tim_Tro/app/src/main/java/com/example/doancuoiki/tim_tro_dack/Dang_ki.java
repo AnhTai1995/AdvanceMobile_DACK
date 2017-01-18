@@ -47,7 +47,7 @@ public class Dang_ki extends AppCompatActivity {
                             .addConverterFactory(GsonConverterFactory.create())
                             .build();
                     Service service = retrofit.create(Service.class);
-                    NguoiDung nguoidung = new NguoiDung("aaaaa", tendn, pass, "1995-01-01", "Nam", mail, "", SDT, false);
+                    NguoiDung nguoidung = new NguoiDung(tendn, tendn, pass, "1995-01-01", "Nam", mail, "", SDT, false);
                     Call<Boolean> call = service.Register(nguoidung);
                     call.enqueue(new Callback<Boolean>() {
                         @Override

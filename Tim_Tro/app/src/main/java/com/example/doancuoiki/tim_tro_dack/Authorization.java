@@ -7,7 +7,6 @@ package com.example.doancuoiki.tim_tro_dack;
 public class Authorization {
     private String ClientId;
     private String access_token;
-
     public Authorization(String userId, String token) {
         this.ClientId = userId;
         this.access_token = token;

@@ -46,6 +46,7 @@ public class Dang_nhap extends AppCompatActivity implements GoogleApiClient.OnCo
     private Authorization authorization = new Authorization("","");
     private GoogleApiClient mGoogleApiClient;
     private static final String POSTURL = "http://renthouseapi.apphb.com/";
+    private NguoiDung Profileuser;
 
 
     @Override
@@ -76,7 +77,8 @@ public class Dang_nhap extends AppCompatActivity implements GoogleApiClient.OnCo
         btnDangNhap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getToken();
+                getToken(edtusername.getText().toString(), password.getText().toString());
+               // saveDetailuser();
             }
         });
 
@@ -104,9 +106,10 @@ public class Dang_nhap extends AppCompatActivity implements GoogleApiClient.OnCo
                 Retrofit retrofit = new Retrofit.Builder()
                         .baseUrl("http://renthouseapi.apphb.com/api/v1/")
                         .addConverterFactory(GsonConverterFactory.create())
+                        .client(client)
                         .build();
                 Service service = retrofit.create(Service.class);
-                Call<List<NhaTro>> call = service.getNhaTro(authorization.getAccessToken(),"NT00002");
+                Call<List<NhaTro>> call = service.getNhaTro("NT00002");
                 call.enqueue(new Callback<List<NhaTro>>() {
                     @Override
                     public void onResponse(Call<List<NhaTro>> call, Response<List<NhaTro>> response) {
@@ -163,50 +166,74 @@ public class Dang_nhap extends AppCompatActivity implements GoogleApiClient.OnCo
     }
 
 
-    public void getToken(){
+    public void getToken(final String tendangnhap, final String pass){
+
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://renthouseapi.apphb.com/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-        Service service = retrofit.create(Service.class);
+
+        final Service service = retrofit.create(Service.class);
         Call<Authorization> call = service.Client_ID(edtusername.getText().toString());
         call.enqueue(new Callback<Authorization>() {
             @Override
             public void onResponse(Call<Authorization> call, Response<Authorization> response) {
                 Authorization auth = response.body();
                 authorization.setClientId(auth.getClientId().toString());
+                Call<Authorization> call1 = service.getAccessToken("password", authorization.getClientId(), tendangnhap,
+                        pass);
+                call1.enqueue(new Callback<Authorization>() {
+                    @Override
+                    public void onResponse(Call<Authorization> call, Response<Authorization> response) {
+                        Authorization auth = response.body();
+                        if(auth.getAccessToken() == null || auth.getAccessToken() == "" || !response.isSuccessful()){
+                            Toast.makeText(Dang_nhap.this, "Đăng nhập không thành công!", Toast.LENGTH_SHORT).show();
+                        }else {
+                            //Profileuser.Username = edtusername.getText().toString();
+                            Toast.makeText(Dang_nhap.this, "Đăng nhập thành công!", Toast.LENGTH_SHORT).show();
+                            authorization.setToken(auth.getAccessToken());
+                            Toast.makeText(Dang_nhap.this, authorization.getAccessToken(), Toast.LENGTH_SHORT).show();
+                            saveDetailuser(tendangnhap);
+                            Intent newscr = new Intent(Dang_nhap.this,Dang_ki.class);
+                            startActivity(newscr);
+                        }
+                    }
+                    @Override
+                    public void onFailure(Call<Authorization> call, Throwable t) {
+                        Log.e(TAG, t.getMessage());
+                    }
+                });
             }
             @Override
             public void onFailure(Call<Authorization> call, Throwable t) {
                 Log.e(TAG, t.getMessage());
             }
         });
-        if(authorization.getClientId() != null && authorization.getClientId() != "" )
-        {
-            Call<Authorization> call1 = service.getAccessToken("password", authorization.getClientId(), edtusername.getText().toString(),
-                    password.getText().toString());
-            call1.enqueue(new Callback<Authorization>() {
-                @Override
-                public void onResponse(Call<Authorization> call, Response<Authorization> response) {
-                    Authorization auth = response.body();
-                    if(auth.getAccessToken() == null || auth.getAccessToken() == ""){
-                        Toast.makeText(Dang_nhap.this, "Đăng nhập không thành công!", Toast.LENGTH_SHORT);
-                    }else {
-                        Toast.makeText(Dang_nhap.this, "Đăng nhập thành công!", Toast.LENGTH_SHORT);
-                        authorization.setToken(auth.getAccessToken());
-                    }
-                }
 
-                @Override
-                public void onFailure(Call<Authorization> call, Throwable t) {
-                    Log.e(TAG, t.getMessage());
-                }
-            });
-        }
 
     }
 
 
+    public void saveDetailuser(String tendangnhap){
+            Retrofit retrofit = new Retrofit.Builder()
+                    .baseUrl("http://renthouseapi.apphb.com/api/v1/")
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+            Service service = retrofit.create(Service.class);
+            Call<NguoiDung> call = service.getNguoiDung(edtusername.getText().toString());
+            call.enqueue(new Callback<NguoiDung>() {
+                @Override
+                public void onResponse(Call<NguoiDung> call, Response<NguoiDung> response) {
+                    NguoiDung nd = response.body();
+                    //Lưu xuống Realm
+                    Toast.makeText(Dang_nhap.this, nd.Username, Toast.LENGTH_SHORT).show();
+                }
+                @Override
+                public void onFailure(Call<NguoiDung> call, Throwable t) {
+                    Log.e(TAG, t.getMessage());
+                }
+            });
+    }
 
 
     // [START onActivityResult]
@@ -229,45 +256,57 @@ public class Dang_nhap extends AppCompatActivity implements GoogleApiClient.OnCo
         if (result.isSuccess()) {
             // Signed in successfully, show authenticated UI.
             GoogleSignInAccount acct = result.getSignInAccount();
-            String personName = acct.getDisplayName();
-//            String personGivenName = acct.getGivenName();
-//            String personFamilyName = acct.getFamilyName();
-            String personEmail = acct.getEmail();
-            String personId = acct.getId();
 
+            final String personName = acct.getDisplayName();
+//          final  String personGivenName = acct.getGivenName();
+//            String personFamilyName = acct.getFamilyName();
+            final String personEmail = acct.getEmail();
+            final String personId = acct.getId();
             Retrofit retrofit = new Retrofit.Builder()
-                    .baseUrl("http://renthouseapi.apphb.com/")
+                    .baseUrl("http://renthouseapi.apphb.com/api/v1/")
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
-            Service service = retrofit.create(Service.class);
-            NguoiDung nguoidung = new NguoiDung(personId, personName, personId, "1995-01-01", "Nam", personEmail, "", "", true);
-            Call<Boolean> call = service.Register(nguoidung);
-            call.enqueue(new Callback<Boolean>() {
+            final Service service = retrofit.create(Service.class);
+            Call<NguoiDung> call = service.getNguoiDung(personId);
+            call.enqueue(new Callback<NguoiDung>() {
                 @Override
-                public void onResponse(Call<Boolean> call, Response<Boolean> response) {
-                    //Boolean bool = response.body();
-                    Log.d(TAG, response.toString());
-                    if (!response.isSuccessful()){
-                        Toast.makeText(getApplicationContext(), "Đăng kí thất bại", Toast.LENGTH_SHORT).show();
-                    }
-                    else {
-                        Toast.makeText(getApplicationContext(), "Đăng kí thành công", Toast.LENGTH_SHORT).show();
-                        Intent newscr = new Intent(Dang_nhap.this,Dang_ki.class);
-                        startActivity(newscr);
-//
-                    }
+                public void onResponse(Call<NguoiDung> call, Response<NguoiDung> response) {
+                   if (!response.isSuccessful()){
+                       NguoiDung nguoidung = new NguoiDung(personId, personName, personId, "1995-01-01", "Nam", personEmail, "", "", true);
+                       Call<Boolean> call1 = service.Register(nguoidung);
+                       call1.enqueue(new Callback<Boolean>() {
+                           @Override
+                           public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                               //Boolean bool = response.body();
+                               Log.d(TAG, response.toString());
+                               if (!response.isSuccessful()){
+                                   Toast.makeText(getApplicationContext(), "Đăng nhập thất bại", Toast.LENGTH_SHORT).show();
+                               }
+                               else {
+                                   Toast.makeText(getApplicationContext(), "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
+                                   getToken(personId, personId);
+                               }
+                           }
+                           @Override
+                           public void onFailure(Call<Boolean> call, Throwable t) {
+
+                           }
+                       });
+                   }else {
+                       getToken(personId, personId);
+                   }
                 }
                 @Override
-                public void onFailure(Call<Boolean> call, Throwable t) {
-
+                public void onFailure(Call<NguoiDung> call, Throwable t) {
+                    Log.e(TAG, t.getMessage());
                 }
             });
-
 
         } else {
             // Signed out, show unauthenticated UI.
 
         }
+
     }
     // [END handleSignInResult]
 
