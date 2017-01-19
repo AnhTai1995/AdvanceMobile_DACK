@@ -8,6 +8,7 @@ import java.util.List;
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
 import io.realm.RealmObject;
+import io.realm.RealmResults;
 
 /**
  * Created by asus on 1/18/2017.
@@ -42,5 +43,13 @@ public class Token extends RealmObject {
         if (realm == null) return new ArrayList<Token>();
         return realm.where(Token.class).findAll();
     }
-
+    public static void removeAllClassRealm(){
+        realm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                RealmResults<Token> rows = realm.where(Token.class).findAll();
+                rows.clear();
+            }
+        });
+    }
 }

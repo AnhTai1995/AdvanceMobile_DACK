@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ProgressBar;
 
+import com.example.doancuoiki.tim_tro_dack.DAO.Person;
 import com.example.doancuoiki.tim_tro_dack.R;
 
 public class Splash_start extends AppCompatActivity {
@@ -16,6 +17,7 @@ public class Splash_start extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Person.config(Splash_start.this);
         getSupportActionBar().hide();
         // Show the splash screen
         setContentView(R.layout.activity_splash_start);
