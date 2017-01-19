@@ -75,12 +75,22 @@
                 android:weightSum="1.0">
 
                 <TextView
-                    android:paddingLeft="70dp"
+                    android:layout_marginLeft="60dp"
                     android:id="@+id/edit"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Chỉnh sửa bài đăng"
-                    android:drawableLeft="@drawable/edit" />
+                    android:text="Chỉnh sửa"
+                    android:drawableLeft="@drawable/edit"
+                    android:layout_weight="0.5"/>
+
+                <TextView
+                    android:layout_marginLeft="50dp"
+                    android:id="@+id/delete"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Xóa"
+                    android:drawableLeft="@drawable/remove"
+                    android:layout_weight="0.5"/>
 
             </LinearLayout>
 
