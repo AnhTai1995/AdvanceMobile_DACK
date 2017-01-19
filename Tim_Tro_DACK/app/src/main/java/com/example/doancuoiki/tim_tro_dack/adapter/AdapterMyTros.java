@@ -3,6 +3,7 @@ package com.example.doancuoiki.tim_tro_dack.adapter;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,6 +13,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.SimpleTarget;
 import com.example.doancuoiki.tim_tro_dack.R;
 import com.example.doancuoiki.tim_tro_dack.apihelper.APIService;
 import com.example.doancuoiki.tim_tro_dack.model.Tro;
@@ -66,8 +70,20 @@ public class AdapterMyTros extends RecyclerView.Adapter<AdapterMyTros.MyViewHold
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) {
+    public void onBindViewHolder(final MyViewHolder holder, int position) {
         final Tro tro = _tro.get(position);
+
+        Glide.with(context)
+                .load(tro.getHinhAnh())
+                .asBitmap()
+                .centerCrop()
+                .into(new SimpleTarget<Bitmap>() {
+                    @Override
+                    public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
+
+                        holder.hinhNhaTro.setImageBitmap(resource);
+                    }
+                });
 
         holder.diaChi.setText("Địa chỉ: " + tro.getDiaChi());
         holder.gia.setText("Giá: "+tro.getGiaPhong());

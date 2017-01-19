@@ -1,6 +1,7 @@
 package com.example.doancuoiki.tim_tro_dack.apihelper;
 
 import com.example.doancuoiki.tim_tro_dack.config.Constant;
+import com.example.doancuoiki.tim_tro_dack.model.PersonLikeStt;
 import com.example.doancuoiki.tim_tro_dack.model.Tro;
 import com.example.doancuoiki.tim_tro_dack.model.TroDetaile;
 
@@ -13,6 +14,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
+import retrofit2.http.HTTP;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Query;
@@ -31,9 +33,16 @@ public interface APIService {
     @GET("nha-tro")
     Call<List<Tro>> getNhaTroByIdND(@Query("idnd") String ID);
 
+    @GET("nha-tro-da-luu")
+    Call<List<Tro>> getNhaTroDaLuu(@Query("idnd") String ID);
+
     @POST("nha-tro")
     Call<Boolean> addNewTro(
             @Body Tro body);
+
+    @POST("nha-tro-da-luu")
+    Call<Boolean> addLikeTro(
+            @Body PersonLikeStt body);
 
     @PUT("nha-tro")
     Call<Boolean> editTro(
@@ -41,6 +50,13 @@ public interface APIService {
 
     @DELETE("nha-tro")
     Call<Boolean> deleteItem(@Query("id") String ID);
+
+    @DELETE("nha-tro-da-luu")
+    Call<Boolean> deleteYeuThich(
+            @Body PersonLikeStt body);
+
+    @HTTP(method = "DELETE", path = "nha-tro-da-luu", hasBody = true)
+    Call<Boolean> deleteYeuThichHTTP(@Body PersonLikeStt body);
 
     Retrofit retrofit = new Retrofit.Builder()
             .baseUrl(Constant.URL_PRODUCT)
