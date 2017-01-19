@@ -34,6 +34,11 @@ public class ChinhSuaBaiDang extends AppCompatActivity {
             if (!Settings.System.canWrite(this)) {
                 requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,
                         Manifest.permission.READ_EXTERNAL_STORAGE}, 2909);
+                // continue with your code
+                Intent galleryIntent = new Intent(Intent.ACTION_PICK,
+                        android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                // Start the Intent
+                startActivityForResult(galleryIntent, RESULT_LOAD_IMG);
             } else {
                 // continue with your code
 
