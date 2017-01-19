@@ -37,7 +37,7 @@
             android:layout_gravity="center"
             android:id="@+id/imgView"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="280dp"
             android:scaleType="fitXY"
             android:src="@drawable/camera" />
 

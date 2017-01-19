@@ -11,7 +11,7 @@
         android:textSize="24dp"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:textColor="@color/black"
         android:id="@+id/txtbando"
         android:layout_gravity="center"/>
@@ -47,6 +47,28 @@
         android:layout_gravity="center"
         android:textColor="@color/black"
         android:id="@+id/edtmatkhaulaplai" />
+
+    <EditText
+        android:paddingLeft="10dp"
+        android:background="@drawable/edittext"
+        android:layout_marginTop="15dp"
+        android:hint="Giới tính"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:textColor="@color/black"
+        android:id="@+id/edtgt" />
+    <EditText
+        android:paddingLeft="10dp"
+        android:background="@drawable/edittext"
+        android:layout_marginTop="15dp"
+        android:hint="Ngày sinh (yyyy/mm/dd)"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:textColor="@color/black"
+        android:id="@+id/edtngaysinh" />
+
     <EditText
         android:paddingLeft="10dp"
         android:background="@drawable/edittext"

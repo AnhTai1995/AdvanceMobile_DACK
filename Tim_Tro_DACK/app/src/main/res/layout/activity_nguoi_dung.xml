@@ -152,26 +152,6 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <TextView
-                    android:textSize="19dp"
-                    android:textStyle="bold"
-                    android:text="Số bài đăng:"
-                    android:layout_marginLeft="40dp"
-                    android:layout_width="120dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:textColor="@color/black" />
-
-                <TextView
-                    android:textSize="19dp"
-                    android:text="5"
-                    android:paddingLeft="5dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:textColor="@color/black" />
-
-
 
             </LinearLayout>
 

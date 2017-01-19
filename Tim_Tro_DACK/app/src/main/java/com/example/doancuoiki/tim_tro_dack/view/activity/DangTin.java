@@ -33,6 +33,12 @@ public class DangTin extends AppCompatActivity {
             if (!Settings.System.canWrite(this)) {
                 requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,
                         Manifest.permission.READ_EXTERNAL_STORAGE}, 2909);
+                // continue with your code
+                Intent galleryIntent = new Intent(Intent.ACTION_PICK,
+                        android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                // Start the Intent
+                startActivityForResult(galleryIntent, RESULT_LOAD_IMG);
+
             } else {
                 // continue with your code
 
@@ -74,11 +80,11 @@ public class DangTin extends AppCompatActivity {
                         .decodeFile(imgDecodableString));
 
             } else {
-                Toast.makeText(this, "You haven't picked Image",
+                Toast.makeText(this, "Bạn chưa chọn hình ảnh!",
                         Toast.LENGTH_LONG).show();
             }
         } catch (Exception e) {
-            Toast.makeText(this, "Something went wrong", Toast.LENGTH_LONG)
+            Toast.makeText(this, "Có lỗi xảy ra!", Toast.LENGTH_LONG)
                     .show();
         }
 
