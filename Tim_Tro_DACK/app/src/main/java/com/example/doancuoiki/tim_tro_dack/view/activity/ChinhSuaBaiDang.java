@@ -15,17 +15,29 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
+import com.example.doancuoiki.tim_tro_dack.DAO.Person;
 import com.example.doancuoiki.tim_tro_dack.R;
+import com.example.doancuoiki.tim_tro_dack.apihelper.APIService;
+import com.example.doancuoiki.tim_tro_dack.model.Tro;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ChinhSuaBaiDang extends AppCompatActivity {
 
@@ -37,16 +49,104 @@ public class ChinhSuaBaiDang extends AppCompatActivity {
     private Cloudinary cloudinary;
     private java.util.Map Map;
     private File file;
+
+
+    EditText tvDiaChi, tvDienThoai, tvDienTich, tvMoTa, tvGia;
+    Button tbChinhSua;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chinh_sua_bai_dang);
+
+        //lấy intent gọi Activity này
+        Intent callerIntent=getIntent();
+        //có intent rồi thì lấy Bundle dựa vào MyPackage
+        Bundle packageFromCaller=
+                callerIntent.getBundleExtra("MyPackage");
+        //Có Bundle rồi thì lấy các thông số dựa vào soa, sob
+        final String idNhaTro=packageFromCaller.getString("IDNhaTro");
+        final String hinhAnh=packageFromCaller.getString("hinhAnh");
+        String diaChi=packageFromCaller.getString("diaChi");
+        String dienTich=packageFromCaller.getString("dienTich");
+        String dienThoai=packageFromCaller.getString("dienThoai");
+        String moTa=packageFromCaller.getString("moTa");
+        String gia=packageFromCaller.getString("gia");
 
         Map config = new HashMap();
         config.put("cloud_name", "hebb2kmup");
         config.put("api_key", "886147584342316");
         config.put("api_secret", "zgJX-eYIC90JDQe9I57pTa2H-rI");
         cloudinary = new Cloudinary(config);
+
+        tvDiaChi = (EditText) findViewById(R.id.edtdiachi);
+        tvDienThoai = (EditText) findViewById(R.id.edtsdt);
+        tvDienTich = (EditText) findViewById(R.id.edtdientich);
+        tvMoTa = (EditText) findViewById(R.id.edtMoTa);
+        tvGia = (EditText) findViewById(R.id.edtgia);
+
+        tbChinhSua = (Button) findViewById(R.id.btChinhSua);
+
+        tvDiaChi.setText(diaChi);
+        tvDienTich.setText(dienTich);
+        tvDienThoai.setText(dienThoai);
+        tvGia.setText(gia);
+        tvMoTa.setText(moTa);
+
+        tbChinhSua.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if(Map != null)
+                    imgURL = Map.get("url").toString();
+                else
+                    imgURL=hinhAnh;
+
+                //Log.d(TAG, imgURL);
+
+                List<Person> aa = Person.getDataRealm();
+
+                if(aa.size() == 0){
+                    //String idnd = aa.get(0).IDNguoiDung;
+                    String idnd = "";
+
+                    Retrofit retrofit = new Retrofit.Builder()
+                            .baseUrl("http://renthouseapi.apphb.com/api/v1/")
+                            .addConverterFactory(GsonConverterFactory.create())
+                            .build();
+                    APIService apiService = retrofit.create(APIService.class);
+                    Tro tro = new Tro(idNhaTro, tvDienTich.getText().toString(), tvDiaChi.getText().toString(), idnd, "", "",
+                            imgURL, tvGia.getText().toString(), "", tvMoTa.getText().toString(), "", "",
+                            tvDienThoai.getText().toString(), "", "", "", "", "",
+                            "", "");
+                    Call<Boolean> call = apiService.editTro(tro);
+                    call.enqueue(new Callback<Boolean>() {
+                        @Override
+                        public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                            //Boolean bool = response.body();
+                            //Log.d(TAG, response.message());
+                            if (!response.isSuccessful()){
+                                Toast.makeText(ChinhSuaBaiDang.this, "Cập nhật thông tin thất bại", Toast.LENGTH_SHORT).show();
+                            }
+                            if(response.isSuccessful()) {
+                                Toast.makeText(getApplicationContext(), "Cập nhật thông tin thành công", Toast.LENGTH_SHORT).show();
+                                Intent newscr = new Intent(ChinhSuaBaiDang.this,Dang_nhap.class);
+                                startActivity(newscr);
+                            }else {
+
+                            }
+                        }
+                        @Override
+                        public void onFailure(Call<Boolean> call, Throwable t) {
+                            Toast.makeText(ChinhSuaBaiDang.this, "Thất bại!", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+                else {
+                    // chuyển sang màn hình đăng nhập vì chưa đăng nhập
+                    Toast.makeText(ChinhSuaBaiDang.this, "Bạn chưa đăng nhập", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
     private class Upload extends AsyncTask<String, Void, String> {
@@ -130,9 +230,13 @@ public class ChinhSuaBaiDang extends AppCompatActivity {
                 imgView.setImageBitmap(BitmapFactory
                         .decodeFile(imgDecodableString));
 
-                file = new File(imgDecodableString);
-                ChinhSuaBaiDang.Upload task = new ChinhSuaBaiDang.Upload( cloudinary );
-                task.execute();
+                if(imgDecodableString != null){
+                    file = new File(imgDecodableString);
+                    ChinhSuaBaiDang.Upload task = new ChinhSuaBaiDang.Upload( cloudinary );
+                    task.execute();
+                }else{
+                    Map = null;
+                }
 
             } else {
                 Toast.makeText(this, "You haven't picked Image",

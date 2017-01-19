@@ -170,7 +170,7 @@
                 android:layout_height="60dp"
                 android:hint="Mô tả chi tiết về phòng trọ..."
                 android:textSize="15dp"
-                android:id="@+id/edtbinhluan"/>
+                android:id="@+id/edtMoTa"/>
 
             <Button
                 android:layout_gravity="center"
@@ -179,7 +179,7 @@
                 android:layout_width="300dp"
                 android:layout_height="30dp"
                 android:text="Chỉnh sửa"
-                android:id="@+id/btdangtin"
+                android:id="@+id/btChinhSua"
                 android:background="#00AA00"
                 android:textColor="@color/white"/>
         </LinearLayout>

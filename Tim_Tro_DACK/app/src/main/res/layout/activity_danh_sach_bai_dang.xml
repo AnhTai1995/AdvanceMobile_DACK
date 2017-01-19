@@ -11,7 +11,7 @@
     android:paddingRight="7dp">
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/rcvTimTro"
+        android:id="@+id/rcvDanhSachTro"
         android:scrollbars="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>

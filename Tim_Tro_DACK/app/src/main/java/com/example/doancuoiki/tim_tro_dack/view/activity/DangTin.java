@@ -16,19 +16,28 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
+import com.example.doancuoiki.tim_tro_dack.DAO.Person;
 import com.example.doancuoiki.tim_tro_dack.R;
+import com.example.doancuoiki.tim_tro_dack.apihelper.APIService;
+import com.example.doancuoiki.tim_tro_dack.model.Tro;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-import io.realm.Realm;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class DangTin extends AppCompatActivity {
     private static int RESULT_LOAD_IMG = 1;
@@ -39,12 +48,23 @@ public class DangTin extends AppCompatActivity {
     private Cloudinary cloudinary;
     private Map Map;
     private File file;
+
+
+
+    String anh;
+    EditText tvDiaChi, tvDienTich, tvDienThoai, tvGia, tvMoTa;
     private Button btnDangTin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dang_tin);
+
+        tvDiaChi = (EditText) findViewById(R.id.edtdiachi);
+        tvDienTich = (EditText) findViewById(R.id.edtdientich);
+        tvDienThoai = (EditText) findViewById(R.id.edtsdt);
+        tvGia = (EditText) findViewById(R.id.edtgia);
+        tvMoTa = (EditText) findViewById(R.id.edtbinhluan);
 
         btnDangTin = (Button) findViewById(R.id.btdangtin);
 
@@ -57,8 +77,54 @@ public class DangTin extends AppCompatActivity {
         btnDangTin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                imgURL = Map.get("url").toString();
-                Log.d(TAG, imgURL);
+                if(Map != null)
+                    imgURL = Map.get("url").toString();
+                else
+                    imgURL="";
+                //Log.d(TAG, imgURL);
+
+                List<Person> aa = Person.getDataRealm();
+
+                if(aa.size() == 0){
+                    //String idnd = aa.get(0).IDNguoiDung;
+                    String idnd = "ND00002";
+
+                    Retrofit retrofit = new Retrofit.Builder()
+                            .baseUrl("http://renthouseapi.apphb.com/api/v1/")
+                            .addConverterFactory(GsonConverterFactory.create())
+                            .build();
+                    APIService apiService = retrofit.create(APIService.class);
+                    Tro tro = new Tro("", tvDienTich.getText().toString(), tvDiaChi.getText().toString(), idnd, "", "",
+                            imgURL, tvGia.getText().toString(), "", tvMoTa.getText().toString(), "", "",
+                            tvDienThoai.getText().toString(), "", "", "", "", "",
+                            "", "");
+                    Call<Boolean> call = apiService.addNewTro(tro);
+                    call.enqueue(new Callback<Boolean>() {
+                        @Override
+                        public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                            //Boolean bool = response.body();
+                            //Log.d(TAG, response.message());
+                            if (!response.isSuccessful()){
+                                Toast.makeText(DangTin.this, "Đăng tin thất bại", Toast.LENGTH_SHORT).show();
+                            }
+                            if(response.isSuccessful()) {
+                                Toast.makeText(getApplicationContext(), "Đăng tin thành công", Toast.LENGTH_SHORT).show();
+                                Intent newscr = new Intent(DangTin.this,Dang_nhap.class);
+                                startActivity(newscr);
+                            }else {
+
+                            }
+                        }
+                        @Override
+                        public void onFailure(Call<Boolean> call, Throwable t) {
+                            Toast.makeText(DangTin.this, "Thất bại!", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+                else {
+                    // chuyển sang màn hình đăng nhập vì chưa đăng nhập
+                    Toast.makeText(DangTin.this, "Bạn chưa đăng nhập", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
@@ -147,9 +213,14 @@ public class DangTin extends AppCompatActivity {
                 imgView.setImageBitmap(BitmapFactory
                         .decodeFile(imgDecodableString));
 
-                file = new File(imgDecodableString);
-                Upload task = new Upload( cloudinary );
-                task.execute();
+                if(imgDecodableString != null){
+                    file = new File(imgDecodableString);
+                    DangTin.Upload task = new DangTin.Upload( cloudinary );
+                    task.execute();
+                }
+                else{
+                    Map = null;
+                }
 
             } else {
                 Toast.makeText(this, "Bạn chưa chọn hình ảnh!",

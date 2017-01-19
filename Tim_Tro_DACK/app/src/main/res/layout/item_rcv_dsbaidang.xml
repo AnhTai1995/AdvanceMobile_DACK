@@ -25,44 +25,44 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/dichi"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/black"
-                    android:text="Địa chỉ: "
-                    android:paddingLeft="20dp"
-                    />
+            <TextView
+                android:id="@+id/dichi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:text="Địa chỉ: "
+                android:paddingLeft="20dp"
+                />
 
-                <TextView
-                    android:id="@+id/gia"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/black"
-                    android:text="Giá phòng: "
-                    android:paddingLeft="20dp"/>
+            <TextView
+                android:id="@+id/gia"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:text="Giá phòng: "
+                android:paddingLeft="20dp"/>
 
-                <TextView
-                    android:id="@+id/dientich"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/black"
-                    android:text="Diện tích:"
-                    android:paddingLeft="20dp"/>
+            <TextView
+                android:id="@+id/dientich"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:text="Diện tích:"
+                android:paddingLeft="20dp"/>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
 
-                    <ImageView
-                        android:layout_marginTop="6dp"
-                        android:id="@+id/imgTro"
-                        android:layout_width="match_parent"
-                        android:layout_height="280dp"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/nhatro" />
+                <ImageView
+                    android:layout_marginTop="6dp"
+                    android:id="@+id/imgTro"
+                    android:layout_width="match_parent"
+                    android:layout_height="280dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/nhatro" />
 
             </LinearLayout>
 
