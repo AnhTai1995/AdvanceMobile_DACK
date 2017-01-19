@@ -6,7 +6,9 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Build;
+import android.os.SystemClock;
 import android.provider.MediaStore;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
@@ -16,16 +18,65 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
 import com.example.doancuoiki.tim_tro_dack.R;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ChinhSuaBaiDang extends AppCompatActivity {
 
     private static int RESULT_LOAD_IMG = 1;
-    String imgDecodableString;
+    private final String TAG = this.getClass().getName();
+
+    private String imgDecodableString;
+    private String imgURL;
+    private Cloudinary cloudinary;
+    private java.util.Map Map;
+    private File file;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chinh_sua_bai_dang);
+
+        Map config = new HashMap();
+        config.put("cloud_name", "hebb2kmup");
+        config.put("api_key", "886147584342316");
+        config.put("api_secret", "zgJX-eYIC90JDQe9I57pTa2H-rI");
+        cloudinary = new Cloudinary(config);
+    }
+
+    private class Upload extends AsyncTask<String, Void, String> {
+        private Cloudinary mCloudinary;
+
+        public Upload( Cloudinary cloudinary ) {
+            super();
+            mCloudinary = cloudinary;
+        }
+
+        @Override
+        protected String doInBackground(String... urls) {
+            String response = "";
+            SystemClock.sleep(100);
+
+            try {
+                Map = mCloudinary.uploader().unsignedUpload(file, "rkxjk6bl", ObjectUtils.asMap());
+            } catch (IOException e) {
+                Log.e(TAG, e.toString());
+            }
+            return response;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            Toast.makeText(ChinhSuaBaiDang.this, "Chọn và tải ảnh lên thành công",
+                    Toast.LENGTH_LONG).show();
+            Log.d(TAG, Map.toString());
+        }
     }
 
     public void loadImagefromGallery(View view) {
@@ -78,6 +129,10 @@ public class ChinhSuaBaiDang extends AppCompatActivity {
                 // Set the Image in ImageView after decoding the String
                 imgView.setImageBitmap(BitmapFactory
                         .decodeFile(imgDecodableString));
+
+                file = new File(imgDecodableString);
+                ChinhSuaBaiDang.Upload task = new ChinhSuaBaiDang.Upload( cloudinary );
+                task.execute();
 
             } else {
                 Toast.makeText(this, "You haven't picked Image",

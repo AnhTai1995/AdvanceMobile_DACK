@@ -6,26 +6,94 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.provider.MediaStore;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
 import com.example.doancuoiki.tim_tro_dack.R;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
+import io.realm.Realm;
 
 public class DangTin extends AppCompatActivity {
     private static int RESULT_LOAD_IMG = 1;
-    String imgDecodableString;
+    private final String TAG = this.getClass().getName();
+
+    private String imgDecodableString;
+    private String imgURL;
+    private Cloudinary cloudinary;
+    private Map Map;
+    private File file;
+    private Button btnDangTin;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dang_tin);
+
+        btnDangTin = (Button) findViewById(R.id.btdangtin);
+
+        Map config = new HashMap();
+        config.put("cloud_name", "hebb2kmup");
+        config.put("api_key", "886147584342316");
+        config.put("api_secret", "zgJX-eYIC90JDQe9I57pTa2H-rI");
+        cloudinary = new Cloudinary(config);
+
+        btnDangTin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                imgURL = Map.get("url").toString();
+                Log.d(TAG, imgURL);
+            }
+        });
     }
+
+    private class Upload extends AsyncTask<String, Void, String> {
+        private Cloudinary mCloudinary;
+
+        public Upload( Cloudinary cloudinary ) {
+            super();
+            mCloudinary = cloudinary;
+        }
+
+        @Override
+        protected String doInBackground(String... urls) {
+            String response = "";
+            SystemClock.sleep(100);
+
+            try {
+                Map = mCloudinary.uploader().unsignedUpload(file, "rkxjk6bl", ObjectUtils.asMap());
+            } catch (IOException e) {
+                Log.e(TAG, e.toString());
+            }
+            return response;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            Toast.makeText(DangTin.this, "Chọn và tải ảnh lên thành công",
+                    Toast.LENGTH_LONG).show();
+            Log.d(TAG, Map.toString());
+        }
+    }
+
+
 
     public void loadImagefromGallery(View view) {
         // Create intent to Open Image applications like Gallery, Google Photos
@@ -79,6 +147,10 @@ public class DangTin extends AppCompatActivity {
                 imgView.setImageBitmap(BitmapFactory
                         .decodeFile(imgDecodableString));
 
+                file = new File(imgDecodableString);
+                Upload task = new Upload( cloudinary );
+                task.execute();
+
             } else {
                 Toast.makeText(this, "Bạn chưa chọn hình ảnh!",
                         Toast.LENGTH_LONG).show();
@@ -86,6 +158,7 @@ public class DangTin extends AppCompatActivity {
         } catch (Exception e) {
             Toast.makeText(this, "Có lỗi xảy ra!", Toast.LENGTH_LONG)
                     .show();
+            Log.e(TAG, e.toString());
         }
 
     }
