@@ -130,8 +130,15 @@ public class MainActivity extends AppCompatActivity {
 //                }
 
                 if(menuItem.getItemId()==R.id.nav_item_profile) {
-                    Intent newscr = new Intent(MainActivity.this,NguoiDung.class);
-                    startActivity(newscr);
+                    if(Person.getDataRealm().size() != 0) {
+                        Intent newscr = new Intent(MainActivity.this,NguoiDung.class);
+                        startActivity(newscr);
+                    }
+                    else {
+                        Toast.makeText(MainActivity.this, "Vui lòng đăng nhập để sử dụng chức năng!", Toast.LENGTH_SHORT).show();
+                        Intent newscr = new Intent(MainActivity.this, Dang_nhap.class);
+                        startActivity(newscr);
+                    }
                 }
 
                 if(menuItem.getItemId()==R.id.nav_item_notification) {

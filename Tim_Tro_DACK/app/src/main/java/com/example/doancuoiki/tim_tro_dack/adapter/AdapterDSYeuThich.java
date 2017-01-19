@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
+import com.example.doancuoiki.tim_tro_dack.DAO.Person;
 import com.example.doancuoiki.tim_tro_dack.R;
 import com.example.doancuoiki.tim_tro_dack.apihelper.APIService;
 import com.example.doancuoiki.tim_tro_dack.model.PersonLikeStt;
@@ -116,7 +117,7 @@ public class AdapterDSYeuThich extends RecyclerView.Adapter<AdapterDSYeuThich.My
                         .build();
                 APIService apiService = retrofit.create(APIService.class);
                 //Thăng này là thàng nào= để gọi api
-                PersonLikeStt personLikeStt = new PersonLikeStt(tro.getIDNhaTro(), "ND00002");
+                PersonLikeStt personLikeStt = new PersonLikeStt(tro.getIDNhaTro(), Person.getDataRealm().get(0).IDNguoiDung);
                 Call<Boolean> call = apiService.deleteYeuThichHTTP(personLikeStt);
                 call.enqueue(new Callback<Boolean>() {
                     @Override

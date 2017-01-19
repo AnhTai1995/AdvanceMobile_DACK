@@ -16,7 +16,7 @@ import io.realm.RealmResults;
 
 public class Person extends RealmObject {
     public String Username;
-    public String Name;
+    public String Ten;
     public String Pass;
     public String NamSinh;
     public String GioiTinh;

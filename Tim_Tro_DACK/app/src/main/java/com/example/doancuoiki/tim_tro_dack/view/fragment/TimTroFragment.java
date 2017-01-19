@@ -15,10 +15,7 @@ import android.widget.Button;
 
 import com.example.doancuoiki.tim_tro_dack.R;
 import com.example.doancuoiki.tim_tro_dack.presenter.TroPresenter;
-import com.example.doancuoiki.tim_tro_dack.view.activity.Chi_tiet_nha_tro;
 import com.example.doancuoiki.tim_tro_dack.view.activity.DangTin;
-import com.example.doancuoiki.tim_tro_dack.view.activity.Dang_nhap;
-import com.example.doancuoiki.tim_tro_dack.view.activity.MainActivity;
 
 /**
  * Created by xuan trung on 11/19/2016.
@@ -55,7 +52,6 @@ public class TimTroFragment extends Fragment {
         troPresenter = new TroPresenter(context, recyclerViewTro);
 
         troPresenter.fetchData();
-
 
         btdangtin.setOnClickListener(new View.OnClickListener() {
             @Override

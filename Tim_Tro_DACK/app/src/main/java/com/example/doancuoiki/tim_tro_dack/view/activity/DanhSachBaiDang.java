@@ -6,6 +6,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
+import com.example.doancuoiki.tim_tro_dack.DAO.Person;
 import com.example.doancuoiki.tim_tro_dack.R;
 import com.example.doancuoiki.tim_tro_dack.adapter.AdapterMyTros;
 import com.example.doancuoiki.tim_tro_dack.apihelper.APIService;
@@ -40,7 +41,7 @@ public class DanhSachBaiDang extends AppCompatActivity {
                 .build();
         APIService apiService = retrofit.create(APIService.class);
 
-        Call<List<Tro>> call = apiService.getNhaTroByIdND("ND00002");
+        Call<List<Tro>> call = apiService.getNhaTroByIdND(Person.getDataRealm().get(0).IDNguoiDung);
         call.enqueue(new Callback<List<Tro>>() {
             @Override
             public void onResponse(Call<List<Tro>> call, Response<List<Tro>> response) {

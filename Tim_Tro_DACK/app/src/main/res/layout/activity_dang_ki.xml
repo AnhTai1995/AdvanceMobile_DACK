@@ -37,6 +37,7 @@
         android:layout_gravity="center"
         android:textColor="@color/black"
         android:id="@+id/edtmatkhau" />
+
     <EditText
         android:paddingLeft="10dp"
         android:background="@drawable/edittext"

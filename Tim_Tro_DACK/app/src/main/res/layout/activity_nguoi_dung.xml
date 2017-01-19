@@ -89,6 +89,7 @@
                 <TextView
                     android:textSize="19dp"
                     android:text="Nam"
+                    android:id="@+id/tvgioitinh"
                     android:paddingLeft="25dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -115,6 +116,7 @@
                     android:textSize="19dp"
                     android:text="anhtaicute@gmail.com"
                     android:paddingLeft="25dp"
+                    android:id="@+id/tvemail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
@@ -140,6 +142,7 @@
                     android:textSize="19dp"
                     android:text="089999999"
                     android:paddingLeft="5dp"
+                    android:id="@+id/tvsdt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"

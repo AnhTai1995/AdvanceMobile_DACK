@@ -60,6 +60,12 @@ public class DangTin extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dang_tin);
 
+        if(Person.getDataRealm().size() == 0) {
+            Intent newscr = new Intent(DangTin.this,Dang_nhap.class);
+            startActivity(newscr);
+            finish();
+        }
+
         tvDiaChi = (EditText) findViewById(R.id.edtdiachi);
         tvDienTich = (EditText) findViewById(R.id.edtdientich);
         tvDienThoai = (EditText) findViewById(R.id.edtsdt);
@@ -87,7 +93,7 @@ public class DangTin extends AppCompatActivity {
 
                 if(aa.size() == 0){
                     //String idnd = aa.get(0).IDNguoiDung;
-                    String idnd = "ND00002";
+                    String idnd = aa.get(0).IDNguoiDung;
 
                     Retrofit retrofit = new Retrofit.Builder()
                             .baseUrl("http://renthouseapi.apphb.com/api/v1/")

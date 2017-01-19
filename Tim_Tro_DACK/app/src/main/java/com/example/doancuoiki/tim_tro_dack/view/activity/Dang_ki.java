@@ -12,7 +12,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.doancuoiki.tim_tro_dack.R;
-import com.example.doancuoiki.tim_tro_dack.listener.Service;
+import com.example.doancuoiki.tim_tro_dack.apihelper.Service;
 import com.example.doancuoiki.tim_tro_dack.model.NguoiDung;
 
 import retrofit2.Call;
@@ -24,7 +24,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class Dang_ki extends AppCompatActivity {
     private final String TAG = this.getClass().getName();
 
-    private EditText username, password, repassword, email, sodienthoai;
+    private EditText username, password, repassword, email, sodienthoai,ngaysinh;
+    private Spinner GioiTinh;
     private Button DangKy;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,10 +37,11 @@ public class Dang_ki extends AppCompatActivity {
         email = (EditText) findViewById(R.id.edtmail);
         sodienthoai = (EditText) findViewById(R.id.edtsdt);
         DangKy = (Button) findViewById(R.id.btdangki);
+        ngaysinh = (EditText) findViewById(R.id.edtngaysinh);
 
         // Spiner quận
         //Lấy đối tượng Spinner ra
-        Spinner spin=(Spinner)findViewById(R.id.spinner1);
+        GioiTinh=(Spinner)findViewById(R.id.spinner1);
         //Gán Data source (arr) vào Adapter
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(Dang_ki.this,
                 R.array.arr_sex, android.R.layout.simple_spinner_item);
@@ -47,7 +49,9 @@ public class Dang_ki extends AppCompatActivity {
         adapter.setDropDownViewResource
                 (android.R.layout.simple_list_item_single_choice);
         //Thiết lập adapter cho Spinner
-        spin.setAdapter(adapter);
+
+        GioiTinh.setAdapter(adapter);
+
 
 
 
@@ -59,6 +63,15 @@ public class Dang_ki extends AppCompatActivity {
                 String pass = password.getText().toString();
                 String mail = email.getText().toString();
                 String SDT = sodienthoai.getText().toString();
+                String gt = "Nữ";
+
+                if (GioiTinh.getSelectedItemPosition() == 0){
+                    gt = "Nam";
+                }
+                if (GioiTinh.getSelectedItemPosition() == 1){
+                    gt = "Nữ";
+                }
+                Toast.makeText(Dang_ki.this, gt, Toast.LENGTH_SHORT).show();
                 if ( pass.compareTo(repassword.getText().toString()) == 0 )
                 {
                     Retrofit retrofit = new Retrofit.Builder()
@@ -66,7 +79,7 @@ public class Dang_ki extends AppCompatActivity {
                             .addConverterFactory(GsonConverterFactory.create())
                             .build();
                     Service service = retrofit.create(Service.class);
-                    NguoiDung nguoidung = new NguoiDung(tendn, "Quoc", pass, "1995-01-01", "Nam", mail, "", SDT, false);
+                    NguoiDung nguoidung = new NguoiDung(tendn, tendn, pass, ngaysinh.getText().toString(), gt, mail, "", SDT, false);
                     Call<Boolean> call = service.Register(nguoidung);
                     call.enqueue(new Callback<Boolean>() {
                         @Override

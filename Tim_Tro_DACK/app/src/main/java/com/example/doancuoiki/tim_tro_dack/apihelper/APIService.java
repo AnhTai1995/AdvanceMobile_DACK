@@ -1,6 +1,7 @@
 package com.example.doancuoiki.tim_tro_dack.apihelper;
 
 import com.example.doancuoiki.tim_tro_dack.config.Constant;
+import com.example.doancuoiki.tim_tro_dack.model.Comment;
 import com.example.doancuoiki.tim_tro_dack.model.PersonLikeStt;
 import com.example.doancuoiki.tim_tro_dack.model.Tro;
 import com.example.doancuoiki.tim_tro_dack.model.TroDetaile;
@@ -62,6 +63,9 @@ public interface APIService {
             .baseUrl(Constant.URL_PRODUCT)
             .addConverterFactory(GsonConverterFactory.create())
             .build();
+
+    @POST("binh-luan")
+    Call<Boolean> postBinhLuan(@Body Comment cmt);
 }
 
 

@@ -14,8 +14,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.doancuoiki.tim_tro_dack.DAO.Person;
+import com.example.doancuoiki.tim_tro_dack.DAO.Token;
 import com.example.doancuoiki.tim_tro_dack.R;
-import com.example.doancuoiki.tim_tro_dack.listener.Service;
+import com.example.doancuoiki.tim_tro_dack.apihelper.Service;
 import com.example.doancuoiki.tim_tro_dack.model.Authorization;
 import com.example.doancuoiki.tim_tro_dack.model.NguoiDung;
 import com.facebook.AccessToken;
@@ -400,10 +401,15 @@ public class Dang_nhap extends AppCompatActivity implements GoogleApiClient.OnCo
                 a.Username = nd.Username;
                 a.Mail = nd.Mail;
                 a.Pass = nd.Pass;
+                a.SDT = nd.SDT;
                 a.isFacebook = nd.isFacebook;
                 a.GioiTinh = nd.GioiTinh;
-                a.Name = nd.Name;
+                a.Ten = nd.Ten;
+                a.Avatar = nd.Avatar;
                 Person.addDataRealm(a);
+                Token b = new Token();
+                b.access_token = authorization.getAccessToken();
+                Token.addDataRealm(b);
                 //Save data in Realm
 //               / NguoiDung.config(Dang_nhap.this);
 //                NguoiDung.addDataRealm(nd);
