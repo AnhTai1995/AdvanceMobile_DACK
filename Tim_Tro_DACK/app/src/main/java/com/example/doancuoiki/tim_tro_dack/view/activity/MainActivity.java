@@ -10,8 +10,11 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MenuItem;
+import android.widget.Toast;
 
+import com.example.doancuoiki.tim_tro_dack.DAO.Person;
 import com.example.doancuoiki.tim_tro_dack.GioiThieu;
 import com.example.doancuoiki.tim_tro_dack.NguoiDung;
 import com.example.doancuoiki.tim_tro_dack.R;
@@ -23,12 +26,14 @@ public class MainActivity extends AppCompatActivity {
     NavigationView mNavigationView;
     FragmentManager mFragmentManager;
     FragmentTransaction mFragmentTransaction;
+    final String TAG = this.getClass().getName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
         setContentView(R.layout.activity_main);
+
 
         /**
          *Setup the DrawerLayout and NavigationView
@@ -84,11 +89,35 @@ public class MainActivity extends AppCompatActivity {
 //
 //                }
 //
+
+                NavigationView navigationView = (NavigationView) findViewById(R.id.shitstuff);
+
+
+
+                Log.d(TAG, String.valueOf(Person.getDataRealm().size()) );
+
+                if (Person.getDataRealm().size() != 0)
+                {
+                    navigationView.getMenu().findItem(R.id.nav_item_sign).setVisible(false);
+                    navigationView.getMenu().findItem(R.id.item_logout).setVisible(true);
+
+                }
+                else {
+                    navigationView.getMenu().findItem(R.id.nav_item_sign).setVisible(true);
+                    navigationView.getMenu().findItem(R.id.item_logout).setVisible(false);
+
+
+                }
+
                if (menuItem.getItemId() == R.id.nav_item_sign) {
                    Intent newscr = new Intent(MainActivity.this,Dang_nhap.class);
                    startActivity(newscr);
 
                }
+                if (menuItem.getItemId() == R.id.item_logout) {
+                    Person.removeAllClassRealm();
+                    Toast.makeText(MainActivity.this, "Đăng xuất", Toast.LENGTH_SHORT).show();
+                }
                 if (menuItem.getItemId() == R.id.nav_item_about) {
                     Intent newscr = new Intent(MainActivity.this,GioiThieu.class);
                     startActivity(newscr);
