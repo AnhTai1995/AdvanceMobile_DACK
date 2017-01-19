@@ -48,16 +48,14 @@
         android:textColor="@color/black"
         android:id="@+id/edtmatkhaulaplai" />
 
-    <EditText
-        android:paddingLeft="10dp"
-        android:background="@drawable/edittext"
+    <Spinner
+        android:layout_gravity="center"
         android:layout_marginTop="15dp"
-        android:hint="Giới tính"
+        android:background="@drawable/edittext"
+        android:id="@+id/spinner1"
         android:layout_width="250dp"
         android:layout_height="40dp"
-        android:layout_gravity="center"
-        android:textColor="@color/black"
-        android:id="@+id/edtgt" />
+        android:textColor="@color/black" />
     <EditText
         android:paddingLeft="10dp"
         android:background="@drawable/edittext"

@@ -5,8 +5,10 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.doancuoiki.tim_tro_dack.R;
@@ -34,6 +36,22 @@ public class Dang_ki extends AppCompatActivity {
         email = (EditText) findViewById(R.id.edtmail);
         sodienthoai = (EditText) findViewById(R.id.edtsdt);
         DangKy = (Button) findViewById(R.id.btdangki);
+
+        // Spiner quận
+        //Lấy đối tượng Spinner ra
+        Spinner spin=(Spinner)findViewById(R.id.spinner1);
+        //Gán Data source (arr) vào Adapter
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(Dang_ki.this,
+                R.array.arr_sex, android.R.layout.simple_spinner_item);
+        //phải gọi lệnh này để hiển thị danh sách cho Spinner
+        adapter.setDropDownViewResource
+                (android.R.layout.simple_list_item_single_choice);
+        //Thiết lập adapter cho Spinner
+        spin.setAdapter(adapter);
+
+
+
+
         DangKy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
