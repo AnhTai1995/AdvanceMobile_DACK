@@ -179,7 +179,7 @@
                 android:layout_width="300dp"
                 android:layout_height="30dp"
                 android:text="Chỉnh sửa"
-                android:id="@+id/btdangtin"
+                android:id="@+id/btchinhsua"
                 android:background="#00AA00"
                 android:textColor="@color/white"/>
         </LinearLayout>

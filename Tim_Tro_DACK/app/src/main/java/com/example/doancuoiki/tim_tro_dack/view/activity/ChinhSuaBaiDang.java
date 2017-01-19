@@ -1,10 +1,13 @@
 package com.example.doancuoiki.tim_tro_dack.view.activity;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.BitmapFactory;
+import android.location.Address;
+import android.location.Geocoder;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -15,16 +18,20 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 import com.example.doancuoiki.tim_tro_dack.R;
+import com.google.android.gms.maps.model.LatLng;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class ChinhSuaBaiDang extends AppCompatActivity {
@@ -37,18 +44,72 @@ public class ChinhSuaBaiDang extends AppCompatActivity {
     private Cloudinary cloudinary;
     private java.util.Map Map;
     private File file;
+
+    private Button btnchinhsua;
+    private EditText edtdiachi;
+    private Double Kinhdo, Vido;
+    private LatLng toado;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chinh_sua_bai_dang);
+
+        btnchinhsua = (Button) findViewById(R.id.btchinhsua);
+        edtdiachi = (EditText) findViewById(R.id.edtdiachi);
 
         Map config = new HashMap();
         config.put("cloud_name", "hebb2kmup");
         config.put("api_key", "886147584342316");
         config.put("api_secret", "zgJX-eYIC90JDQe9I57pTa2H-rI");
         cloudinary = new Cloudinary(config);
+
+        btnchinhsua.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (Map != null) {
+                    imgURL = Map.get("url").toString();
+                    Log.d(TAG, imgURL);
+                }
+
+                toado = getLocationFromAddress(ChinhSuaBaiDang.this,edtdiachi.getText().toString());
+                Kinhdo = toado.longitude;
+                Vido = toado.latitude;
+                //Show ra để thấy con khi post lên thi gán kinh độ vĩ độ thui
+                Toast.makeText(ChinhSuaBaiDang.this,Vido.toString()+" Và "+ Kinhdo.toString(),Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
+
+    //------Chuyển string thành latlng:
+    public LatLng getLocationFromAddress(Context context, String strAddress) {
+
+        Geocoder coder = new Geocoder(context);
+        List<Address> address;
+        LatLng p1 = null;
+
+        try {
+
+            address = coder.getFromLocationName(strAddress, 5);
+            if (address == null) {
+                return null;
+            }
+            Address location = address.get(0);
+            location.getLatitude();
+            location.getLongitude();
+
+            p1 = new LatLng(location.getLatitude(), location.getLongitude() );
+
+        } catch (Exception ex) {
+
+            ex.printStackTrace();
+        }
+
+        return p1;
+    }
+    //---------------
+
+    //Cloundinary
     private class Upload extends AsyncTask<String, Void, String> {
         private Cloudinary mCloudinary;
 
