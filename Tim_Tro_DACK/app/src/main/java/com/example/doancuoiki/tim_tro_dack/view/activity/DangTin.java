@@ -1,6 +1,7 @@
 package com.example.doancuoiki.tim_tro_dack.view.activity;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -26,6 +27,7 @@ import com.example.doancuoiki.tim_tro_dack.DAO.Person;
 import com.example.doancuoiki.tim_tro_dack.R;
 import com.example.doancuoiki.tim_tro_dack.apihelper.APIService;
 import com.example.doancuoiki.tim_tro_dack.model.Tro;
+import com.google.android.gms.maps.model.LatLng;
 
 import java.io.File;
 import java.io.IOException;
@@ -39,6 +41,10 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import android.location.Address;
+import android.location.Geocoder;
+
+
 public class DangTin extends AppCompatActivity {
     private static int RESULT_LOAD_IMG = 1;
     private final String TAG = this.getClass().getName();
@@ -49,7 +55,8 @@ public class DangTin extends AppCompatActivity {
     private Map Map;
     private File file;
 
-
+    private Double Kinhdo, Vido;
+    private LatLng toado;
 
     String anh;
     EditText tvDiaChi, tvDienTich, tvDienThoai, tvGia, tvMoTa;
@@ -83,6 +90,15 @@ public class DangTin extends AppCompatActivity {
         btnDangTin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                toado = getLocationFromAddress(DangTin.this,tvDiaChi.getText().toString());
+                Kinhdo = toado.longitude;
+                Vido = toado.latitude;
+                //Show ra để thấy con khi post lên thi gán kinh độ vĩ độ thui còn lại chú gán vô
+                Toast.makeText(DangTin.this,Vido.toString()+" Và "+ Kinhdo.toString(),Toast.LENGTH_SHORT).show();
+
+                //------------------------
+
                 if(Map != null)
                     imgURL = Map.get("url").toString();
                 else
@@ -134,6 +150,32 @@ public class DangTin extends AppCompatActivity {
             }
         });
     }
+
+
+    //------Chuyển string thành latlng:
+    public LatLng getLocationFromAddress(Context context, String strAddress) {
+
+        Geocoder coder = new Geocoder(context);
+        List<Address> address;
+        LatLng p1 = null;
+        try {
+
+            address = coder.getFromLocationName(strAddress, 5);
+            if (address == null) {
+                return null;
+            }
+              Address location = address.get(0);
+              location.getLatitude();
+              location.getLongitude();
+                     p1 = new LatLng(location.getLatitude(), location.getLongitude() );
+                    } catch (Exception ex) {
+
+                       ex.printStackTrace();
+           }
+
+        return p1;
+    }
+       //---------------
 
     private class Upload extends AsyncTask<String, Void, String> {
         private Cloudinary mCloudinary;
