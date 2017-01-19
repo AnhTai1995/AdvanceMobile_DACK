@@ -30,5 +30,6 @@ namespace RenthouseAPI.Models
         public DbSet<ChiTietNhaTro> ChiTietNhaTroes { get; set; }
         public DbSet<NguoiDung> NguoiDungs { get; set; }
         public DbSet<NhaTro> NhaTroes { get; set; }
+        public DbSet<NhaTroDaLuu> NhaTroDaLuus { get; set; }
     }
 }

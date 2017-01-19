@@ -30,7 +30,7 @@ namespace RenthouseAPI
 
             Audience audience = AudiencesStore.FindAudience(audienceId);
 
-            string symmetricKeyAsBase64 = audience.Base64Secret;
+            string symmetricKeyAsBase64 = "IxrAjDoa2FqElO7IhrSrUJELhUckePEPVpaePlS_Xaw";
 
             var keyByteArray = TextEncodings.Base64Url.Decode(symmetricKeyAsBase64);
 
@@ -39,7 +39,7 @@ namespace RenthouseAPI
             var issued = data.Properties.IssuedUtc;
             var expires = data.Properties.ExpiresUtc;
 
-            var token = new JwtSecurityToken(_issuer, audienceId, data.Identity.Claims, issued.Value.UtcDateTime, expires.Value.UtcDateTime, signingKey);
+            var token = new JwtSecurityToken(_issuer, "all", data.Identity.Claims, issued.Value.UtcDateTime, expires.Value.UtcDateTime, signingKey);
 
             var handler = new JwtSecurityTokenHandler();
 

@@ -25,7 +25,7 @@ namespace RenthouseAPI
                 .ForJob(newsJob)
                 .WithIdentity("trigger1")
                 .StartNow()
-                .WithCronSchedule("0 0/60 * * * ?")
+                .WithCronSchedule("0 0/15 * * * ?")
                 .Build();
 
             ISchedulerFactory sf = new StdSchedulerFactory();

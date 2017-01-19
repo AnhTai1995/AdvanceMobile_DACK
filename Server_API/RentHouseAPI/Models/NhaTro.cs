@@ -16,6 +16,7 @@ namespace RenthouseAPI.Models
     {
         public NhaTro()
         {
+            this.BinhLuans = new HashSet<BinhLuan>();
             this.ChiTietNhaTroes = new HashSet<ChiTietNhaTro>();
         }
     
@@ -29,6 +30,7 @@ namespace RenthouseAPI.Models
         public string NgayDang { get; set; }
         public Nullable<bool> AutoExtract { get; set; }
     
+        public virtual ICollection<BinhLuan> BinhLuans { get; set; }
         public virtual ICollection<ChiTietNhaTro> ChiTietNhaTroes { get; set; }
         public virtual NguoiDung NguoiDung { get; set; }
     }

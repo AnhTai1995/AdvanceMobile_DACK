@@ -49,9 +49,9 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IDNguoiDung" Type="varchar" MaxLength="7" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="AccountType" Type="varchar" MaxLength="5" />
-          <Property Name="Username" Type="varchar" MaxLength="30" />
-          <Property Name="Ten" Type="nvarchar" MaxLength="50" />
-          <Property Name="Pass" Type="varchar" MaxLength="20" />
+          <Property Name="Username" Type="nvarchar" MaxLength="100" />
+          <Property Name="Ten" Type="nvarchar" MaxLength="100" />
+          <Property Name="Pass" Type="nvarchar" MaxLength="100" />
           <Property Name="NamSinh" Type="date" />
           <Property Name="GioiTinh" Type="nvarchar" MaxLength="10" />
           <Property Name="Mail" Type="varchar" MaxLength="500" />
@@ -73,7 +73,15 @@
           <Property Name="NgayDang" Type="nvarchar" MaxLength="100" />
           <Property Name="AutoExtract" Type="bit" />
         </EntityType>
-        <Association Name="FK__BinhLuan__IDNguo__25869641">
+        <EntityType Name="NhaTroDaLuu">
+          <Key>
+            <PropertyRef Name="IDNhaTro" />
+            <PropertyRef Name="IDNguoiDung" />
+          </Key>
+          <Property Name="IDNhaTro" Type="varchar" MaxLength="7" Nullable="false" />
+          <Property Name="IDNguoiDung" Type="varchar" MaxLength="7" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__BinhLuan__IDNguo__59063A47">
           <End Role="NguoiDung" Type="Self.NguoiDung" Multiplicity="0..1" />
           <End Role="BinhLuan" Type="Self.BinhLuan" Multiplicity="*" />
           <ReferentialConstraint>
@@ -85,7 +93,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ChiTietNh__IDNha__20C1E124">
+        <Association Name="FK__BinhLuan__IDNhaT__59FA5E80">
+          <End Role="NhaTro" Type="Self.NhaTro" Multiplicity="0..1" />
+          <End Role="BinhLuan" Type="Self.BinhLuan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NhaTro">
+              <PropertyRef Name="IDNhaTro" />
+            </Principal>
+            <Dependent Role="BinhLuan">
+              <PropertyRef Name="IDNhaTro" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ChiTietNh__IDNha__5441852A">
           <End Role="NhaTro" Type="Self.NhaTro" Multiplicity="0..1" />
           <End Role="ChiTietNhaTro" Type="Self.ChiTietNhaTro" Multiplicity="*" />
           <ReferentialConstraint>
@@ -97,7 +117,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__NguoiDung__Accou__1A14E395">
+        <Association Name="FK__NguoiDung__Accou__4D94879B">
           <End Role="AccountType" Type="Self.AccountType" Multiplicity="0..1" />
           <End Role="NguoiDung" Type="Self.NguoiDung" Multiplicity="*" />
           <ReferentialConstraint>
@@ -109,7 +129,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__NhaTro__IDNguoiD__1DE57479">
+        <Association Name="FK__NhaTro__IDNguoiD__5165187F">
           <End Role="NguoiDung" Type="Self.NguoiDung" Multiplicity="0..1" />
           <End Role="NhaTro" Type="Self.NhaTro" Multiplicity="*" />
           <ReferentialConstraint>
@@ -127,19 +147,24 @@
           <EntitySet Name="ChiTietNhaTro" EntityType="Self.ChiTietNhaTro" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NguoiDung" EntityType="Self.NguoiDung" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NhaTro" EntityType="Self.NhaTro" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__BinhLuan__IDNguo__25869641" Association="Self.FK__BinhLuan__IDNguo__25869641">
+          <EntitySet Name="NhaTroDaLuu" EntityType="Self.NhaTroDaLuu" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__BinhLuan__IDNguo__59063A47" Association="Self.FK__BinhLuan__IDNguo__59063A47">
             <End Role="NguoiDung" EntitySet="NguoiDung" />
             <End Role="BinhLuan" EntitySet="BinhLuan" />
           </AssociationSet>
-          <AssociationSet Name="FK__ChiTietNh__IDNha__20C1E124" Association="Self.FK__ChiTietNh__IDNha__20C1E124">
+          <AssociationSet Name="FK__BinhLuan__IDNhaT__59FA5E80" Association="Self.FK__BinhLuan__IDNhaT__59FA5E80">
+            <End Role="NhaTro" EntitySet="NhaTro" />
+            <End Role="BinhLuan" EntitySet="BinhLuan" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ChiTietNh__IDNha__5441852A" Association="Self.FK__ChiTietNh__IDNha__5441852A">
             <End Role="NhaTro" EntitySet="NhaTro" />
             <End Role="ChiTietNhaTro" EntitySet="ChiTietNhaTro" />
           </AssociationSet>
-          <AssociationSet Name="FK__NguoiDung__Accou__1A14E395" Association="Self.FK__NguoiDung__Accou__1A14E395">
+          <AssociationSet Name="FK__NguoiDung__Accou__4D94879B" Association="Self.FK__NguoiDung__Accou__4D94879B">
             <End Role="AccountType" EntitySet="AccountType" />
             <End Role="NguoiDung" EntitySet="NguoiDung" />
           </AssociationSet>
-          <AssociationSet Name="FK__NhaTro__IDNguoiD__1DE57479" Association="Self.FK__NhaTro__IDNguoiD__1DE57479">
+          <AssociationSet Name="FK__NhaTro__IDNguoiD__5165187F" Association="Self.FK__NhaTro__IDNguoiD__5165187F">
             <End Role="NguoiDung" EntitySet="NguoiDung" />
             <End Role="NhaTro" EntitySet="NhaTro" />
           </AssociationSet>
@@ -155,7 +180,7 @@
           </Key>
           <Property Name="ID" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="TenLoai" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="NguoiDungs" Relationship="Self.FK__NguoiDung__Accou__1A14E395" FromRole="AccountType" ToRole="NguoiDung" />
+          <NavigationProperty Name="NguoiDungs" Relationship="Self.FK__NguoiDung__Accou__4D94879B" FromRole="AccountType" ToRole="NguoiDung" />
         </EntityType>
         <EntityType Name="BinhLuan">
           <Key>
@@ -167,7 +192,8 @@
           <Property Name="IDNguoiDung" Type="String" MaxLength="7" FixedLength="false" Unicode="false" />
           <Property Name="NoiDung" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="ThoiGianBL" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="NguoiDung" Relationship="Self.FK__BinhLuan__IDNguo__25869641" FromRole="BinhLuan" ToRole="NguoiDung" />
+          <NavigationProperty Name="NguoiDung" Relationship="Self.FK__BinhLuan__IDNguo__59063A47" FromRole="BinhLuan" ToRole="NguoiDung" />
+          <NavigationProperty Name="NhaTro" Relationship="Self.FK__BinhLuan__IDNhaT__59FA5E80" FromRole="BinhLuan" ToRole="NhaTro" />
         </EntityType>
         <EntityType Name="ChiTietNhaTro">
           <Key>
@@ -187,7 +213,7 @@
           <Property Name="ViDo" Type="Single" />
           <Property Name="ChuThich" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="AutoExtract" Type="Boolean" />
-          <NavigationProperty Name="NhaTro" Relationship="Self.FK__ChiTietNh__IDNha__20C1E124" FromRole="ChiTietNhaTro" ToRole="NhaTro" />
+          <NavigationProperty Name="NhaTro" Relationship="Self.FK__ChiTietNh__IDNha__5441852A" FromRole="ChiTietNhaTro" ToRole="NhaTro" />
         </EntityType>
         <EntityType Name="NguoiDung">
           <Key>
@@ -196,18 +222,18 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="IDNguoiDung" Type="String" MaxLength="7" FixedLength="false" Unicode="false" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="AccountType" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
-          <Property Name="Username" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="Ten" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Pass" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Username" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Ten" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Pass" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="NamSinh" Type="DateTime" Precision="0" />
           <Property Name="GioiTinh" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="Mail" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="Avatar" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="SoDienThoai" Type="Int32" />
           <Property Name="IsFacebookUser" Type="Boolean" />
-          <NavigationProperty Name="AccountType1" Relationship="Self.FK__NguoiDung__Accou__1A14E395" FromRole="NguoiDung" ToRole="AccountType" />
-          <NavigationProperty Name="BinhLuans" Relationship="Self.FK__BinhLuan__IDNguo__25869641" FromRole="NguoiDung" ToRole="BinhLuan" />
-          <NavigationProperty Name="NhaTroes" Relationship="Self.FK__NhaTro__IDNguoiD__1DE57479" FromRole="NguoiDung" ToRole="NhaTro" />
+          <NavigationProperty Name="AccountType1" Relationship="Self.FK__NguoiDung__Accou__4D94879B" FromRole="NguoiDung" ToRole="AccountType" />
+          <NavigationProperty Name="BinhLuans" Relationship="Self.FK__BinhLuan__IDNguo__59063A47" FromRole="NguoiDung" ToRole="BinhLuan" />
+          <NavigationProperty Name="NhaTroes" Relationship="Self.FK__NhaTro__IDNguoiD__5165187F" FromRole="NguoiDung" ToRole="NhaTro" />
         </EntityType>
         <EntityType Name="NhaTro">
           <Key>
@@ -222,10 +248,19 @@
           <Property Name="GiaPhong" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="NgayDang" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="AutoExtract" Type="Boolean" />
-          <NavigationProperty Name="ChiTietNhaTroes" Relationship="Self.FK__ChiTietNh__IDNha__20C1E124" FromRole="NhaTro" ToRole="ChiTietNhaTro" />
-          <NavigationProperty Name="NguoiDung" Relationship="Self.FK__NhaTro__IDNguoiD__1DE57479" FromRole="NhaTro" ToRole="NguoiDung" />
+          <NavigationProperty Name="BinhLuans" Relationship="Self.FK__BinhLuan__IDNhaT__59FA5E80" FromRole="NhaTro" ToRole="BinhLuan" />
+          <NavigationProperty Name="ChiTietNhaTroes" Relationship="Self.FK__ChiTietNh__IDNha__5441852A" FromRole="NhaTro" ToRole="ChiTietNhaTro" />
+          <NavigationProperty Name="NguoiDung" Relationship="Self.FK__NhaTro__IDNguoiD__5165187F" FromRole="NhaTro" ToRole="NguoiDung" />
         </EntityType>
-        <Association Name="FK__NguoiDung__Accou__1A14E395">
+        <EntityType Name="NhaTroDaLuu">
+          <Key>
+            <PropertyRef Name="IDNhaTro" />
+            <PropertyRef Name="IDNguoiDung" />
+          </Key>
+          <Property Name="IDNhaTro" Type="String" MaxLength="7" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IDNguoiDung" Type="String" MaxLength="7" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__NguoiDung__Accou__4D94879B">
           <End Role="AccountType" Type="Self.AccountType" Multiplicity="0..1" />
           <End Role="NguoiDung" Type="Self.NguoiDung" Multiplicity="*" />
           <ReferentialConstraint>
@@ -237,7 +272,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__BinhLuan__IDNguo__25869641">
+        <Association Name="FK__BinhLuan__IDNguo__59063A47">
           <End Role="NguoiDung" Type="Self.NguoiDung" Multiplicity="0..1" />
           <End Role="BinhLuan" Type="Self.BinhLuan" Multiplicity="*" />
           <ReferentialConstraint>
@@ -249,7 +284,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ChiTietNh__IDNha__20C1E124">
+        <Association Name="FK__BinhLuan__IDNhaT__59FA5E80">
+          <End Role="NhaTro" Type="Self.NhaTro" Multiplicity="0..1" />
+          <End Role="BinhLuan" Type="Self.BinhLuan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NhaTro">
+              <PropertyRef Name="IDNhaTro" />
+            </Principal>
+            <Dependent Role="BinhLuan">
+              <PropertyRef Name="IDNhaTro" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ChiTietNh__IDNha__5441852A">
           <End Role="NhaTro" Type="Self.NhaTro" Multiplicity="0..1" />
           <End Role="ChiTietNhaTro" Type="Self.ChiTietNhaTro" Multiplicity="*" />
           <ReferentialConstraint>
@@ -261,7 +308,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__NhaTro__IDNguoiD__1DE57479">
+        <Association Name="FK__NhaTro__IDNguoiD__5165187F">
           <End Role="NguoiDung" Type="Self.NguoiDung" Multiplicity="0..1" />
           <End Role="NhaTro" Type="Self.NhaTro" Multiplicity="*" />
           <ReferentialConstraint>
@@ -279,19 +326,24 @@
           <EntitySet Name="ChiTietNhaTroes" EntityType="Self.ChiTietNhaTro" />
           <EntitySet Name="NguoiDungs" EntityType="Self.NguoiDung" />
           <EntitySet Name="NhaTroes" EntityType="Self.NhaTro" />
-          <AssociationSet Name="FK__NguoiDung__Accou__1A14E395" Association="Self.FK__NguoiDung__Accou__1A14E395">
+          <EntitySet Name="NhaTroDaLuus" EntityType="Self.NhaTroDaLuu" />
+          <AssociationSet Name="FK__NguoiDung__Accou__4D94879B" Association="Self.FK__NguoiDung__Accou__4D94879B">
             <End Role="AccountType" EntitySet="AccountTypes" />
             <End Role="NguoiDung" EntitySet="NguoiDungs" />
           </AssociationSet>
-          <AssociationSet Name="FK__BinhLuan__IDNguo__25869641" Association="Self.FK__BinhLuan__IDNguo__25869641">
+          <AssociationSet Name="FK__BinhLuan__IDNguo__59063A47" Association="Self.FK__BinhLuan__IDNguo__59063A47">
             <End Role="NguoiDung" EntitySet="NguoiDungs" />
             <End Role="BinhLuan" EntitySet="BinhLuans" />
           </AssociationSet>
-          <AssociationSet Name="FK__ChiTietNh__IDNha__20C1E124" Association="Self.FK__ChiTietNh__IDNha__20C1E124">
+          <AssociationSet Name="FK__BinhLuan__IDNhaT__59FA5E80" Association="Self.FK__BinhLuan__IDNhaT__59FA5E80">
+            <End Role="NhaTro" EntitySet="NhaTroes" />
+            <End Role="BinhLuan" EntitySet="BinhLuans" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ChiTietNh__IDNha__5441852A" Association="Self.FK__ChiTietNh__IDNha__5441852A">
             <End Role="NhaTro" EntitySet="NhaTroes" />
             <End Role="ChiTietNhaTro" EntitySet="ChiTietNhaTroes" />
           </AssociationSet>
-          <AssociationSet Name="FK__NhaTro__IDNguoiD__1DE57479" Association="Self.FK__NhaTro__IDNguoiD__1DE57479">
+          <AssociationSet Name="FK__NhaTro__IDNguoiD__5165187F" Association="Self.FK__NhaTro__IDNguoiD__5165187F">
             <End Role="NguoiDung" EntitySet="NguoiDungs" />
             <End Role="NhaTro" EntitySet="NhaTroes" />
           </AssociationSet>
@@ -372,6 +424,14 @@
                 <ScalarProperty Name="GiaPhong" ColumnName="GiaPhong" />
                 <ScalarProperty Name="NgayDang" ColumnName="NgayDang" />
                 <ScalarProperty Name="AutoExtract" ColumnName="AutoExtract" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NhaTroDaLuus">
+            <EntityTypeMapping TypeName="NHATROModel.NhaTroDaLuu">
+              <MappingFragment StoreEntitySet="NhaTroDaLuu">
+                <ScalarProperty Name="IDNhaTro" ColumnName="IDNhaTro" />
+                <ScalarProperty Name="IDNguoiDung" ColumnName="IDNguoiDung" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

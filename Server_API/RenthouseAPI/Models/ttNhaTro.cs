@@ -11,6 +11,8 @@ namespace RenthouseAPI.Models
         public string DienTich { get; set; }
         public string DiaChi { get; set; }
         public string IDNguoiDang { get; set; }
+        public string TenND { get; set; }
+        public string AvatarND { get; set; }
         public string HinhAnh { get; set; }
         public string GiaPhong { get; set; }
         public string IDCTNT { get; set; }

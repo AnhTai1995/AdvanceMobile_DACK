@@ -28,7 +28,7 @@ namespace RenthouseAPI
 
             var key = new byte[32];
             RNGCryptoServiceProvider.Create().GetBytes(key);
-            var base64Secret = TextEncodings.Base64Url.Encode(key);
+            var base64Secret = "IxrAjDoa2FqElO7IhrSrUJELhUckePEPVpaePlS_Xaw";
 
             Audience newAudience = new Audience
             {

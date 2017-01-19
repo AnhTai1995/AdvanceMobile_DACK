@@ -12,16 +12,9 @@ namespace RenthouseAPI.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class BinhLuan
+    public partial class NhaTroDaLuu
     {
-        public int ID { get; set; }
-        public string IDBinhLuan { get; set; }
         public string IDNhaTro { get; set; }
         public string IDNguoiDung { get; set; }
-        public string NoiDung { get; set; }
-        public Nullable<System.DateTime> ThoiGianBL { get; set; }
-    
-        public virtual NguoiDung NguoiDung { get; set; }
-        public virtual NhaTro NhaTro { get; set; }
     }
 }
