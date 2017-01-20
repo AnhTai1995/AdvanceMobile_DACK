@@ -53,6 +53,7 @@ public class ChinhSuaBaiDang extends AppCompatActivity {
     private File file;
 
 
+    ImageView imgView;
     EditText tvDiaChi, tvDienThoai, tvDienTich, tvMoTa, tvGia;
     Button tbChinhSua;
     @Override
@@ -107,7 +108,8 @@ public class ChinhSuaBaiDang extends AppCompatActivity {
                     tvDienTich.setText("Diện tích: " + nhaTro.get(0).getDienTich());
                     tvGia.setText("Diện tích: " + nhaTro.get(0).getGiaPhong());
                     tvDienThoai.setText("Diện tích: " + nhaTro.get(0).getDienThoai());
-
+                    DownloadImageTask task = (DownloadImageTask) new DownloadImageTask((ImageView) findViewById(R.id.imgView))
+                            .execute(nhaTro.get(0).getHinhAnh());
                 }
                 else
                     Toast.makeText(ChinhSuaBaiDang.this, "Chưa cập nhật thông tin" , Toast.LENGTH_SHORT).show();
@@ -280,7 +282,7 @@ public class ChinhSuaBaiDang extends AppCompatActivity {
                 int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
                 imgDecodableString = cursor.getString(columnIndex);
                 cursor.close();
-                ImageView imgView = (ImageView) findViewById(R.id.imgView);
+                imgView = (ImageView) findViewById(R.id.imgView);
                 // Set the Image in ImageView after decoding the String
                 imgView.setImageBitmap(BitmapFactory
                         .decodeFile(imgDecodableString));
