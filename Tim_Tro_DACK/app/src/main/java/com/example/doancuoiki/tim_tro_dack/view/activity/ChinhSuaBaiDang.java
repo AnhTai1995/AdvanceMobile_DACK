@@ -4,15 +4,16 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.os.Bundle;
 import android.os.SystemClock;
 import android.provider.MediaStore;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -29,6 +30,7 @@ import com.example.doancuoiki.tim_tro_dack.model.Tro;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -65,18 +67,16 @@ public class ChinhSuaBaiDang extends AppCompatActivity {
                 callerIntent.getBundleExtra("MyPackage");
         //Có Bundle rồi thì lấy các thông số dựa vào soa, sob
         final String idNhaTro=packageFromCaller.getString("IDNhaTro");
-        final String hinhAnh=packageFromCaller.getString("hinhAnh");
-        String diaChi=packageFromCaller.getString("diaChi");
-        String dienTich=packageFromCaller.getString("dienTich");
-        String dienThoai=packageFromCaller.getString("dienThoai");
-        String moTa=packageFromCaller.getString("moTa");
-        String gia=packageFromCaller.getString("gia");
 
-        Map config = new HashMap();
-        config.put("cloud_name", "hebb2kmup");
-        config.put("api_key", "886147584342316");
-        config.put("api_secret", "zgJX-eYIC90JDQe9I57pTa2H-rI");
-        cloudinary = new Cloudinary(config);
+        final String hinhAnh=packageFromCaller.getString("hinhAnh");
+
+
+//        String diaChi=packageFromCaller.getString("diaChi");
+//        String dienTich=packageFromCaller.getString("dienTich");
+//        String dienThoai=packageFromCaller.getString("dienThoai");
+//        String moTa=packageFromCaller.getString("moTa");
+//        String gia=packageFromCaller.getString("gia");
+
 
         tvDiaChi = (EditText) findViewById(R.id.edtdiachi);
         tvDienThoai = (EditText) findViewById(R.id.edtsdt);
@@ -84,14 +84,45 @@ public class ChinhSuaBaiDang extends AppCompatActivity {
         tvMoTa = (EditText) findViewById(R.id.edtMoTa);
         tvGia = (EditText) findViewById(R.id.edtgia);
 
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://renthouseapi.apphb.com/api/v1/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        //Service service = retrofit.create(Service.class);
+        APIService apiService = retrofit.create(APIService.class);
+
+        Call<List<Tro>> call = apiService.getNhaTro(idNhaTro);
+        call.enqueue(new Callback<List<Tro>>() {
+            @Override
+            public void onResponse(Call<List<Tro>> call, Response<List<Tro>> response) {
+                List<Tro> nhaTro = response.body();
+                if(nhaTro !=null){
+                    //diChi.setText(nhaTro.get(0).ge);
+                    //dienTich.setText(nhaTro.get(0).get);
+                    //giaPhong.setText(nhaTro.get(0).g);
+                    //dienThoai.set //điện thoại sai
+                    tvMoTa.setText("Mô tả: " + nhaTro.get(0).getMoTa());
+                    tvDiaChi.setText("Địa chỉ: " + nhaTro.get(0).getDiaChi());
+                    tvDienTich.setText("Diện tích: " + nhaTro.get(0).getDienTich());
+                    tvGia.setText("Diện tích: " + nhaTro.get(0).getGiaPhong());
+                    tvDienThoai.setText("Diện tích: " + nhaTro.get(0).getDienThoai());
+
+                }
+                else
+                    Toast.makeText(ChinhSuaBaiDang.this, "Chưa cập nhật thông tin" , Toast.LENGTH_SHORT).show();
+            }
+            @Override
+            public void onFailure(Call<List<Tro>> call, Throwable t) {
+                //Log.e(TAG, t.getMessage());
+            }
+        });
+        Map config = new HashMap();
+        config.put("cloud_name", "hebb2kmup");
+        config.put("api_key", "886147584342316");
+        config.put("api_secret", "zgJX-eYIC90JDQe9I57pTa2H-rI");
+        cloudinary = new Cloudinary(config);
         tbChinhSua = (Button) findViewById(R.id.btChinhSua);
-
-        tvDiaChi.setText(diaChi);
-        tvDienTich.setText(dienTich);
-        tvDienThoai.setText(dienThoai);
-        tvGia.setText(gia);
-        tvMoTa.setText(moTa);
-
         tbChinhSua.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -204,6 +235,30 @@ public class ChinhSuaBaiDang extends AppCompatActivity {
 
     }
 
+    private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
+        ImageView bmImage;
+
+        public DownloadImageTask(ImageView bmImage) {
+            this.bmImage = bmImage;
+        }
+
+        protected Bitmap doInBackground(String... urls) {
+            String urldisplay = urls[0];
+            Bitmap mIcon11 = null;
+            try {
+                InputStream in = new java.net.URL(urldisplay).openStream();
+                mIcon11 = BitmapFactory.decodeStream(in);
+            } catch (Exception e) {
+                Log.e("Error", e.getMessage());
+                e.printStackTrace();
+            }
+            return mIcon11;
+        }
+
+        protected void onPostExecute(Bitmap result) {
+            bmImage.setImageBitmap(result);
+        }
+    }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
