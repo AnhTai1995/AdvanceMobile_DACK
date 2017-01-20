@@ -3,6 +3,9 @@ package com.example.doancuoiki.tim_tro_dack.view.activity;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -17,14 +20,16 @@ import com.example.doancuoiki.tim_tro_dack.DAO.Person;
 import com.example.doancuoiki.tim_tro_dack.R;
 import com.example.doancuoiki.tim_tro_dack.apihelper.APIService;
 import com.example.doancuoiki.tim_tro_dack.model.Comment;
-import com.example.doancuoiki.tim_tro_dack.model.TroDetaile;
+import com.example.doancuoiki.tim_tro_dack.model.Tro;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.pkmmte.view.CircularImageView;
 
+import java.io.InputStream;
 import java.util.List;
 
 import retrofit2.Call;
@@ -36,7 +41,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Chi_tiet_nha_tro extends AppCompatActivity implements OnMapReadyCallback {
 
-    TextView diChi, dienTich, giaPhong, dienThoai, moTa;
+    TextView diChi, dienTich, giaPhong, dienThoai, moTa, username, thoigian;
     GoogleMap mMap;
     SupportMapFragment mapFragment;
     LatLng latlng;
@@ -59,8 +64,8 @@ public class Chi_tiet_nha_tro extends AppCompatActivity implements OnMapReadyCal
         moTa = (TextView) findViewById(R.id.moTa);
         Gui = (Button) findViewById(R.id.btgui);
         Cmt = (EditText) findViewById(R.id.edtbinhluan);
-
-
+        username = (TextView) findViewById(R.id.username);
+        thoigian = (TextView) findViewById(R.id.timePost) ;
         //lấy intent gọi Activity này
         Intent callerIntent=getIntent();
         //có intent rồi thì lấy Bundle dựa vào MyPackage
@@ -80,36 +85,42 @@ public class Chi_tiet_nha_tro extends AppCompatActivity implements OnMapReadyCal
         //Service service = retrofit.create(Service.class);
         APIService apiService = retrofit.create(APIService.class);
 
-        Call<List<TroDetaile>> call = apiService.getNhaTro(idNhaTro);
-        call.enqueue(new Callback<List<TroDetaile>>() {
+        Call<List<Tro>> call = apiService.getNhaTro(idNhaTro);
+        call.enqueue(new Callback<List<Tro>>() {
             @Override
-            public void onResponse(Call<List<TroDetaile>> call, Response<List<TroDetaile>> response) {
-                List<TroDetaile> nhaTro = response.body();
+            public void onResponse(Call<List<Tro>> call, Response<List<Tro>> response) {
+                List<Tro> nhaTro = response.body();
 
-                if(nhaTro!=null){
+                if(nhaTro !=null){
                     //diChi.setText(nhaTro.get(0).ge);
                     //dienTich.setText(nhaTro.get(0).get);
                     //giaPhong.setText(nhaTro.get(0).g);
                     //dienThoai.set //điện thoại sai
                     moTa.setText("Mô tả: " + nhaTro.get(0).getMoTa());
-
+                    diChi.setText("Địa chỉ: " + nhaTro.get(0).getDiaChi());
+                    dienTich.setText("Diện tích: " + nhaTro.get(0).getDienTich());
+                    giaPhong.setText("Diện tích: " + nhaTro.get(0).getGiaPhong());
+                    dienThoai.setText("Diện tích: " + nhaTro.get(0).getDienThoai());
+                    DownloadImageTask task = (DownloadImageTask) new DownloadImageTask((CircularImageView) findViewById(R.id.avatar))
+                            .execute(nhaTro.get(0).getAvatarND());
+                    username.setText( nhaTro.get(0).getTenND());
+                    thoigian.setText( nhaTro.get(0).getNgayDang());
                     //Add marker cho bản đồ
-                    Double kd = Double.parseDouble(nhaTro.get(0).getKinhDo());
-                    Double vd = Double.parseDouble(nhaTro.get(0).getViDo());
-                    latlng = new LatLng(vd,kd);
-
-                    LatLng HCM = new LatLng(vd,kd);
-                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(HCM, 13));
-                    // Add a marker in Sydney and move the camera
-                    mMap.addMarker(new MarkerOptions().position(HCM).title(nhaTro.get(0).getTinhTrang()));
-                    mMap.moveCamera(CameraUpdateFactory.newLatLng(HCM));
-
+                    if(nhaTro.get(0).getKinhDo() != null && nhaTro.get(0).getViDo() != null){
+                        Double kd = Double.parseDouble(nhaTro.get(0).getKinhDo());
+                        Double vd = Double.parseDouble(nhaTro.get(0).getViDo());
+                        latlng = new LatLng(vd,kd);
+                        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latlng, 13));
+                        // Add a marker in Sydney and move the camera
+                        mMap.addMarker(new MarkerOptions().position(latlng).title(nhaTro.get(0).getTinhTrang()));
+                        mMap.moveCamera(CameraUpdateFactory.newLatLng(latlng));
+                    }
                 }
                 else
                     Toast.makeText(Chi_tiet_nha_tro.this, "Chưa cập nhật thông tin" , Toast.LENGTH_SHORT).show();
             }
             @Override
-            public void onFailure(Call<List<TroDetaile>> call, Throwable t) {
+            public void onFailure(Call<List<Tro>> call, Throwable t) {
                 //Log.e(TAG, t.getMessage());
             }
         });
@@ -147,7 +158,30 @@ public class Chi_tiet_nha_tro extends AppCompatActivity implements OnMapReadyCal
             }
         });
     }
+    private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
+        CircularImageView bmImage;
 
+        public DownloadImageTask(CircularImageView bmImage) {
+            this.bmImage = bmImage;
+        }
+
+        protected Bitmap doInBackground(String... urls) {
+            String urldisplay = urls[0];
+            Bitmap mIcon11 = null;
+            try {
+                InputStream in = new java.net.URL(urldisplay).openStream();
+                mIcon11 = BitmapFactory.decodeStream(in);
+            } catch (Exception e) {
+                Log.e("Error", e.getMessage());
+                e.printStackTrace();
+            }
+            return mIcon11;
+        }
+
+        protected void onPostExecute(Bitmap result) {
+            bmImage.setImageBitmap(result);
+        }
+    }
 
     @Override
     public void onMapReady(GoogleMap googleMap) {

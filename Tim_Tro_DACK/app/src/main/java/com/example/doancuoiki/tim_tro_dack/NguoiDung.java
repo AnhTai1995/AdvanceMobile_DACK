@@ -70,6 +70,7 @@ public class NguoiDung extends AppCompatActivity {
             }
         });
     }
+
     private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
         CircularImageView bmImage;
 

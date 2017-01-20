@@ -1,13 +1,10 @@
 package com.example.doancuoiki.tim_tro_dack.view.activity;
 
 import android.Manifest;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.BitmapFactory;
-import android.location.Address;
-import android.location.Geocoder;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -29,7 +26,6 @@ import com.example.doancuoiki.tim_tro_dack.DAO.Person;
 import com.example.doancuoiki.tim_tro_dack.R;
 import com.example.doancuoiki.tim_tro_dack.apihelper.APIService;
 import com.example.doancuoiki.tim_tro_dack.model.Tro;
-import com.google.android.gms.maps.model.LatLng;
 
 import java.io.File;
 import java.io.IOException;
@@ -53,9 +49,6 @@ public class ChinhSuaBaiDang extends AppCompatActivity {
     private Cloudinary cloudinary;
     private java.util.Map Map;
     private File file;
-
-    private Double Kinhdo, Vido;
-    private LatLng toado;
 
 
     EditText tvDiaChi, tvDienThoai, tvDienTich, tvMoTa, tvGia;
@@ -102,14 +95,6 @@ public class ChinhSuaBaiDang extends AppCompatActivity {
         tbChinhSua.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                toado = getLocationFromAddress(ChinhSuaBaiDang.this,tvDiaChi.getText().toString());
-                Kinhdo = toado.longitude;
-                Vido = toado.latitude;
-                //Show ra để thấy con khi post lên thi gán kinh độ vĩ độ thui còn lại chú gán vô
-                Toast.makeText(ChinhSuaBaiDang.this,Vido.toString()+" Và "+ Kinhdo.toString(),Toast.LENGTH_SHORT).show();
-
-                //------------------------
 
                 if(Map != null)
                     imgURL = Map.get("url").toString();
@@ -163,31 +148,6 @@ public class ChinhSuaBaiDang extends AppCompatActivity {
             }
         });
     }
-
-    //------Chuyển string thành latlng:
-    public LatLng getLocationFromAddress(Context context, String strAddress) {
-
-        Geocoder coder = new Geocoder(context);
-        List<Address> address;
-        LatLng p1 = null;
-        try {
-
-            address = coder.getFromLocationName(strAddress, 5);
-            if (address == null) {
-                return null;
-            }
-            Address location = address.get(0);
-            location.getLatitude();
-            location.getLongitude();
-            p1 = new LatLng(location.getLatitude(), location.getLongitude() );
-        } catch (Exception ex) {
-
-            ex.printStackTrace();
-        }
-
-        return p1;
-    }
-    //---------------
 
     private class Upload extends AsyncTask<String, Void, String> {
         private Cloudinary mCloudinary;

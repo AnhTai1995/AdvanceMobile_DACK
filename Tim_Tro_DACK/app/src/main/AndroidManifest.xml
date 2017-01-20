@@ -19,10 +19,7 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
-        <meta-data
-            android:name="com.facebook.sdk.ApplicationId"
-            android:value="@string/facebook_app_id" />
-
+        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
         <activity android:name=".view.activity.Splash_start">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -60,11 +57,8 @@
         <activity
             android:name=".view.activity.ChinhSuaBaiDang"
             android:label="Chỉnh sửa bài đăng" />
-        <activity
-            android:name=".view.activity.DanhSachDaLuu"
-            android:label="Danh sách yêu thích" />
-        <activity android:name=".view.activity.DanhSachTimKiem"
-            android:label="Danh sách tìm kiếm" />
+        <activity android:name=".view.activity.DanhSachDaLuu"
+            android:label="Danh sách yêu thích"></activity>
     </application>
 
 </manifest>

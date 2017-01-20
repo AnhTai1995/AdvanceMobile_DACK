@@ -43,6 +43,8 @@ public interface Service {
     @GET("nguoi-dung")
     Call<NguoiDung> getNguoiDung(@Query("username") String usename);
 
+    @GET("nha-tro")
+    Call<List<Tro>> getTatCaNhaTro();
 
 
 

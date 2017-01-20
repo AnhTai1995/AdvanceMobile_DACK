@@ -4,7 +4,6 @@ import com.example.doancuoiki.tim_tro_dack.config.Constant;
 import com.example.doancuoiki.tim_tro_dack.model.Comment;
 import com.example.doancuoiki.tim_tro_dack.model.PersonLikeStt;
 import com.example.doancuoiki.tim_tro_dack.model.Tro;
-import com.example.doancuoiki.tim_tro_dack.model.TroDetaile;
 
 import java.util.List;
 
@@ -29,7 +28,7 @@ public interface APIService {
     Call<ResponseBody> getAllPTro();
 
     @GET("nha-tro")
-    Call<List<TroDetaile>> getNhaTro(@Query("id") String ID);
+    Call<List<Tro>> getNhaTro(@Query("id") String ID);
 
     @GET("nha-tro")
     Call<List<Tro>> getNhaTroByIdND(@Query("idnd") String ID);
