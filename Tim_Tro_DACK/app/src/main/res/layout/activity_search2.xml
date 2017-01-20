@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:scrollbars="vertical"
+    android:paddingTop="8dp"
+    android:paddingLeft="7dp"
+    android:paddingRight="7dp"
+    tools:context="com.example.doancuoiki.tim_tro_dack.view.activity.Search">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rcvDanhSachTro"
+        android:scrollbars="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+</LinearLayout>

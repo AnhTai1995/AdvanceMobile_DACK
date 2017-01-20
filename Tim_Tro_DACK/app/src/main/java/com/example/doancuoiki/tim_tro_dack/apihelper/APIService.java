@@ -36,6 +36,13 @@ public interface APIService {
     @GET("nha-tro-da-luu")
     Call<List<Tro>> getNhaTroDaLuu(@Query("idnd") String ID);
 
+    @GET("nha-tro")
+    Call<List<Tro>> getSearchTro(
+            @Query("diachi") String diaChi,
+            @Query("dientich") String dTich,
+            @Query("gia") String gia
+    );
+
     @POST("nha-tro")
     Call<Boolean> addNewTro(
             @Body Tro body);
